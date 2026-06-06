@@ -1,0 +1,1272 @@
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+:root {
+    --primary-academic: #1b365d; /* Authoritative Navy Blue */
+    --ieee-blue: #00629B; /* IEEE Official Blue */
+    --secondary-academic: #8b0000; /* Academic Burgundy Red */
+    --accent-orange: #f59e0b; /* Yellow-Orange */
+    --accent-lightblue: #0ea5e9; /* Light Blue */
+    --text-primary: #111827; /* Rich Dark Blue-Black */
+    --text-secondary: #1e3a8a; /* Deep Blue Secondary */
+    --text-muted: #64748b; /* Slate 500 */
+    --bg-gray: #f8fafc; /* Snow Blue-Gray Background */
+    --border-light: #e2e8f0;
+    --border-subtle: rgba(27, 54, 93, 0.12);
+    --row-alt: #f1f5f9;
+    --footnote-color: #1d4ed8;
+    --title-border-color: rgba(245, 158, 11, 0.1);
+    --closing-border-color: rgba(245, 158, 11, 0.1);
+    
+    --bg-card: linear-gradient(135deg, rgba(255, 255, 255, 0.70), rgba(255, 255, 255, 0.50));
+    --bg-header-card: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75));
+    --bg-dot: rgba(27, 54, 93, 0.25);
+    --shadow-card: 0 8px 32px 0 rgba(27, 54, 93, 0.08); /* Sophisticated subtle shadow */
+    --shadow-active: 0 8px 32px 0 rgba(27, 54, 93, 0.15); /* Pronounced active shadow */
+    --math-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.10));
+    --header-bg: linear-gradient(135deg, rgba(3, 4, 94, 0.98), rgba(2, 62, 138, 0.95)); /* Navy to Royal Blue Glass */
+    --tab-text: rgba(255, 255, 255, 0.65);
+    --footer-text: white;
+}
+
+/* Dark Mode Overrides */
+html.dark-mode {
+    --bg-gray: #001845; /* Oxford Blue Background */
+    --text-primary: #cae9ff; /* Light Cyan-White */
+    --text-secondary: #98c1d9; /* Powder Blue */
+    --text-muted: #62b6cb; /* Muted Cyan */
+    --primary-academic: #0466c8; /* Honolulu Blue */
+    --secondary-academic: #33415c; /* Slate Blue */
+    --bg-card: linear-gradient(145deg, rgba(5, 10, 20, 0.75), rgba(0, 0, 5, 0.55)); /* Very Dark/Black Glass */
+    --bg-header-card: var(--bg-card); /* Match academic-box background */
+    --bg-dot: rgba(4, 102, 200, 0.15); 
+    --shadow-card: 0 0 25px rgba(0, 0, 0, 0.5); /* Centered and reduced spread */
+    --shadow-active: 0 0 50px rgba(4, 102, 200, 0.2); /* Centered and reduced spread */
+    --border-subtle: rgba(4, 102, 200, 0.35); /* Slightly stronger border for glass */
+    --math-bg: rgba(0, 24, 69, 0.4); /* Deep Navy Glass */
+    --header-bg: linear-gradient(135deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95), rgba(0, 40, 85, 0.95)); /* Deep Classic Navy Glass */
+    --tab-text: rgba(98, 182, 203, 0.5); /* Match footer text color (--text-muted) muted */
+    --footer-text: #62b6cb;
+    --row-alt: rgba(4, 102, 200, 0.08); /* Subtle gradient for tables */
+    --footnote-color: var(--footer-text); /* Sync with footer color */
+}
+
+/* Global Stacking Context */
+html {
+    transition: background-color 0.4s ease;
+    background-color: var(--bg-gray);
+    position: relative;
+}
+
+/* Transparent Background Image */
+html::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('pngegg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.60; /* Transparansi 40% (Opacity 60%) */
+    z-index: 1; /* Render in front of html canvas background */
+    pointer-events: none; /* Let clicks pass through to presentation */
+    transition: opacity 0.4s ease, filter 0.4s ease;
+    filter: invert(0.8) contrast(0.5); /* Invert white grid to dark grid in light mode, with contrast 0.5 */
+}
+
+html.dark-mode::before {
+    filter: invert(0) contrast(0.5); /* Keep original white grid in dark mode, with contrast 0.5 */
+}
+
+body {
+    position: relative;
+    z-index: 2; /* Render in front of the background image */
+}
+
+body, .reveal, .header, .footer, .tab-item, .timer-container, .image-preview-overlay {
+    transition: 
+        background-color 0.4s ease, 
+        color 0.4s ease, 
+        border-color 0.4s ease, 
+        box-shadow 0.4s ease;
+}
+
+/* Transitions for elements that should NOT transition background-color (like glass cards)
+   to prevent visual color flashing/flicker during theme transitions */
+.academic-box, section h2, table, tr, td, th {
+    transition: 
+        color 0.4s ease, 
+        border-color 0.4s ease, 
+        box-shadow 0.4s ease;
+}
+
+/* Background from pngegg.png is now handled by html::before */
+
+body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section, 
+.reveal .slide-background, .reveal .slide-background-content {
+    background-color: transparent !important;
+    background: transparent !important;
+    overscroll-behavior-x: none !important;
+    overscroll-behavior-y: none !important;
+    touch-action: pan-y;
+}
+
+.reveal .slides {
+    inset: 0;
+}
+
+.reveal {
+    font-family: "Noto Serif", serif;
+    color: var(--text-primary);
+    font-size: 1em;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+}
+
+.reveal h1 { font-size: 2.2em; }
+.reveal h2 { font-size: 1.8em; }
+.reveal h3 { font-size: 1.5em; }
+
+.reveal h1, .reveal h2, .reveal h3 {
+    font-family: "Noto Serif", serif;
+    color: var(--primary-academic);
+    text-transform: none;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.02em;
+}
+
+/* Card styling for H3 (Note: Redefined as a container card component; affects ### markdown headers) */
+.reveal .slides section h3 {
+    color: var(--primary-academic);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic);
+    padding: 15px 30px;
+    box-shadow: none;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto 20px auto;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.reveal .slides section {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top */
+    align-items: center;
+    height: 100%;
+    padding: 190px 60px 80px 60px; /* Adjusted to prevent title overlap */
+    box-sizing: border-box;
+    text-align: left;
+    overflow: visible !important; /* Allow card zoom/shadow to spill out */
+}
+
+.reveal .slides section:not(.layout-title):not(.layout-closing) h2 {
+    position: absolute;
+    top: 90px; /* Adjusted from 125px to match slimmer header (15+40=55 + 35 gap) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px; /* Fixed width to match academic-box max-width */
+    background: var(--bg-header-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic); /* Unified 10px left border */
+    padding: 20px 40px;
+    box-shadow: var(--shadow-card);
+    margin: 0;
+    font-size: 1.4em;
+    line-height: 1.2;
+    text-align: left; /* Align text to match content cards */
+    z-index: 5;
+    box-sizing: border-box;
+    border-radius: 15px;
+    color: var(--primary-academic);
+}
+
+/* Scrollable Content Wrapper */
+.content-wrapper {
+    width: 100%;
+    max-width: 1700px; /* Slightly wider than cards to prevent clipping on zoom */
+    height: auto;
+    max-height: 790px; /* Prevents container from overflowing into the footer */
+    overflow-y: auto;
+    overflow-x: visible; /* Allow zoom and shadows to exceed boundaries */
+    padding: 20px 50px; /* Room for card expansion and red line indicator */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-academic) transparent;
+    -webkit-overflow-scrolling: touch; 
+    overscroll-behavior-y: contain; 
+}
+
+/* Custom Scrollbar for Webkit */
+.content-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+.content-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+.content-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--primary-academic);
+    border-radius: 20px;
+}
+
+/* Ensure containers inside wrapper flow naturally */
+.flex-container, .academic-box {
+    width: 100%;
+    position: relative;
+    margin-top: 0; /* Remove top margin that might cause offset */
+    margin-bottom: 20px;
+    flex-shrink: 0; /* Prevent boxes from collapsing */
+}
+
+/* Specific fix for title slide layout (Big Academic Card) */
+.reveal .slides section.layout-title,
+.reveal .slides section.layout-closing {
+    padding: 0 !important; /* Reset all padding to ensure perfect centering */
+    justify-content: center !important; /* Center vertically */
+    align-items: center !important; /* Center horizontally */
+}
+
+.layout-title-slide {
+    width: 1600px !important;
+    height: auto !important;
+    min-height: 800px; /* Increased from 650px for more presence */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 60px !important; /* Slightly more vertical breathing room */
+    box-sizing: border-box;
+    text-align: center !important;
+    background: var(--bg-card) !important; /* Themed background */
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic); /* Navy Blue Accent */
+    box-shadow: var(--shadow-active);
+    margin: 0 auto !important;
+    position: relative;
+    z-index: 10;
+    border-radius: 15px;
+}
+
+.layout-title-slide > * {
+    text-align: center !important;
+    width: 100%;
+}
+
+/* TESIS at the very top of the title group */
+.layout-title-slide h1.tesis-top {
+    font-size: 1.0em !important;
+    color: var(--primary-academic);
+    margin-bottom: 2em !important; /* Increased gap */
+    margin-top: 0 !important;
+    text-align: center !important;
+    letter-spacing: 8px;
+    width: 100%;
+    font-weight: 700;
+    font-variant: small-caps;
+    text-transform: uppercase;
+}
+
+.layout-title-slide h2.thesis-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 1400px;
+    margin: 1em auto 1.5em auto; /* Centered margins */
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-size: 1.6em; /* Slightly larger to fill space */
+    color: var(--primary-academic);
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 800;
+    display: block;
+}
+
+.title-logo {
+    max-height: 180px !important; /* Larger logo */
+    width: 180px !important; /* Fixed width for perfect circle */
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto 30px auto !important; /* Centered margin */
+    display: block !important;
+    background-color: white !important; /* Background white for dark/light mode compatibility */
+    border-radius: 50% !important; /* Circular container */
+    padding: 15px !important; /* Inner spacing */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+    box-sizing: border-box !important;
+    object-fit: contain !important;
+}
+
+/* --- LAYOUT CLOSING SLIDE --- */
+.layout-closing-slide {
+    width: 1600px !important;
+    height: auto !important;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px !important;
+    box-sizing: border-box;
+    text-align: center !important;
+    background: var(--bg-card) !important; /* Themed background */
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic); /* Navy Blue Accent */
+    box-shadow: var(--shadow-active);
+    margin: 0 auto !important;
+    position: relative;
+    z-index: 10;
+    border-radius: 15px;
+}
+
+.layout-closing-slide h1 {
+    font-size: 2.2em !important; /* Matched with global h1 */
+    color: var(--primary-academic);
+    margin-top: 0 !important;
+    margin-bottom: 15px !important;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center !important;
+}
+
+.layout-closing-slide h2 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-size: 1.5em; /* Reduced for better proportion */
+    color: var(--primary-academic);
+    margin-bottom: 1em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.layout-closing-slide .title-details {
+    border-top-color: var(--closing-border-color); /* Pembatas di slide penutup */
+}
+
+.layout-closing-slide .title-logo {
+    max-height: 140px !important;
+    width: 140px !important;
+    margin-bottom: 25px !important;
+}
+
+/* Plain UI for Title Slide / Hide State */
+.plain-ui {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Academic Box Styling - Premium Glassmorphism & Touch Optimized */
+.academic-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic);
+    padding: 30px 40px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    width: 100%;
+    max-width: 1600px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    text-align: left;
+    position: relative;
+    /* Separate cubic-bezier transitions specifically for interactive scale feedback and shadow scaling.
+       These are distinct from the general theme color transitions defined in the global transit rules. */
+    transition: 
+        transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+        box-shadow 0.25s ease,
+        border-left-width 0.2s ease;
+    will-change: transform;
+}
+
+.academic-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-subtle);
+}
+
+.academic-box.red-top {
+    border-color: rgba(27, 54, 93, 0.06);
+    border-left: 4px solid var(--primary-academic);
+}
+
+.academic-box.blue-top {
+    border-color: rgba(0, 98, 155, 0.06);
+    border-left: 4px solid var(--primary-academic);
+}
+
+/* TOUCH FEEDBACK & HOVER */
+.academic-box:hover,
+.academic-box:active,
+.academic-box.is-interacting {
+    transform: scale(1.02) !important;
+    background: var(--bg-card) !important;
+    box-shadow: none !important;
+    z-index: 100 !important;
+}
+
+/* Remove the previous pseudo-element approach as it was still getting clipped */
+.reveal .slides section .academic-box:hover::after,
+.reveal .slides section .academic-box:active::after,
+.academic-box.is-interacting::after {
+    display: none;
+}
+
+.academic-box h4 {
+    margin-top: 0;
+    color: var(--primary-academic);
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    text-transform: none;
+    font-family: "Noto Serif", serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(27, 54, 93, 0.12);
+    display: inline-block;
+}
+
+/* Flex Layouts */
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%;
+    max-width: 1600px; /* Same as academic-box for alignment */
+    margin: 0 auto;
+}
+
+.flex-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Ensure 1-content-with-text and default templates match the width */
+.academic-box.full-width {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.flex-item img {
+    max-width: 100%;
+    max-height: 700px;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.full-width-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.full-width-image-container img {
+    max-width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.two-image-row {
+    margin-bottom: 10px;
+}
+
+.two-image-row .flex-item img {
+    max-height: 350px;
+    border-radius: 15px;
+    border: 1px solid var(--border-light);
+}
+
+/* Mermaid Optimization */
+.mermaid {
+    background: #ffffff !important;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #dddddd !important;
+    width: 100%;
+    max-height: 900px; /* increased to give more vertical space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible !important; /* allow diagrams to extend beyond container if needed */
+}
+
+/* Invert Mermaid for Dark Mode */
+html.dark-mode .reveal h1,
+html.dark-mode .layout-title-slide h1,
+html.dark-mode .layout-closing-slide h1 {
+    color: #ffffff;
+}
+
+html.dark-mode .reveal h2,
+html.dark-mode .layout-closing-slide h2,
+html.dark-mode .reveal .slides section:not(.layout-title):not(.layout-closing) h2,
+html.dark-mode .reveal .slides section h3,
+html.dark-mode .academic-box h4,
+html.dark-mode .reveal h5 {
+    color: #FF9B05;
+}
+
+/* KHUSUS Slide Pembuka: Putih Clear (Paksa spesifisitas tinggi) */
+html.dark-mode .reveal .slides section .layout-title-slide h2,
+html.dark-mode .reveal .slides section .layout-title-slide h2.thesis-title,
+html.dark-mode .layout-title-slide h2.thesis-title {
+    color: #ffffff;
+}
+
+html.dark-mode .academic-box h4 {
+    border-bottom-color: rgba(181, 228, 140, 0.4);
+}
+
+/* Add white background to images in dark mode for transparent PNGs */
+html.dark-mode figure,
+html.dark-mode .flex-item img,
+html.dark-mode .full-width-image-container img,
+html.dark-mode .two-image-row .flex-item img,
+html.dark-mode .title-logo,
+html.dark-mode .Kontruk-SEM img,
+html.dark-mode .trajectory-container img,
+html.dark-mode .Bukti-Log img,
+html.dark-mode .Bukti-implementasi img,
+html.dark-mode div[align="center"] img {
+    background-color: white;
+}
+
+
+
+/* Ensure all text and HTML labels inside mermaid container have a stable dark color */
+.mermaid,
+.mermaid text,
+.mermaid .labelText,
+.mermaid foreignObject,
+.mermaid foreignObject * {
+    fill: #2c2c2c !important;
+    color: #2c2c2c !important;
+}
+
+/* Ensure text inside mermaid respects dark mode */
+
+
+/* IEEE Equation Styling */
+.ieee-equation-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1.5em 0;
+    position: relative;
+    padding: 20px 25px;
+    background: var(--math-bg); /* Themed math bg */
+    border: 1px dashed var(--primary-academic); /* Formal academic border */
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.ieee-equation-content {
+    flex-grow: 1;
+    text-align: center;
+    overflow-x: auto;
+    font-family: "Latin Modern Math", "STIX Two Math", "TeX Gyre Termes Math", serif;
+    padding: 0 60px; /* Equal spacing on left and right to prevent overlap with equation number */
+}
+
+/* Ensure MathJax block has no margin inside our container */
+.ieee-equation-content .MathJax {
+    margin: 0 !important;
+}
+
+/* Shrink inline MathJax font size for better proportions */
+mjx-container:not([display="true"]) {
+    font-size: 0.85em !important;
+}
+
+.ieee-equation-number {
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    font-family: "Noto Serif", serif;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+}
+
+.footnote-container {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: baseline;
+    box-sizing: border-box;
+}
+
+.academic-footnote {
+    font-size: 0.7em !important;
+    opacity: 1;
+    color: var(--footnote-color) !important;
+    line-height: 1.3;
+    font-style: normal !important;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: "Noto Serif", serif;
+}
+
+.academic-footnote * {
+    font-size: inherit !important;
+    font-style: inherit !important;
+    color: inherit !important;
+}
+
+.academic-footnote .footnote-marker sup {
+    font-size: 0.9em !important;
+    top: -0.1em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.footnote-definition {
+    font-size: 0.65em;
+    color: var(--footnote-color);
+    opacity: 1;
+    margin-top: 15px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 5px;
+}
+
+.mermaid-container {
+    width: 100%;
+    max-width: 1600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mermaid svg {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 750px !important;
+}
+
+/* Mermaid Specific Refinements for Projector Visibility */
+.mermaid svg .edgePath path {
+    stroke-width: 3.5px !important; /* Even thicker from 2.5px */
+    stroke: var(--primary-academic) !important;
+}
+.mermaid svg .marker path {
+    fill: var(--primary-academic) !important;
+    stroke: var(--primary-academic) !important;
+}
+.mermaid svg .node rect, 
+.mermaid svg .node circle, 
+.mermaid svg .node polygon {
+    stroke-width: 3px !important; /* Thicker from 2px */
+    stroke: var(--primary-academic) !important;
+}
+
+/* Tables - IEEE Style */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+
+thead th {
+    background-color: transparent;
+    color: var(--text-primary);
+    font-family: "Noto Serif", serif;
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid var(--primary-academic);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--row-alt);
+}
+
+html.dark-mode tbody tr:nth-child(even) {
+    background: linear-gradient(90deg, rgba(4, 102, 200, 0.05), rgba(51, 65, 92, 0.1));
+}
+
+html.dark-mode tbody tr:hover {
+    background: rgba(4, 102, 200, 0.15) !important;
+}
+
+tbody td {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-subtle);
+    text-align: left;
+    color: var(--text-primary);
+}
+
+tbody tr:last-child td {
+    border-bottom: 2px solid var(--primary-academic);
+}
+
+/* Academic table wrapper from markdown renderer */
+.academic-table-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.academic-table-wrapper table {
+    border-collapse: collapse;
+    width: auto;
+    min-width: 85%;
+    font-family: "Noto Serif", serif;
+    box-shadow: none;
+    border-top: 3px solid var(--primary-academic);
+    border-bottom: 3px solid var(--primary-academic);
+    background: var(--math-bg); /* Use themed bg */
+}
+
+html.dark-mode .academic-table-wrapper table {
+    background: linear-gradient(135deg, rgba(4, 102, 200, 0.05), rgba(0, 24, 69, 0.3));
+    border-color: var(--primary-academic);
+}
+
+.academic-table-wrapper thead {
+    border-bottom: 2px solid var(--primary-academic);
+}
+
+.academic-table-wrapper thead th {
+    background-color: transparent;
+    color: var(--text-primary);
+    font-family: "Noto Serif", serif;
+    padding: 10px 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.academic-table-wrapper tbody td {
+    padding: 8px 25px;
+    border: none !important; /* Explicitly reset and prevent overrides from general tbody td rules */
+    text-align: left;
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+
+/* Blockquotes - IEEE Formal Style */
+blockquote {
+    border-left: 4px solid var(--ieee-blue) !important;
+    background: var(--bg-gray) !important;
+    padding: 15px 30px !important;
+    margin: 25px 0 !important;
+    font-size: 0.85em !important;
+    color: var(--text-secondary) !important;
+    font-style: normal !important;
+    text-align: left !important;
+    line-height: 1.25 !important;
+    box-shadow: none !important;
+    width: auto !important;
+    align-self: stretch !important;
+    border-radius: 0 !important;
+}
+
+blockquote p {
+    margin: 0 !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+}
+
+/* Decorative icons removed for IEEE style */
+blockquote::before {
+    display: none !important;
+}
+
+/* Lists */
+ul, ol {
+    margin-left: 25px;
+    padding-left: 10px;
+}
+
+li {
+    margin-bottom: 12px;
+}
+
+/* Header & Footer */
+.reveal .header {
+    position: absolute;
+    top: 15px; /* Floating slightly */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px;
+    height: 46px; /* Slightly taller for better alignment with footer style */
+    background: var(--header-bg); /* Themed header bg */
+    border: 1px solid var(--border-subtle);
+    border-radius: 15px; /* Matched with footer */
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 5px 25px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 100; /* High priority */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+    padding: 0 40px; /* Matched with footer */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Theme Toggle Styling */
+.header-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#theme-toggle {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+.theme-icon::before {
+    content: '☀️'; /* Default Sun */
+    font-size: 1.2em;
+}
+
+html.dark-mode .theme-icon::before {
+    content: '🌙'; /* Moon in dark mode */
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 8px;
+    height: 36px;
+}
+
+.tab-item {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.45); /* Muted for future tabs in Light Mode */
+    border: none;
+    padding: 0 10px;
+    border-radius: 12px; /* Matched with timer button rounded style */
+    cursor: pointer;
+    font-size: 0.6em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-transform: uppercase;
+}
+
+html.dark-mode .tab-item {
+    color: rgba(202, 233, 255, 0.7); /* Significantly increased opacity from 0.45 for readability */
+}
+
+.tab-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+/* Completed Tabs Style */
+.tab-item.completed {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+html.dark-mode .tab-item.completed {
+    color: var(--text-primary); /* Full brightness for completed tabs in dark mode */
+    background: rgba(202, 233, 255, 0.12);
+}
+
+.tab-item.completed::after {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.tab-item:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+html.dark-mode .tab-item:hover {
+    color: rgba(202, 233, 255, 0.9);
+    background: rgba(202, 233, 255, 0.12);
+}
+
+/* Active Tab Style */
+.tab-item.active {
+    background: rgba(255, 255, 255, 0.22);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    font-weight: 800;
+}
+
+html.dark-mode .tab-item.active {
+    color: #ffffff !important; /* Absolute white for max contrast */
+    background: rgba(4, 102, 200, 0.4); /* Stronger blue background */
+    box-shadow: 0 0 20px rgba(202, 233, 255, 0.2);
+    border: 1px solid rgba(202, 233, 255, 0.3);
+}
+
+.tab-item.active::after {
+    width: 85%;
+    background: var(--accent-orange); /* Progress indicator */
+}
+
+.timer-container {
+    background: rgba(255, 255, 255, 0.15); /* Slightly clearer glassy background */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 0 20px;
+    height: 36px;
+    border-radius: 15px; /* Rounded consistent with dashboard style */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.75em;
+    color: #ffffff;
+    box-shadow: none;
+    margin-bottom: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+html.dark-mode .timer-container {
+    background: rgba(4, 102, 200, 0.2);
+    color: #ffffff;
+    border-color: rgba(202, 233, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.timer-container button {
+    background: rgba(255, 255, 255, 0.22);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 4px 12px;
+    border-radius: 12px; /* Rounded consistent with timer container */
+    cursor: pointer;
+    font-size: 0.7em;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+html.dark-mode .timer-container button {
+    border-color: rgba(202, 233, 255, 0.4);
+}
+
+/* Distinct button variants */
+.timer-container button#start-timer {
+    background: var(--primary-academic);
+    border-color: var(--primary-academic);
+}
+
+html.dark-mode .timer-container button#start-timer {
+    background: #0466c8; /* Brighter blue for dark mode */
+}
+
+.timer-container button#reset-timer {
+    background: var(--secondary-academic);
+    border-color: var(--secondary-academic);
+}
+
+html.dark-mode .timer-container button#reset-timer {
+    background: #5c677d; /* Lighter slate blue for dark mode */
+}
+
+
+.timer-container button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+}
+
+.timer-container button#start-timer:hover {
+    background: #164a7c; /* darker primary */
+}
+.timer-container button#reset-timer:hover {
+    background: #5c1e1e; /* darker secondary */
+}
+
+.timer-container .timer-display {
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+
+.timer-container button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    opacity: 1;
+}
+
+.timer-container button:active {
+    transform: scale(0.95);
+}
+
+.timer-container.alert-mode, html.dark-mode .timer-container.alert-mode {
+    background: #ff3b30 !important; /* Crimson Red Warning */
+    border-color: #ff3b30 !important;
+    color: white !important;
+    transition: all 0.3s ease;
+    animation: pulse-alert 1.5s infinite alternate;
+}
+
+.timer-container.alert-mode #timer-display {
+    font-weight: 900;
+}
+
+@keyframes pulse-alert {
+    0% {
+        box-shadow: 0 0 4px rgba(255, 59, 48, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 59, 48, 0.9);
+    }
+}
+
+.reveal .footer {
+    position: absolute;
+    bottom: 15px; /* Floating slightly above bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px;
+    height: 50px;
+    background: var(--header-bg); /* Themed header bg */
+    border: 1px solid var(--border-subtle);
+    border-radius: 15px;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr; /* Center info given more space */
+    align-items: center;
+    padding: 0 40px;
+    font-size: 0.75em; /* Increased from 0.6em */
+    color: var(--footer-text, white); /* Themed footer text */
+    box-sizing: border-box;
+    z-index: 100;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease, background-color 0.4s ease, color 0.4s ease;
+}
+
+.reveal .footer.hidden-footer {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.reveal .footer .left-info {
+    text-align: left;
+    font-weight: 700;
+}
+
+.reveal .footer .center-info {
+    text-align: center;
+    font-weight: 700;
+    text-transform: none;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.reveal .footer .right-info {
+    text-align: right;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    height: 100%;
+}
+
+/* Page number formatting to match footer base style.
+   Note: !important is mandatory here to override Reveal.js's highly specific inline styles injected at runtime. */
+.reveal .slide-number {
+    position: static !important; /* Remove Reveal.js absolute positioning */
+    display: inline-block !important;
+    font-size: 1em !important;
+    letter-spacing: normal !important;
+    line-height: 1 !important;
+    color: white !important;
+    background: transparent !important; /* Remove the black box */
+    padding: 0 !important; /* Remove default padding */
+    margin: 0 !important;
+    z-index: auto !important;
+}
+
+/* Adjust Reveal.js Controls position to be above footer */
+.reveal .controls {
+    bottom: 90px !important; /* Raised further to accommodate floating footer (15px + 50px) */
+    right: 30px !important;
+    transform: scale(1.8); /* Make controls 1.8x larger */
+    transform-origin: bottom right;
+}
+
+/* Make control arrows more visible */
+.reveal .controls button {
+    color: var(--primary-academic) !important;
+    opacity: 0.8 !important;
+}
+
+.reveal .controls button:hover {
+    opacity: 1 !important;
+}
+
+/* Adjust Progress Bar if needed */
+.reveal .progress {
+    display: none !important;
+}
+
+/* Image Preview Overlay */
+.image-preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); /* Less opaque to see blur */
+    backdrop-filter: blur(12px); /* High-end bokeh effect */
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.image-preview-overlay.active {
+    opacity: 1;
+}
+
+.image-preview-overlay img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 8px; /* Slightly more modern */
+    border: none;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+    cursor: default;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.17, 0.84, 0.44, 1);
+}
+
+.image-preview-overlay.active img {
+    transform: scale(1);
+}
+
+.image-preview-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5em;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.image-preview-close:hover {
+    transform: scale(1.2);
+}
+
+.flex-item img,
+.full-width-image-container img,
+.two-image-row .flex-item img {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.flex-item img:hover,
+.full-width-image-container img:hover,
+.two-image-row .flex-item img:hover {
+    transform: scale(1.02);
+}
+
+/* Dark Mode Toggle Button Styles - Wrapper kept for Timer */
+.header-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 32px;
+}
+
+/* Reveal.js progress bar - Integrated under floating header */
+.reveal .progress {
+    display: none !important;
+}
+
+/* Optimization for stacked layout to reduce scrolling */
+.layout-1-column-stacked .academic-box {
+    padding: 25px 40px !important;
+    margin-bottom: 15px !important;
+}
+.layout-1-column-stacked .academic-box h4 {
+    margin-bottom: 10px !important;
+}

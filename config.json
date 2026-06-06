@@ -1,0 +1,14 @@
+{
+  "presentationMinutes": 15,
+  "baseFontSize": "18pt",
+  "presentationTitle": "Thesis Defense: Lectura Hybrid Architecture",
+  "authorName": "Telo Godhok",
+  "institutionInfo": "Institute of Tire Repair (ITR)",
+  "studyProgram": "Tire Repair Engineering",
+  "lang": "en",
+  "revealTheme": "black",
+  "timerStartText": "START",
+  "timerResetText": "RESET",
+  "themeToggleTitle": "Toggle Dark/Light Mode",
+  "contentFile": "content-en.md"
+}

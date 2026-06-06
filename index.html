@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- Reveal.js Base -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" id="theme">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css?v=2">
+    <!-- Marked.js for dynamic markdown parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.2.12/marked.min.js"></script>
+</head>
+<body>
+    <div class="reveal">
+        <!-- LaTeX Style Header & Footer -->
+        <div class="header" style="display: none;">
+            <div class="nav-tabs" id="book-tabs">
+            </div>
+            <div class="header-right-controls">
+                <div id="presentation-timer" class="timer-container">
+                    <button id="start-timer"></button>
+                    <button id="reset-timer"></button>
+                    <span id="timer-display"></span>
+                </div>
+                <button id="theme-toggle">
+                    <span class="theme-icon"></span>
+                </button>
+            </div>
+        </div>
+        <div class="footer" style="display: none;">
+            <div class="left-info"></div>
+            <div class="center-info"></div>
+            <div class="right-info"><span class="slide-number"></span></div>
+        </div>
+
+        <div class="slides">
+            <!-- Dynamic content will be loaded here from content.md -->
+            <section>
+                <h2>Loading Presentation...</h2>
+            </section>
+        </div>
+    </div>
+
+    <!-- Image Preview Overlay -->
+    <div class="image-preview-overlay" id="image-preview" style="display: none;">
+        <span class="image-preview-close" id="image-preview-close">&times;</span>
+        <img src="" alt="Preview" id="image-preview-img">
+    </div>
+
+    <!-- Reveal.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/math/math.min.js"></script>
+    <!-- Standard Mermaid (Stable 9.x) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.min.js"></script>
+    <!-- Final Script -->
+    <script src="script.js"></script>
+</body>
+</html>
