@@ -23,7 +23,7 @@ import { initCardInteractions } from './cards.js';
 import { initGestures }         from './gestures.js';
 import { loadStylesheet }       from './styles.js';
 
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
     // ── Stylesheet Integration ────────────────────────────────
     // Kelola loading style.css dari JS untuk cache-busting terkontrol.
     // Dipanggil pertama kali untuk mencegah FOUC.
@@ -49,4 +49,5 @@ window.onload = () => {
     initScribbleMode();
     initNavigation();
     initCardInteractions();
-};
+});
+

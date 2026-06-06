@@ -23,6 +23,7 @@
 
 - [✨ Features](#-features)
 - [📁 Architecture & File Structure](#-architecture--file-structure)
+- [🎨 CSS Architecture](#-css-architecture)
 - [📖 User Guide (Documentation)](#-user-guide-documentation)
   - [🚀 Getting Started](GUIDE.md#-getting-started)
   - [⚙️ Configuration](GUIDE.md#️-configuration)
@@ -52,13 +53,21 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 📦 Lectura
 ├── 📄 index.html          # HTML scaffold + CDN deps
 ├── 📄 script.js           # Core engine: config, markdown parsing, UI
-├── 📄 style.css           # Glassmorphism, themes, responsive layout
+├── 📄 style.css           # CSS entrypoint — imports all 7 style layers
 ├── 📄 config.json         # Global presentation settings
-├── 📄 GUIDE.md           # Detailed user guide & documentation 👈
+├── 📄 GUIDE.md            # Detailed user guide & documentation 👈
 ├── 📄 content-id.md       # Slide content (Bahasa Indonesia)
 ├── 📄 content-en.md       # Slide content (English)
-├── 📁 assets/             # Assets directory (images)
-│   ├── 🖼️ placeholder.png # Preview / demo image
+├── 📁 styles/             # CSS modules (7-layer clean architecture)
+│   ├── 🎨 tokens.css      # Layer 1 — Design tokens & CSS variables
+│   ├── 🎨 base.css        # Layer 2 — Reset, html/body, dark mode vars
+│   ├── 🎨 typography.css  # Layer 3 — Headings, lists, blockquotes
+│   ├── 🎨 layout.css      # Layer 4 — Slide layout, title/closing slides
+│   ├── 🎨 components.css  # Layer 5 — Cards, tables, equations, mermaid
+│   ├── 🎨 ui.css          # Layer 6 — Header, footer, timer, tools
+│   └── 🎨 animations.css  # Layer 7 — Keyframes & animation utilities
+├── 📁 assets/             # Assets directory (images, background)
+│   ├── 🖼️ background.png  # Grid background overlay
 │   └── ...
 └── 📁 Noto_Serif/         # Custom font
 ```
@@ -69,9 +78,27 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 |------|------|
 | **[index.html](index.html)** | Loads Reveal.js, Marked.js, MathJax 3, Mermaid via CDN. |
 | **[script.js](script.js)** | Reads `config.json` → Fetches & parses Markdown → Renders layouts & UI. |
-| **[style.css](style.css)** | Glassmorphism, grid layouts, navigation controls, and themes. |
+| **[style.css](style.css)** | CSS entrypoint — imports all 7 modular style layers from `styles/`. |
 | **[config.json](config.json)** | Single source of truth for presentation metadata and settings. |
 | **[GUIDE.md](GUIDE.md)** | **Complete documentation for setup and usage.** |
+
+---
+
+## 🎨 CSS Architecture
+
+The stylesheet uses a **7-Layer Clean Architecture** — each file has a single responsibility. The entrypoint `style.css` only contains `@import` statements; all styles live in the `styles/` folder.
+
+| Layer | File | Responsibility |
+|-------|------|----------------|
+| 1 | [`styles/tokens.css`](styles/tokens.css) | CSS custom properties (colors, shadows, gradients, widths) |
+| 2 | [`styles/base.css`](styles/base.css) | Global reset, `html`/`body` stacking, dark mode variable overrides |
+| 3 | [`styles/typography.css`](styles/typography.css) | Headings, dark mode text colors, lists, blockquotes |
+| 4 | [`styles/layout.css`](styles/layout.css) | Slide sections, content wrapper, title & closing slides |
+| 5 | [`styles/components.css`](styles/components.css) | Academic cards, tables, equations (MathJax), Mermaid, footnotes |
+| 6 | [`styles/ui.css`](styles/ui.css) | Header, footer, timer, navigation, accessibility, overlay, tools |
+| 7 | [`styles/animations.css`](styles/animations.css) | `@keyframes` & stagger animation utilities |
+
+> **Cascade order** is intentional: lower layers (tokens) are always loaded before higher layers (components) that depend on their variables.
 
 ---
 

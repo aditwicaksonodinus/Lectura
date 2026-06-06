@@ -172,7 +172,8 @@ export async function initPresentation() {
         slidesContainer.innerHTML = '';
         if (tabsContainer) tabsContainer.innerHTML = '';
 
-        const uniqueSections = [];
+        // Set untuk deduplication O(1) — menggantikan Array.includes() O(n)
+        const uniqueSections = new Set();
         const sectionMap     = {}; // sectionName → index slide pertama
 
         slideSections.forEach((sectionText, index) => {
@@ -183,8 +184,8 @@ export async function initPresentation() {
             slidesFragment.appendChild(slideElement);
 
             const sectionName = slideData.metadata.section;
-            if (sectionName && !uniqueSections.includes(sectionName)) {
-                uniqueSections.push(sectionName);
+            if (sectionName && !uniqueSections.has(sectionName)) {
+                uniqueSections.add(sectionName);
                 sectionMap[sectionName] = index;
             }
         });
@@ -192,20 +193,27 @@ export async function initPresentation() {
         // Append semua slide sekaligus
         slidesContainer.appendChild(slidesFragment);
 
-        // 5. Buat tab navigasi secara dinamis
+        // 5. Buat tab navigasi secara dinamis (event delegation — 1 listener)
         if (tabsContainer) {
-            uniqueSections.forEach(name => {
+            for (const name of uniqueSections) {
                 const button = document.createElement('button');
                 button.className = 'tab-item';
                 button.textContent = name.toUpperCase();
                 button.setAttribute('data-section-name', name);
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    Reveal.slide(sectionMap[name]);
-                });
                 tabsFragment.appendChild(button);
-            });
+            }
             tabsContainer.appendChild(tabsFragment);
+
+            // Event delegation: satu listener untuk semua tab-item
+            tabsContainer.addEventListener('click', (e) => {
+                const tab = e.target.closest('.tab-item');
+                if (!tab) return;
+                e.preventDefault();
+                const sectionName = tab.getAttribute('data-section-name');
+                if (sectionName in sectionMap) {
+                    Reveal.slide(sectionMap[sectionName]);
+                }
+            });
 
             // Reset cache tabs setelah rebuild
             resetTabsCache();

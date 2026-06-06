@@ -58,15 +58,16 @@ export function initAccessibilityMenu() {
         }
     });
 
-    // Tutup menu dengan Escape
+    // Keyboard shortcuts: Escape (tutup) dan 'A' (toggle)
+    // Digabung dalam satu listener untuk efisiensi
     document.addEventListener('keydown', (e) => {
+        // Escape → tutup menu jika terbuka
         if (e.key === 'Escape' && menu.classList.contains('active')) {
             toggleMenu(false);
+            return;
         }
-    });
 
-    // Shortcut keyboard: 'A' untuk toggle menu
-    document.addEventListener('keydown', (e) => {
+        // 'A' → toggle menu (abaikan jika di input field atau modifier key)
         if (
             e.key.toLowerCase() === 'a' &&
             !e.ctrlKey && !e.altKey && !e.metaKey

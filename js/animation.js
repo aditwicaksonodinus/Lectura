@@ -1,11 +1,7 @@
-/**
- * animation.js
- * ─────────────────────────────────────────────────────────────
- * Animasi staggered untuk elemen di dalam slide.
- * Setiap elemen anak dari .academic-box mendapat CSS custom
- * property --stagger-index untuk delay animasi berurutan.
- * ─────────────────────────────────────────────────────────────
- */
+// ── Module-level state ────────────────────────────────────────
+// Menyimpan referensi elemen staggered dari slide sebelumnya
+// agar cleanup tidak perlu DOM scan global setiap slide change.
+let _prevStaggered = [];
 
 /**
  * Terapkan animasi staggered pada elemen dalam slide yang aktif.
@@ -13,11 +9,13 @@
  * @param {HTMLElement|null} slide - Elemen section slide saat ini
  */
 export function applyStaggeredAnimation(slide) {
-    // Bersihkan state stagger dari slide sebelumnya
-    document.querySelectorAll('.staggered').forEach(el => {
+    // Bersihkan state stagger dari slide sebelumnya via tracked refs
+    // (lebih efisien dari querySelectorAll('.staggered') global scan)
+    for (const el of _prevStaggered) {
         el.classList.remove('staggered');
         el.style.removeProperty('--stagger-index');
-    });
+    }
+    _prevStaggered = [];
 
     if (!slide) return;
 
@@ -26,4 +24,5 @@ export function applyStaggeredAnimation(slide) {
         el.style.setProperty('--stagger-index', i);
         el.classList.add('staggered');
     });
+    _prevStaggered = Array.from(elements);
 }

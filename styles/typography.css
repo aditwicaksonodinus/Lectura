@@ -1,0 +1,112 @@
+/* 
+  ========================================================================
+  LAYER 3 — TYPOGRAPHY
+  Font settings, heading hierarchy, dark mode text overrides,
+  lists, and blockquotes (IEEE formal style).
+  ========================================================================
+*/
+
+/* Base Font */
+.reveal {
+    font-family: "Noto Serif", serif;
+    color: var(--text-primary);
+    font-size: 1em;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+}
+
+/* Heading Sizes */
+.reveal h1 { font-size: 2.2em; }
+.reveal h2 { font-size: 1.8em; }
+.reveal h3 { font-size: 1.5em; }
+
+.reveal h1, .reveal h2, .reveal h3 {
+    font-family: "Noto Serif", serif;
+    color: var(--primary-academic);
+    text-transform: none;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.02em;
+}
+
+/* Card styling for H3 (Note: Redefined as a container card component; affects ### markdown headers) */
+.reveal .slides section h3 {
+    color: var(--primary-academic);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic);
+    padding: 15px 30px;
+    box-shadow: none;
+    border-radius: 12px;
+    width: 100%;
+    max-width: var(--presentation-width);
+    margin: 0 auto 20px auto;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+/* Dark Mode — Heading Color Overrides */
+html.dark-mode .reveal h1,
+html.dark-mode .layout-title-slide h1,
+html.dark-mode .layout-closing-slide h1 {
+    color: #ffffff;
+}
+
+html.dark-mode .reveal h2,
+html.dark-mode .layout-closing-slide h2,
+html.dark-mode .reveal .slides section:not(.layout-title):not(.layout-closing) h2,
+html.dark-mode .reveal .slides section h3,
+html.dark-mode .academic-box h4,
+html.dark-mode .reveal h5 {
+    color: #FF9B05;
+}
+
+/* KHUSUS Slide Pembuka: Putih Clear (Paksa spesifisitas tinggi) */
+html.dark-mode .reveal .slides section .layout-title-slide h2,
+html.dark-mode .reveal .slides section .layout-title-slide h2.thesis-title,
+html.dark-mode .layout-title-slide h2.thesis-title {
+    color: #ffffff;
+}
+
+html.dark-mode .academic-box h4 {
+    border-bottom-color: rgba(181, 228, 140, 0.4);
+}
+
+/* Lists */
+ul, ol {
+    margin-left: 25px;
+    padding-left: 10px;
+}
+
+li {
+    margin-bottom: 12px;
+}
+
+/* Blockquotes — IEEE Formal Style */
+blockquote {
+    border-left: 4px solid var(--ieee-blue) !important;
+    background: var(--bg-gray) !important;
+    padding: 15px 30px !important;
+    margin: 25px 0 !important;
+    font-size: 0.85em !important;
+    color: var(--text-secondary) !important;
+    font-style: normal !important;
+    text-align: left !important;
+    line-height: 1.25 !important;
+    box-shadow: none !important;
+    width: auto !important;
+    align-self: stretch !important;
+    border-radius: 0 !important;
+}
+
+blockquote p {
+    margin: 0 !important;
+    line-height: 1.25 !important;
+    text-align: left !important;
+}
+
+/* Decorative icons removed for IEEE style */
+blockquote::before {
+    display: none !important;
+}

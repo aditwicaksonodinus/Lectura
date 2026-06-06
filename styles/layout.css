@@ -1,0 +1,270 @@
+/* 
+  ========================================================================
+  LAYER 4 — LAYOUT
+  Reveal.js slide section layout, scrollable content wrapper,
+  flex grid, title slide, closing slide, and stacked layout variant.
+  ========================================================================
+*/
+
+/* ── Main Slide Section ── */
+.reveal .slides section {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top */
+    align-items: center;
+    height: 100%;
+    padding: 190px 60px 80px 60px; /* Adjusted to prevent title overlap */
+    box-sizing: border-box;
+    text-align: left;
+    overflow: visible !important; /* Allow card zoom/shadow to spill out */
+}
+
+/* Floating Slide Title (H2) */
+.reveal .slides section:not(.layout-title):not(.layout-closing) h2 {
+    position: absolute;
+    top: 90px; /* Adjusted from 125px to match slimmer header (15+40=55 + 35 gap) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--presentation-width); /* Fixed width to match academic-box max-width */
+    background: var(--bg-header-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic); /* Unified 10px left border */
+    padding: 20px 40px;
+    box-shadow: var(--shadow-card);
+    margin: 0;
+    font-size: 1.4em;
+    line-height: 1.2;
+    text-align: left; /* Align text to match content cards */
+    z-index: 5;
+    box-sizing: border-box;
+    border-radius: 15px;
+    color: var(--primary-academic);
+}
+
+/* ── Scrollable Content Wrapper ── */
+.content-wrapper {
+    width: 100%;
+    max-width: 1700px; /* Slightly wider than cards to prevent clipping on zoom */
+    height: auto;
+    max-height: 790px; /* Prevents container from overflowing into the footer */
+    overflow-y: auto;
+    overflow-x: visible; /* Allow zoom and shadows to exceed boundaries */
+    padding: 20px 50px; /* Room for card expansion and red line indicator */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-academic) transparent;
+    -webkit-overflow-scrolling: touch; 
+    overscroll-behavior-y: contain; 
+}
+
+/* Custom Scrollbar for Webkit */
+.content-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+.content-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+.content-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--primary-academic);
+    border-radius: 20px;
+}
+
+/* Ensure containers inside wrapper flow naturally */
+.flex-container, .academic-box {
+    width: 100%;
+    position: relative;
+    margin-top: 0; /* Remove top margin that might cause offset */
+    margin-bottom: 20px;
+    flex-shrink: 0; /* Prevent boxes from collapsing */
+}
+
+/* ── Flex Grid ── */
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%;
+    max-width: var(--presentation-width); /* Same as academic-box for alignment */
+    margin: 0 auto;
+}
+
+.flex-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Ensure 1-content-with-text and default templates match the width */
+.academic-box.full-width {
+    max-width: var(--presentation-width);
+    margin: 0 auto;
+}
+
+/* ── Plain UI State (Title/Closing hide) ── */
+.plain-ui {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ── Layout: Title & Closing Section Resets ── */
+.reveal .slides section.layout-title,
+.reveal .slides section.layout-closing {
+    padding: 0 !important; /* Reset all padding to ensure perfect centering */
+    justify-content: center !important; /* Center vertically */
+    align-items: center !important; /* Center horizontally */
+}
+
+/* ── Title Slide ── */
+.layout-title-slide {
+    width: var(--presentation-width) !important;
+    height: auto !important;
+    min-height: 800px; /* Increased from 650px for more presence */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 60px !important; /* Slightly more vertical breathing room */
+    box-sizing: border-box;
+    text-align: center !important;
+    background: var(--bg-card) !important; /* Themed background */
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic); /* Navy Blue Accent */
+    box-shadow: var(--shadow-active);
+    margin: 0 auto !important;
+    position: relative;
+    z-index: 10;
+    border-radius: 15px;
+}
+
+.layout-title-slide > * {
+    text-align: center !important;
+    width: 100%;
+}
+
+/* TESIS at the very top of the title group */
+.layout-title-slide h1.tesis-top {
+    font-size: 1.0em !important;
+    color: var(--primary-academic);
+    margin-bottom: 2em !important; /* Increased gap */
+    margin-top: 0 !important;
+    text-align: center !important;
+    letter-spacing: 8px;
+    width: 100%;
+    font-weight: 700;
+    font-variant: small-caps;
+    text-transform: uppercase;
+}
+
+.layout-title-slide h2.thesis-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: 1400px;
+    margin: 1em auto 1.5em auto; /* Centered margins */
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-size: 1.6em; /* Slightly larger to fill space */
+    color: var(--primary-academic);
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 800;
+    display: block;
+}
+
+.title-logo {
+    max-height: 180px !important; /* Larger logo */
+    width: 180px !important; /* Fixed width for perfect circle */
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto 30px auto !important; /* Centered margin */
+    display: block !important;
+    background-color: white !important; /* Background white for dark/light mode compatibility */
+    border-radius: 50% !important; /* Circular container */
+    padding: 15px !important; /* Inner spacing */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+    box-sizing: border-box !important;
+    object-fit: contain !important;
+}
+
+/* ── Closing Slide ── */
+.layout-closing-slide {
+    width: var(--presentation-width) !important;
+    height: auto !important;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px !important;
+    box-sizing: border-box;
+    text-align: center !important;
+    background: var(--bg-card) !important; /* Themed background */
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic); /* Navy Blue Accent */
+    box-shadow: var(--shadow-active);
+    margin: 0 auto !important;
+    position: relative;
+    z-index: 10;
+    border-radius: 15px;
+}
+
+.layout-closing-slide h1 {
+    font-size: 2.2em !important; /* Matched with global h1 */
+    color: var(--primary-academic);
+    margin-top: 0 !important;
+    margin-bottom: 15px !important;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center !important;
+}
+
+.layout-closing-slide h2 {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-size: 1.5em; /* Reduced for better proportion */
+    color: var(--primary-academic);
+    margin-bottom: 1em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.layout-closing-slide .title-details {
+    border-top-color: var(--closing-border-color); /* Pembatas di slide penutup */
+}
+
+.layout-closing-slide .title-logo {
+    max-height: 140px !important;
+    width: 140px !important;
+    margin-bottom: 25px !important;
+}
+
+/* ── Optimization: Stacked Layout ── */
+.layout-1-column-stacked .academic-box {
+    padding: 25px 40px !important;
+    margin-bottom: 15px !important;
+}
+.layout-1-column-stacked .academic-box h4 {
+    margin-bottom: 10px !important;
+}

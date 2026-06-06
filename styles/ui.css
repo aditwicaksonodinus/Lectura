@@ -1,0 +1,631 @@
+/* 
+  ========================================================================
+  LAYER 6 — UI
+  All presenter interface elements: header bar, navigation tabs,
+  footer bar, timer, navigation buttons, accessibility menu,
+  image overlay, laser pointer, and scribble canvas.
+  ========================================================================
+*/
+
+/* ════════════════════════════════════════════════════
+   HEADER
+   ════════════════════════════════════════════════════ */
+.reveal .header {
+    position: absolute;
+    top: 15px; /* Floating slightly */
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--presentation-width);
+    height: 46px; /* Slightly taller for better alignment with footer style */
+    background: var(--header-bg); /* Themed header bg */
+    border: 1px solid var(--border-subtle);
+    border-radius: 15px; /* Matched with footer */
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 5px 25px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    z-index: 100; /* High priority */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+    padding: 0 40px; /* Matched with footer */
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.header-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 32px;
+}
+
+/* ════════════════════════════════════════════════════
+   ACCESSIBILITY MENU
+   ════════════════════════════════════════════════════ */
+.accessibility-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#accessibility-toggle,
+.accessibility-menu button {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+#accessibility-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    justify-content: center;
+}
+
+#accessibility-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+#accessibility-toggle[aria-expanded="true"] {
+    background: var(--primary-academic);
+    border-color: var(--primary-academic);
+}
+
+.accessibility-menu {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 50%;
+    right: auto;
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-subtle);
+    border-radius: 15px; /* Matched with header/footer */
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensure icons are centered */
+    gap: 8px;
+    width: auto;
+    min-width: 48px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.accessibility-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.accessibility-menu button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.accessibility-menu button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+/* Icons for Accessibility Menu */
+.accessibility-icon::before { content: '⚙️'; font-size: 1.2em; }
+.scribble-icon::before { content: '✏️'; font-size: 1.1em; }
+.clear-icon::before { content: '🗑️'; font-size: 1.1em; }
+
+#laser-toggle[aria-pressed="true"] {
+    background: rgba(255, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    border-color: rgba(255, 0, 0, 0.6);
+}
+
+#scribble-toggle[aria-pressed="true"] {
+    background: var(--accent-orange);
+    box-shadow: 0 0 10px var(--accent-orange);
+    border-color: var(--accent-orange);
+}
+
+.theme-icon::before {
+    content: '☀️'; /* Default Sun */
+    font-size: 1.2em;
+}
+
+html.dark-mode .theme-icon::before {
+    content: '🌙'; /* Moon in dark mode */
+}
+
+/* ════════════════════════════════════════════════════
+   NAVIGATION TABS
+   ════════════════════════════════════════════════════ */
+.nav-tabs {
+    display: flex;
+    gap: 8px;
+    height: 36px;
+}
+
+.tab-item {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.45); /* Muted for future tabs in Light Mode */
+    border: none;
+    padding: 0 10px;
+    border-radius: 12px; /* Matched with timer button rounded style */
+    cursor: pointer;
+    font-size: 0.6em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+    text-transform: uppercase;
+}
+
+html.dark-mode .tab-item {
+    color: rgba(202, 233, 255, 0.7); /* Significantly increased opacity from 0.45 for readability */
+}
+
+.tab-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+/* Completed Tabs Style */
+.tab-item.completed {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+html.dark-mode .tab-item.completed {
+    color: var(--text-primary); /* Full brightness for completed tabs in dark mode */
+    background: rgba(202, 233, 255, 0.12);
+}
+
+.tab-item.completed::after {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.tab-item:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+html.dark-mode .tab-item:hover {
+    color: rgba(202, 233, 255, 0.9);
+    background: rgba(202, 233, 255, 0.12);
+}
+
+/* Active Tab Style */
+.tab-item.active {
+    background: rgba(255, 255, 255, 0.22);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    font-weight: 800;
+}
+
+html.dark-mode .tab-item.active {
+    color: #ffffff !important; /* Absolute white for max contrast */
+    background: rgba(4, 102, 200, 0.4); /* Stronger blue background */
+    box-shadow: 0 0 20px rgba(202, 233, 255, 0.2);
+    border: 1px solid rgba(202, 233, 255, 0.3);
+}
+
+.tab-item.active::after {
+    width: 85%;
+    background: var(--accent-orange); /* Progress indicator */
+}
+
+/* ════════════════════════════════════════════════════
+   TIMER
+   ════════════════════════════════════════════════════ */
+.timer-container {
+    background: rgba(255, 255, 255, 0.15); /* Slightly clearer glassy background */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 0 20px;
+    height: 36px;
+    border-radius: 15px; /* Rounded consistent with dashboard style */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.75em;
+    color: #ffffff;
+    box-shadow: none;
+    margin-bottom: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+html.dark-mode .timer-container {
+    background: rgba(4, 102, 200, 0.2);
+    color: #ffffff;
+    border-color: rgba(202, 233, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.timer-container button {
+    background: rgba(255, 255, 255, 0.22);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 4px 12px;
+    border-radius: 12px; /* Rounded consistent with timer container */
+    cursor: pointer;
+    font-size: 0.7em;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+html.dark-mode .timer-container button {
+    border-color: rgba(202, 233, 255, 0.4);
+}
+
+/* Distinct button variants */
+.timer-container button#start-timer {
+    background: var(--primary-academic);
+    border-color: var(--primary-academic);
+}
+
+html.dark-mode .timer-container button#start-timer {
+    background: #0466c8; /* Brighter blue for dark mode */
+}
+
+.timer-container button#reset-timer {
+    background: var(--secondary-academic);
+    border-color: var(--secondary-academic);
+}
+
+html.dark-mode .timer-container button#reset-timer {
+    background: #5c677d; /* Lighter slate blue for dark mode */
+}
+
+.timer-container button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
+.timer-container button#start-timer:hover {
+    background: #164a7c; /* darker primary */
+}
+.timer-container button#reset-timer:hover {
+    background: #5c1e1e; /* darker secondary */
+}
+
+.timer-container .timer-display {
+    margin-left: 8px;
+    font-weight: 600;
+}
+
+.timer-container button:active {
+    transform: scale(0.95);
+}
+
+.timer-container.alert-mode, html.dark-mode .timer-container.alert-mode {
+    background: #ff3b30 !important; /* Crimson Red Warning */
+    border-color: #ff3b30 !important;
+    color: white !important;
+    transition: all 0.3s ease;
+    animation: pulse-alert 1.5s infinite alternate;
+}
+
+.timer-container.alert-mode #timer-display {
+    font-weight: 900;
+}
+
+@keyframes pulse-alert {
+    0% {
+        box-shadow: 0 0 4px rgba(255, 59, 48, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 59, 48, 0.9);
+    }
+}
+
+/* ════════════════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════════════════ */
+.reveal .footer {
+    position: absolute;
+    bottom: 15px; /* Floating slightly above bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--presentation-width);
+    height: 50px;
+    background: var(--header-bg); /* Themed header bg */
+    border: 1px solid var(--border-subtle);
+    border-radius: 15px;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr; /* Center info given more space */
+    align-items: center;
+    padding: 0 40px;
+    font-size: 0.75em; /* Increased from 0.6em */
+    color: var(--footer-text, white); /* Themed footer text */
+    box-sizing: border-box;
+    z-index: 100;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease, background-color 0.4s ease, color 0.4s ease;
+}
+
+.reveal .footer.hidden-footer {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.reveal .footer .left-info {
+    text-align: left;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 15px;
+}
+
+.reveal .footer .center-info {
+    text-align: center;
+    font-weight: 700;
+    text-transform: none;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.reveal .footer .right-info {
+    text-align: right;
+    font-weight: 700;
+    line-height: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    color: white;
+    height: 100%;
+}
+
+.reveal .footer .watermark {
+    opacity: 0.6;
+    font-weight: 500;
+    font-size: 0.9em;
+    font-family: "Noto Serif", serif;
+    transition: opacity 0.3s ease;
+}
+
+.reveal .footer .watermark:hover {
+    opacity: 1;
+}
+
+/* Page number formatting to match footer base style.
+   Note: !important is mandatory here to override Reveal.js's highly specific inline styles injected at runtime. */
+.reveal .slide-number {
+    position: static !important; /* Remove Reveal.js absolute positioning */
+    display: inline-block !important;
+    font-size: 1em !important;
+    letter-spacing: normal !important;
+    line-height: 1 !important;
+    color: white !important;
+    background: transparent !important; /* Remove the black box */
+    padding: 0 !important; /* Remove default padding */
+    margin: 0 !important;
+    z-index: auto !important;
+}
+
+/* Hide default Reveal.js controls & progress */
+.reveal .controls {
+    display: none !important;
+}
+
+.reveal .progress {
+    display: none !important;
+}
+
+/* ════════════════════════════════════════════════════
+   NAVIGATION CONTROLS
+   ════════════════════════════════════════════════════ */
+.navigation-controls {
+    position: absolute;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--presentation-width);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    z-index: 1000;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.navigation-controls button {
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    color: var(--primary-academic);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    pointer-events: auto;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+.navigation-controls button:hover {
+    transform: scale(1.15);
+    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.navigation-controls button#prev-btn::before {
+    content: '<';
+    font-size: 3em;
+    font-weight: 800;
+    font-family: serif;
+}
+
+.navigation-controls button#next-btn::before {
+    content: '>';
+    font-size: 3em;
+    font-weight: 800;
+    font-family: serif;
+}
+
+/* Ensure visibility in Dark Mode (White/Light Cyan) */
+html.dark-mode .navigation-controls button {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Hide Reveal navigation controls when on title/closing slides */
+.footer.hidden-footer + .navigation-controls {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* ════════════════════════════════════════════════════
+   IMAGE PREVIEW OVERLAY
+   ════════════════════════════════════════════════════ */
+.image-preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); /* Less opaque to see blur */
+    backdrop-filter: blur(12px); /* High-end bokeh effect */
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.image-preview-overlay.active {
+    opacity: 1;
+}
+
+.image-preview-overlay img {
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    border-radius: 8px; /* Slightly more modern */
+    border: none;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+    cursor: default;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.17, 0.84, 0.44, 1);
+}
+
+.image-preview-overlay.active img {
+    transform: scale(1);
+}
+
+.image-preview-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5em;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.image-preview-close:hover {
+    transform: scale(1.2);
+}
+
+/* Zoom cursor on zoomable images */
+.flex-item img,
+.full-width-image-container img,
+.two-image-row .flex-item img {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.flex-item img:hover,
+.full-width-image-container img:hover,
+.two-image-row .flex-item img:hover {
+    transform: scale(1.02);
+}
+
+/* ════════════════════════════════════════════════════
+   LASER POINTER & SCRIBBLE TOOLS
+   ════════════════════════════════════════════════════ */
+.laser-pointer {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,0,0,0.8);
+    box-shadow: 0 0 8px rgba(255,0,0,0.8);
+    pointer-events: none;
+    transform: translate(-5px, -5px);
+    transition: transform 0.05s linear;
+    z-index: 10000;
+    display: none;
+}
+
+/* Laser toggle button icon */
+.laser-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: red;
+    border-radius: 50%;
+}
+
+.scribble-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 90; /* Lower than header (100) and menu (1000) */
+    pointer-events: none;
+    display: block;
+}
+
+/* Enable pointer events only when mode is active */
+.scribble-active .scribble-canvas {
+    pointer-events: auto;
+    cursor: cell; /* Pencil-like cursor */
+    touch-action: none;
+}

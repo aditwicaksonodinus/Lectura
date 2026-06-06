@@ -27,13 +27,24 @@ export function initScribbleMode() {
     let isDrawing = false;
     window.scribbleEnabled = false;
 
+    // ── Debounce Helper ───────────────────────────────────────
+    // Mencegah spike CPU saat window di-resize (firing ratusan kali/detik)
+    const debounce = (fn, delay) => {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => fn(...args), delay);
+        };
+    };
+
     // ── Resize Canvas ─────────────────────────────────────────
     const resizeCanvas = () => {
         canvas.width  = window.innerWidth;
         canvas.height = window.innerHeight;
     };
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', debounce(resizeCanvas, 100));
     resizeCanvas();
+
 
     // ── Toggle Enable/Disable ─────────────────────────────────
     /**

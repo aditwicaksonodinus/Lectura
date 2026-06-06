@@ -1,0 +1,373 @@
+/* 
+  ========================================================================
+  LAYER 5 — COMPONENTS
+  Reusable content components: academic cards, images, tables,
+  equations (IEEE/MathJax), mermaid diagrams, and footnotes.
+  ========================================================================
+*/
+
+/* ════════════════════════════════════════════════════
+   ACADEMIC BOX — Premium Glassmorphism & Touch Optimized
+   ════════════════════════════════════════════════════ */
+.academic-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary-academic);
+    padding: 30px 40px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    width: 100%;
+    max-width: var(--presentation-width);
+    box-sizing: border-box;
+    border-radius: 15px;
+    text-align: left;
+    position: relative;
+    /* Separate cubic-bezier transitions specifically for interactive scale feedback and shadow scaling.
+       These are distinct from the general theme color transitions defined in the global transit rules. */
+    transition: 
+        transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+        box-shadow 0.25s ease,
+        border-left-width 0.2s ease;
+    will-change: transform;
+}
+
+.academic-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-subtle);
+}
+
+.academic-box.red-top {
+    border-color: rgba(27, 54, 93, 0.06);
+    border-left: 4px solid var(--primary-academic);
+}
+
+.academic-box.blue-top {
+    border-color: rgba(0, 98, 155, 0.06);
+    border-left: 4px solid var(--primary-academic);
+}
+
+/* Touch Feedback & Hover */
+.academic-box:hover,
+.academic-box:active,
+.academic-box.is-interacting {
+    transform: scale(1.02) !important;
+    background: var(--bg-card) !important;
+    box-shadow: none !important;
+    z-index: 100 !important;
+}
+
+/* Remove the previous pseudo-element approach as it was still getting clipped */
+.reveal .slides section .academic-box:hover::after,
+.reveal .slides section .academic-box:active::after,
+.academic-box.is-interacting::after {
+    display: none;
+}
+
+.academic-box h4 {
+    margin-top: 0;
+    color: var(--primary-academic);
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    text-transform: none;
+    font-family: "Noto Serif", serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(27, 54, 93, 0.12);
+    display: inline-block;
+}
+
+/* ════════════════════════════════════════════════════
+   IMAGES
+   ════════════════════════════════════════════════════ */
+.flex-item img {
+    max-width: 100%;
+    max-height: 700px;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.full-width-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.full-width-image-container img {
+    max-width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.two-image-row {
+    margin-bottom: 10px;
+}
+
+.two-image-row .flex-item img {
+    max-height: 350px;
+    border-radius: 15px;
+    border: 1px solid var(--border-light);
+}
+
+/* Dark Mode — White background for transparent PNGs */
+html.dark-mode figure,
+html.dark-mode .flex-item img,
+html.dark-mode .full-width-image-container img,
+html.dark-mode .two-image-row .flex-item img,
+html.dark-mode .title-logo,
+html.dark-mode .Kontruk-SEM img,
+html.dark-mode .trajectory-container img,
+html.dark-mode .Bukti-Log img,
+html.dark-mode .Bukti-implementasi img,
+html.dark-mode div[align="center"] img {
+    background-color: white;
+}
+
+/* ════════════════════════════════════════════════════
+   TABLES — IEEE Style
+   ════════════════════════════════════════════════════ */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+
+thead th {
+    background-color: transparent;
+    color: var(--text-primary);
+    font-family: "Noto Serif", serif;
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 15px;
+    border-bottom: 2px solid var(--primary-academic);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--row-alt);
+}
+
+html.dark-mode tbody tr:nth-child(even) {
+    background: linear-gradient(90deg, rgba(4, 102, 200, 0.05), rgba(51, 65, 92, 0.1));
+}
+
+html.dark-mode tbody tr:hover {
+    background: rgba(4, 102, 200, 0.15) !important;
+}
+
+tbody td {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-subtle);
+    text-align: left;
+    color: var(--text-primary);
+}
+
+tbody tr:last-child td {
+    border-bottom: 2px solid var(--primary-academic);
+}
+
+/* Academic table wrapper from markdown renderer */
+.academic-table-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.academic-table-wrapper table {
+    border-collapse: collapse;
+    width: auto;
+    min-width: 85%;
+    font-family: "Noto Serif", serif;
+    box-shadow: none;
+    border-top: 3px solid var(--primary-academic);
+    border-bottom: 3px solid var(--primary-academic);
+    background: var(--math-bg); /* Use themed bg */
+}
+
+html.dark-mode .academic-table-wrapper table {
+    background: linear-gradient(135deg, rgba(4, 102, 200, 0.05), rgba(0, 24, 69, 0.3));
+    border-color: var(--primary-academic);
+}
+
+.academic-table-wrapper thead {
+    border-bottom: 2px solid var(--primary-academic);
+}
+
+.academic-table-wrapper thead th {
+    background-color: transparent;
+    color: var(--text-primary);
+    font-family: "Noto Serif", serif;
+    padding: 10px 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.academic-table-wrapper tbody td {
+    padding: 8px 25px;
+    border: none !important; /* Explicitly reset and prevent overrides from general tbody td rules */
+    text-align: left;
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+
+/* ════════════════════════════════════════════════════
+   IEEE EQUATIONS — MathJax
+   ════════════════════════════════════════════════════ */
+.ieee-equation-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1.5em 0;
+    position: relative;
+    padding: 20px 25px;
+    background: var(--math-bg); /* Themed math bg */
+    border: 1px dashed var(--primary-academic); /* Formal academic border */
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.ieee-equation-content {
+    flex-grow: 1;
+    text-align: center;
+    overflow-x: auto;
+    font-family: "Latin Modern Math", "STIX Two Math", "TeX Gyre Termes Math", serif;
+    padding: 0 60px; /* Equal spacing on left and right to prevent overlap with equation number */
+}
+
+/* Ensure MathJax block has no margin inside our container */
+.ieee-equation-content .MathJax {
+    margin: 0 !important;
+}
+
+/* Shrink inline MathJax font size for better proportions */
+mjx-container:not([display="true"]) {
+    font-size: 0.85em !important;
+}
+
+.ieee-equation-number {
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    font-family: "Noto Serif", serif;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+}
+
+/* ════════════════════════════════════════════════════
+   MERMAID DIAGRAMS
+   ════════════════════════════════════════════════════ */
+.mermaid {
+    background: #ffffff !important;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #dddddd !important;
+    width: 100%;
+    max-height: 900px; /* increased to give more vertical space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible !important; /* allow diagrams to extend beyond container if needed */
+}
+
+/* Ensure all text and HTML labels inside mermaid container have a stable dark color */
+.mermaid,
+.mermaid text,
+.mermaid .labelText,
+.mermaid foreignObject,
+.mermaid foreignObject * {
+    fill: #2c2c2c !important;
+    color: #2c2c2c !important;
+}
+
+.mermaid-container {
+    width: 100%;
+    max-width: var(--presentation-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mermaid svg {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 750px !important;
+}
+
+/* Mermaid Specific Refinements for Projector Visibility */
+.mermaid svg .edgePath path {
+    stroke-width: 3.5px !important; /* Even thicker from 2.5px */
+    stroke: var(--primary-academic) !important;
+}
+.mermaid svg .marker path {
+    fill: var(--primary-academic) !important;
+    stroke: var(--primary-academic) !important;
+}
+.mermaid svg .node rect, 
+.mermaid svg .node circle, 
+.mermaid svg .node polygon {
+    stroke-width: 3px !important; /* Thicker from 2px */
+    stroke: var(--primary-academic) !important;
+}
+
+/* ════════════════════════════════════════════════════
+   FOOTNOTES
+   ════════════════════════════════════════════════════ */
+.footnote-container {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: baseline;
+    box-sizing: border-box;
+}
+
+.academic-footnote {
+    font-size: 0.7em !important;
+    opacity: 1;
+    color: var(--footnote-color) !important;
+    line-height: 1.3;
+    font-style: normal !important;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: "Noto Serif", serif;
+}
+
+.academic-footnote * {
+    font-size: inherit !important;
+    font-style: inherit !important;
+    color: inherit !important;
+}
+
+.academic-footnote .footnote-marker sup {
+    font-size: 0.9em !important;
+    top: -0.1em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.footnote-definition {
+    font-size: 0.65em;
+    color: var(--footnote-color);
+    opacity: 1;
+    margin-top: 15px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 5px;
+}

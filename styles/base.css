@@ -1,0 +1,95 @@
+/* 
+  ========================================================================
+  LAYER 2 — BASE
+  Global reset, html/body stacking context, background overlay,
+  dark mode CSS variable overrides, and global transition rules.
+  ========================================================================
+*/
+
+/* Dark Mode — CSS Variable Overrides */
+html.dark-mode {
+    --bg-gray: #001845; /* Oxford Blue Background */
+    --text-primary: #cae9ff; /* Light Cyan-White */
+    --text-secondary: #98c1d9; /* Powder Blue */
+    --text-muted: #62b6cb; /* Muted Cyan */
+    --primary-academic: #0466c8; /* Honolulu Blue */
+    --secondary-academic: #33415c; /* Slate Blue */
+    --bg-card: linear-gradient(145deg, rgba(5, 10, 20, 0.75), rgba(0, 0, 5, 0.55)); /* Very Dark/Black Glass */
+    --bg-header-card: var(--bg-card); /* Match academic-box background */
+    --bg-dot: rgba(4, 102, 200, 0.15); 
+    --shadow-card: 0 0 25px rgba(0, 0, 0, 0.5); /* Centered and reduced spread */
+    --shadow-active: 0 0 50px rgba(4, 102, 200, 0.2); /* Centered and reduced spread */
+    --border-subtle: rgba(4, 102, 200, 0.35); /* Slightly stronger border for glass */
+    --math-bg: rgba(0, 24, 69, 0.4); /* Deep Navy Glass */
+    --header-bg: linear-gradient(135deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95), rgba(0, 40, 85, 0.95)); /* Deep Classic Navy Glass */
+    --tab-text: rgba(98, 182, 203, 0.5); /* Match footer text color (--text-muted) muted */
+    --footer-text: #62b6cb;
+    --row-alt: rgba(4, 102, 200, 0.08); /* Subtle gradient for tables */
+    --footnote-color: var(--footer-text); /* Sync with footer color */
+}
+
+/* Global Stacking Context */
+html {
+    transition: background-color 0.4s ease;
+    background-color: var(--bg-gray);
+    position: relative;
+}
+
+/* Transparent Background Image */
+html::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/background.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.60; /* Transparansi 40% (Opacity 60%) */
+    z-index: 1; /* Render in front of html canvas background */
+    pointer-events: none; /* Let clicks pass through to presentation */
+    transition: opacity 0.4s ease, filter 0.4s ease;
+    filter: invert(0.8) contrast(0.5); /* Invert white grid to dark grid in light mode, with contrast 0.5 */
+}
+
+html.dark-mode::before {
+    filter: invert(0) contrast(0.5); /* Keep original white grid in dark mode, with contrast 0.5 */
+}
+
+body {
+    position: relative;
+    z-index: 2; /* Render in front of the background image */
+}
+
+/* Global Transitions — elements that change with theme */
+body, .reveal, .header, .footer, .tab-item, .timer-container, .image-preview-overlay {
+    transition: 
+        background-color 0.4s ease, 
+        color 0.4s ease, 
+        border-color 0.4s ease, 
+        box-shadow 0.4s ease;
+}
+
+/* Transitions for elements that should NOT transition background-color (like glass cards)
+   to prevent visual color flashing/flicker during theme transitions */
+.academic-box, section h2, table, tr, td, th {
+    transition: 
+        color 0.4s ease, 
+        border-color 0.4s ease, 
+        box-shadow 0.4s ease;
+}
+
+/* Reveal.js — Transparent Background Resets */
+body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section, 
+.reveal .slide-background, .reveal .slide-background-content {
+    background-color: transparent !important;
+    background: transparent !important;
+    overscroll-behavior-x: none !important;
+    overscroll-behavior-y: none !important;
+    touch-action: pan-y;
+}
+
+.reveal .slides {
+    inset: 0;
+}

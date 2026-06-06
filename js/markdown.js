@@ -47,6 +47,22 @@ marked.setOptions({
     breaks: true
 });
 
+// ── Regex Module-Level Constants ──────────────────────────────
+// Dikompilasi sekali saat module di-load, bukan setiap renderMarkdown() call.
+// Aman dengan String.replace() karena setiap call reset lastIndex secara implisit.
+
+/** Kelompok footnote akademik berurutan: [^1)] content */
+const FOOTNOTE_GROUP_RE = /((?:\[\^[^\]]*?\)\][^\n\r]*(?:\r?\n|$)\s*)+)/g;
+
+/** IEEE Equation: $$eq$$ (label) di awal baris */
+const IEEE_EQ_RE = /^[ \t]*\$\$([^\$]+?)\$\$\s*\(([^)]+)\)/gm;
+
+/** Footnote reference inline: [^1] (bukan definisi) */
+const FOOTNOTE_REF_RE = /\[\^([^\]]+)\](?!\:)/g;
+
+/** Footnote definition: [^1]: content */
+const FOOTNOTE_DEF_RE = /^\[\^([^\]]+)\]:\s*(.*)$/gm;
+
 /**
  * Enhanced markdown parser dengan footnote dan IEEE equation support.
  * @param {string} md - Raw markdown string
@@ -57,7 +73,7 @@ export function renderMarkdown(md) {
 
     // 0. Academic Footnotes: [^1)] content
     // Grupkan footnote berurutan ke dalam satu container (side-by-side display)
-    md = md.replace(/((?:\[\^[^\]]*?\)\][^\n\r]*(?:\r?\n|$)\s*)+)/g, (match) => {
+    md = md.replace(FOOTNOTE_GROUP_RE, (match) => {
         const lines = match.trim().split(/\r?\n/);
         const footnoteSpans = lines.map(line => {
             const parts = line.match(/\[\^([^\]]*?\))\]\s*(.*)/);
@@ -70,15 +86,16 @@ export function renderMarkdown(md) {
     });
 
     // 1. IEEE Equation Style: $$eq$$ (label) — harus di awal baris
-    md = md.replace(/^[ \t]*\$\$([^\$]+?)\$\$\s*\(([^)]+)\)/gm, (match, eq, label) => {
+    md = md.replace(IEEE_EQ_RE, (match, eq, label) => {
         return `\n<div class="ieee-equation-container">\n<div class="ieee-equation-content">\n\n$$\n${eq.trim()}\n$$\n\n</div>\n<div class="ieee-equation-number">(${label})</div>\n</div>\n`;
     });
 
     // 2. Footnote references: [^1]
-    let html = md.replace(/\[\^([^\]]+)\](?!\:)/g, '<sup><a href="#/slide?fn=$1" id="fnref-$1" class="footnote-ref" onclick="return false;">$1</a></sup>');
+    let html = md.replace(FOOTNOTE_REF_RE, '<sup><a href="#/slide?fn=$1" id="fnref-$1" class="footnote-ref" onclick="return false;">$1</a></sup>');
 
     // 3. Footnote definitions: [^1]: content
-    html = html.replace(/^\[\^([^\]]+)\]:\s*(.*)$/gm, '<div class="footnote-definition" id="fn-$1"><sup>[$1]</sup> $2</div>');
+    html = html.replace(FOOTNOTE_DEF_RE, '<div class="footnote-definition" id="fn-$1"><sup>[$1]</sup> $2</div>');
 
     return marked.parse(html);
 }
+

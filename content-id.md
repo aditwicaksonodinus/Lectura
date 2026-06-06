@@ -72,17 +72,36 @@ Belum Terintegrasikannya antara kemampuan adaptasi strategis **(RL)** berdasarka
 [^2)] 2.3 Intelligent Tutoring System (ITS)
 
 ---slide-break---
-<!-- layout: 1-content-with-text -->
+<!-- layout: 1-column-stacked -->
 <!-- title: Metodologi: Mekanisme Adaptif Skor $z_t$ -->
 <!-- section: Metodologi -->
+<!-- top-title: 1. Deteksi Kognitif (CWLL) -->
+<!-- bottom-title: 2. Transformasi Sigmoid & Diskritisasi -->
 
 Mekanisme **Adaptif** berfungsi sebagai deteksi kognitif untuk mengukur kondisi siswa secara langsung melalui tahap:
 
-1. **Confidence Weighted Lead Lag (CWLL)**: $$C_t = p_t + \lambda(q_t - p_t), \lambda=0.25$$ berfungsi pengontrol jalur progres jangka pendek dan jangka panjang dengan pembobotan ($\lambda$). *$\lambda=0.25$ dipilih secara empiris untuk menyeimbangkan stabilitas historis.*
-2. **Transformasi Sigmoid**: $$z_{\text{raw}} = \frac{1}{1+e^{-8.0(c_t-0.50)}}$$ dan $$z_{t}= \beta_z z_t-1+(1-\beta_z)z_{\text{raw}}$$ berfungsi normalisasi respons kognitif ke dalam ruang state [0,1].
-3. **Diskritisasi State**: Nilai kontinu $z_t$ dipetakan ke dalam **4 level ZPD (ZPD-0 hingga ZPD-3)** untuk mendukung algoritma **Tabular Q-Learning**.
+1. **Confidence Weighted Lead Lag (CWLL)**:
+   Berfungsi pengontrol jalur progres jangka pendek dan jangka panjang dengan pembobotan ($\lambda$):
 
-[^1)] 3.8.2 Mekanisme Skor Adaptif ($z_t$) & 3.9 Adaptive Agent
+$$C_t = p_t + \lambda(q_t - p_t), \lambda=0.25$$ (3.1)
+
+*$\lambda=0.25$ dipilih secara empiris untuk menyeimbangkan stabilitas historis.*
+
+[^1)] 3.8.2 Mekanisme Skor Adaptif ($z_t$)
+
+<!-- split -->
+
+2. **Transformasi Sigmoid**:
+   Berfungsi normalisasi respons kognitif ke dalam ruang state [0,1]:
+
+$$z_{\text{raw}} = \frac{1}{1+e^{-8.0(c_t-0.50)}}$$ (3.2)
+
+$$z_{t}= \beta_z z_t-1+(1-\beta_z)z_{\text{raw}}$$ (3.3)
+
+3. **Diskritisasi State**:
+   Nilai kontinu $z_t$ dipetakan ke dalam **4 level ZPD (ZPD-0 hingga ZPD-3)** untuk mendukung algoritma **Tabular Q-Learning**.
+
+[^2)] 3.9 Adaptive Agent
 
 ---slide-break---
 <!-- layout: 1-column-stacked -->
@@ -170,15 +189,20 @@ sequenceDiagram
 **(MAESTRO) Multi‑dimensional Adaptive Educational System with Temporal Reinforcement Optimization**
 
 ---slide-break---
-<!-- layout: 2-content-with-img -->
+<!-- layout: 1-column-stacked -->
 <!-- title: Hasil & Analisis: Performa & Efisiensi RL -->
 <!-- section: Hasil RL -->
-<!-- image: assets/adversarial_inactive_reward/q_value_magnitude.png -->
+<!-- top-title: Visualisasi Performa (Reward & Q-Value) -->
+<!-- bottom-title: Tabel Ringkasan Metrik Evaluasi -->
 
 <div class="trajectory-container" style="display: flex; gap: 20px; justify-content: center;">
   <img src="assets/adversarial_inactive_reward/q_value_magnitude.png" width="35%">
   <img src="assets/adversarial_inactive_reward/bar_metrics.png" width="50%">
 </div>
+
+[^1)] Gambar 4.1 Magnitudo Q-Value & Metrik Bar
+
+<!-- split -->
 
 | Metrik Evaluasi    | Agen Adaptif | Agen Statis | Delta                 | Statistik        |
 | :----------------- | :----------- | :---------- | :-------------------- | :--------------- |
@@ -191,7 +215,7 @@ sequenceDiagram
 
 - **Uji Bootstrap**: Selisih reward 0,024 dengan CI 95% [0,019; 0,029] , seluruhnya diatas nol, mengonfirmasi stabilitas terhadap variasi *run-seeds*.
 
-[^1)] Tabel 4.2 Ringkasan Performa & Analisis Ablasi 4.3
+[^2)] Tabel 4.2 Ringkasan Performa & Analisis Ablasi 4.3
 
 ---slide-break---
 <!-- layout: 1-column-stacked -->

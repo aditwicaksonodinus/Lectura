@@ -49,6 +49,9 @@ export function initMermaid(baseFontSize) {
     });
 }
 
+// Counter deterministik untuk ID diagram — bebas collision, lebih cepat dari Math.random()
+let _mermaidCounter = 0;
+
 // Decoder persisten untuk menghindari pembuatan DOM berulang
 const _htmlDecoder = document.createElement('div');
 
@@ -60,7 +63,7 @@ const _htmlDecoder = document.createElement('div');
 export async function processMermaidDiagram(diagram) {
     if (typeof mermaid === 'undefined' || diagram.hasAttribute('data-processed')) return;
 
-    const id = `mermaid-svg-${Math.floor(Math.random() * 1000000)}`;
+    const id = `mermaid-svg-${_mermaidCounter++}`;
 
     // Decode HTML entities dari konten diagram
     _htmlDecoder.innerHTML = diagram.innerHTML.trim();
