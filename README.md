@@ -53,7 +53,9 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 ├── 📄 content-id.md       # Slide content (Bahasa Indonesia)
 ├── 📄 content-en.md       # Slide content (English)
 ├── 🖼️ placeholder.png     # Preview / demo image
-├── 🖼️ University-logo.png # Institution logo (title slide)
+├── 📁 assets/             # Assets directory (images)
+│   ├── 🖼️ background.png  # Transparent background image
+│   └── 🖼️ University-logo.png # Institution logo (title slide)
 └── 📁 Noto_Serif/         # Custom font
 ```
 
@@ -199,12 +201,12 @@ Full academic title page with centered logo, thesis title, and author details.
 
 | Metadata | Description |
 |----------|-------------|
-| `logo` | Path to institution logo (e.g. `University-logo.png`) |
+| `logo` | Path to institution logo (e.g. `assets/University-logo.png`) |
 | `state` | `hide-header-footer` to hide nav UI |
 
 ```markdown
 <!-- layout: title -->
-<!-- logo: University-logo.png -->
+<!-- logo: assets/University-logo.png -->
 <!-- state: hide-header-footer -->
 
 # THESIS

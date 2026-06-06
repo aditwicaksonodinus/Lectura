@@ -1,5 +1,5 @@
 <!-- layout: title -->
-<!-- logo: University-logo.png -->
+<!-- logo: assets/University-logo.png -->
 <!-- section: Pendahuluan -->
 
 # TESIS
