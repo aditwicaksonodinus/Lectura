@@ -1,0 +1,24 @@
+================================================================================
+A/B TEST: ADAPTIVE vs STATIC HYPERPARAMETERS
+Generated: 2026-05-19 19:36:23
+================================================================================
+Config   : 50 runs x 200 episodes x 5 steps
+Budget   : 1000 interactions/run (max)
+Treatment: AdaptiveAgent - Strict A1 full-adaptive alpha/gamma/epsilon
+Baseline : StaticAgent   - Fixed decay alpha/epsilon, fixed gamma
+Update   : Dual TD-update ON
+Mode     : full_system
+Reward   : inactive_reward
+Seeds    : 50 shared seeds
+================================================================================
+
+TABLE 1: OVERVIEW - ADAPTIVE vs STATIC
+--------------------------------------------------------------------------------
+Metric       Adaptive                 Static                   Diff       Improv.
+Q-Value      2.1840+-0.1680       0.8951+-0.0458       +1.2890   +144.0%
+Reward/Ep    1.6704+-0.0710       1.5449+-0.0511       +0.1255   +8.1%
+
+TABLE 4: STATISTICAL SIGNIFICANCE
+--------------------------------------------------------------------------------
+Cohen's d  : 2.0350
+t-statistic: 14.3897  |  p-value: 3.1914e-19

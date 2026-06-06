@@ -1,0 +1,41 @@
+{
+  "reward_design": "inactive_reward",
+  "description": "Inactive reward (No-penalty): same components as full mode, but action and diversity contributions are clamped to non-negative values (remove punishment effects).",
+  "config_hash": "2322f4868e223b9d",
+  "seed_mode": "deterministic_generator",
+  "num_runs": 50,
+  "experiment_mode": "full_system",
+  "use_dual_update": true,
+  "adaptive_tuning_profile_requested": "strict",
+  "adaptive_config": {
+    "adaptive_alpha": true,
+    "adaptive_gamma": true,
+    "adaptive_epsilon": true,
+    "use_dual_update": true
+  },
+  "static_config": {
+    "fixed_gamma": 0.65,
+    "alpha_start": 0.3,
+    "alpha_end": 0.05,
+    "epsilon_start": 0.25,
+    "epsilon_end": 0.01,
+    "use_dual_update": true
+  },
+  "adaptive_tuning_profile": "strict",
+  "adaptive_tuning_overrides": {},
+  "objective_status": {
+    "reward_delta": 0.12545396051129232,
+    "aulc_delta": 25.04923326591347,
+    "run_win_rate": 100.0,
+    "reward_positive": true,
+    "aulc_positive": true,
+    "metric_pass": true,
+    "overall_pass": true
+  },
+  "metrics": {
+    "reward_adaptive": 1.670403592517858,
+    "reward_static": 1.5449496320065657,
+    "aulc_adaptive": 332.4553382992249,
+    "aulc_static": 307.4061050333114
+  }
+}

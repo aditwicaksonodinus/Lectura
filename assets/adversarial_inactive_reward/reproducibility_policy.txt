@@ -1,0 +1,13 @@
+Reproducibility Policy
+seed_mode=deterministic_generator
+seed_value=44
+reward_mode=inactive_reward
+output_suffix=none
+output_subdir=/Users/aditwicaksono/Documents/Git/Adaptive-Score-RL-LLM-RAG-main/Result/q_learning_sigmoid/adversarial_inactive_reward
+adaptive_profile_requested=strict
+adaptive_profile=strict
+objective_reward_delta_positive=True
+objective_aulc_delta_positive=True
+objective_run_win_rate=100.00
+objective_pass=True
+config_hash=2322f4868e223b9d

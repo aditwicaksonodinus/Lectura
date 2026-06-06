@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "generated_at": "2026-05-19T12:36:35+00:00",
+    "output_dir": "/Users/aditwicaksono/Documents/Git/Adaptive-Score-RL-LLM-RAG-main/Result/q_learning_sigmoid/adversarial_inactive_reward",
+    "result_file": "/Users/aditwicaksono/Documents/Git/Adaptive-Score-RL-LLM-RAG-main/Result/q_learning_sigmoid/adversarial_inactive_reward/result_adaptive_vs_static.txt"
+  },
+  "config_used": {
+    "global": {
+      "num_runs": 50,
+      "episodes": 200,
+      "steps": 5,
+      "experiment_mode": "full_system",
+      "use_dual_update": true,
+      "reward_design": "inactive_reward",
+      "reward_clip": [
+        -1.0,
+        5.0
+      ],
+      "q_clip": [
+        -1.0,
+        5.0
+      ],
+      "initial_state_distribution": {
+        "scaffolding": 0.4,
+        "consolidation": 0.35,
+        "exploration": 0.15,
+        "engagement": 0.1
+      }
+    },
+    "adaptive_agent": {
+      "adaptive_alpha": true,
+      "adaptive_gamma": true,
+      "adaptive_epsilon": true,
+      "use_dual_update": true
+    },
+    "static_agent": {
+      "fixed_gamma": 0.65,
+      "alpha_start": 0.3,
+      "alpha_end": 0.05,
+      "epsilon_start": 0.25,
+      "epsilon_end": 0.01,
+      "use_dual_update": true
+    }
+  },
+  "metrics": {
+    "reward": {
+      "adaptive": {
+        "mean": 1.67,
+        "std": 0.071,
+        "min": 1.524,
+        "max": 1.829,
+        "ci_95": 0.02,
+        "n": 50.0
+      },
+      "static": {
+        "mean": 1.545,
+        "std": 0.051,
+        "min": 1.447,
+        "max": 1.686,
+        "ci_95": 0.015,
+        "n": 50.0
+      },
+      "delta": 0.125,
+      "improvement_pct": 8.091
+    },
+    "q_value": {
+      "adaptive": {
+        "mean": 2.184,
+        "std": 0.168,
+        "min": 1.903,
+        "max": 2.6,
+        "ci_95": 0.048,
+        "n": 50.0
+      },
+      "static": {
+        "mean": 0.895,
+        "std": 0.046,
+        "min": 0.807,
+        "max": 1.004,
+        "ci_95": 0.013,
+        "n": 50.0
+      }
+    },
+    "aulc": {
+      "adaptive": 332.455,
+      "static": 307.406,
+      "delta": 25.049,
+      "improvement_pct": 8.149,
+      "paired_p_value": 0.0
+    },
+    "robustness": {
+      "cv_adaptive": 4.248,
+      "cv_static": 3.31,
+      "iqr_adaptive": 0.086,
+      "iqr_static": 0.071
+    },
+    "convergence": {
+      "bellman_adaptive": {
+        "max_error": 0.104,
+        "convergence_ep": 33,
+        "last_metric": 0.001
+      },
+      "bellman_static": {
+        "max_error": 0.084,
+        "convergence_ep": 24,
+        "last_metric": 0.001
+      },
+      "normalized_bellman_adaptive": {
+        "max_abs_normalized": 0.076,
+        "mean_normalized": 0.007,
+        "raw_max_abs": 0.104
+      },
+      "normalized_bellman_static": {
+        "max_abs_normalized": 0.075,
+        "mean_normalized": 0.004,
+        "raw_max_abs": 0.084
+      },
+      "time_to_threshold_adaptive": 26,
+      "time_to_threshold_static": 15
+    },
+    "entropy": {
+      "adaptive": 2.278,
+      "static": 1.787,
+      "max_entropy": 2.585,
+      "adaptive_utilization_pct": 88.108,
+      "static_utilization_pct": 69.129
+    },
+    "association": {
+      "reward_vs_q": {
+        "pearson_r": 0.131,
+        "pearson_p": 0.0,
+        "spearman_rho": 0.17,
+        "n": 10000
+      },
+      "reward_vs_alpha": {
+        "pearson_r": -0.038,
+        "pearson_p": 0.0,
+        "spearman_rho": -0.032,
+        "n": 10000
+      },
+      "reward_vs_gamma": {
+        "pearson_r": -0.038,
+        "pearson_p": 0.0,
+        "spearman_rho": -0.032,
+        "n": 10000
+      },
+      "reward_vs_epsilon": {
+        "pearson_r": -0.061,
+        "pearson_p": 0.0,
+        "spearman_rho": -0.046,
+        "n": 10000
+      }
+    },
+    "mastery": {
+      "sentinel_episode": 201,
+      "reach_rate_adaptive": 100.0,
+      "reach_rate_static": 100.0,
+      "mean_episode_adaptive": 3.3,
+      "mean_episode_static": 3.46,
+      "median_episode_adaptive": 2.5,
+      "median_episode_static": 3.0
+    },
+    "safety": {
+      "enforcement": {
+        "C1_MASKED": 514,
+        "C3_FILTERED": 13179
+      },
+      "metrics": {
+        "v2": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "v3": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "v4": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "vw": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "total": 0.0,
+      "rate_per_step": 0.0
+    }
+  },
+  "inferential": {
+    "t_stat": 14.39,
+    "p_value": 0.0,
+    "cohen_d": 2.035,
+    "bootstrap": {
+      "mean_ci": [
+        0.109,
+        0.143
+      ],
+      "cohen_ci": [
+        1.744,
+        2.572
+      ]
+    },
+    "permutation_p": 0.0,
+    "bayesian": {
+      "required": true,
+      "available": true,
+      "prob_superior": 1.0,
+      "ci_95": [
+        0.108,
+        0.143
+      ]
+    }
+  },
+  "evaluation": {
+    "improvement": {
+      "value_pct": 8.091,
+      "pass": true
+    },
+    "aulc": {
+      "delta_pct": 8.149,
+      "paired_p_value": 0.0,
+      "pass": true
+    },
+    "significance": {
+      "p_value": 0.0,
+      "pass": true
+    },
+    "bayesian": {
+      "prob_superior": 1.0,
+      "pass": true,
+      "required": true,
+      "available": true
+    },
+    "anti_rewardhack": {
+      "enabled": true,
+      "pass": true,
+      "aggregation_mode": "all",
+      "failed_gates": [],
+      "gates": [
+        {
+          "name": "action_utilization",
+          "passed": true,
+          "reason": "Action utilization healthy",
+          "details": {
+            "entropy_utilization_pct": 88.108,
+            "entropy_threshold": 41.0,
+            "dominance_share": 0.167,
+            "dominance_threshold": 0.7,
+            "min_distinct_actions_per_state": 3.0
+          }
+        },
+        {
+          "name": "convergence_stability",
+          "passed": true,
+          "reason": "Convergence profile stable",
+          "details": {
+            "convergence_ep_adaptive": 33.0,
+            "convergence_ep_static": 24.0,
+            "convergence_ep_gap": 9.0,
+            "convergence_gap_threshold": 50.0,
+            "norm_bellman_mean_adaptive": 0.007,
+            "norm_bellman_mean_static": 0.004,
+            "norm_bellman_threshold": 0.1
+          }
+        },
+        {
+          "name": "improvement_consistency",
+          "passed": true,
+          "reason": "Early-to-late improvement consistent",
+          "details": {
+            "late_to_early_ratio_adaptive": 1.034,
+            "late_to_early_ratio_static": 1.03,
+            "ratio_threshold": 1.02
+          }
+        },
+        {
+          "name": "oscillation_stability",
+          "passed": true,
+          "reason": "Oscillation profile healthy",
+          "details": {
+            "reward_cv_pct_adaptive": 6.604,
+            "reward_cv_pct_static": 5.253,
+            "max_cv_threshold": 13.0,
+            "lag1_autocorr_adaptive": 0.299,
+            "lag1_autocorr_static": -0.022,
+            "min_lag1_threshold": -0.1
+          }
+        },
+        {
+          "name": "q_bounds",
+          "passed": true,
+          "reason": "Q-value bounds healthy",
+          "details": {
+            "boundary_fraction_adaptive": 0.0,
+            "boundary_fraction_static": 0.0,
+            "boundary_tolerance": 0.2,
+            "max_boundary_fraction_allowed": 0.24
+          }
+        },
+        {
+          "name": "run_level_consistency",
+          "passed": true,
+          "reason": "Run-level consistency healthy",
+          "details": {
+            "run_win_rate_pct": 100.0,
+            "win_rate_threshold": 24.0,
+            "median_improvement_pct": 7.799,
+            "median_threshold": -0.5
+          }
+        }
+      ]
+    },
+    "all_pass": true
+  }
+}

@@ -288,11 +288,11 @@ Image on the left, `academic-box` text on the right. Supports **Image Lightbox**
 
 | Metadata | Description |
 |----------|-------------|
-| `image` | Image path (e.g. `chart.jpg`) |
+| `image` | Image path (e.g. `assets/chart.jpg`) |
 
 ```markdown
 <!-- layout: 2-content-with-img -->
-<!-- image: placeholder.png -->
+<!-- image: assets/placeholder.png -->
 <!-- title: Decision Tree Visualization Analysis -->
 <!-- section: Results -->
 

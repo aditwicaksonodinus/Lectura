@@ -168,11 +168,11 @@ flowchart LR
 
 ---slide-break---
 <!-- layout: 2-content-with-img -->
-<!-- image: placeholder.png -->
+<!-- image: assets/placeholder.png -->
 <!-- title: Results: Left Image & Right Text Layout -->
 <!-- section: Results -->
 
-- **Image Layout Configuration**: Uses the `2-content-with-img` layout with the `image: placeholder.png` metadata (any image path can be used; here we use the `placeholder.png` file).
+- **Image Layout Configuration**: Uses the `2-content-with-img` layout with the `image: assets/placeholder.png` metadata (any image path can be used; here we use the `placeholder.png` file).
 - **Visual Appearance**: The image is responsively loaded on the left, while the explanatory text is placed inside an `academic-box` on the right.
 - **Lightbox Feature**: Users can click on any image within the presentation slide to trigger a dynamic enlargement popup modal (*lightbox*).
 - **Decision Tree Case Study**: 

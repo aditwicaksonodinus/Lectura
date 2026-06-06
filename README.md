@@ -57,8 +57,9 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 ├── 📄 GUIDE.md           # Detailed user guide & documentation 👈
 ├── 📄 content-id.md       # Slide content (Bahasa Indonesia)
 ├── 📄 content-en.md       # Slide content (English)
-├── 🖼️ placeholder.png     # Preview / demo image
 ├── 📁 assets/             # Assets directory (images)
+│   ├── 🖼️ placeholder.png # Preview / demo image
+│   └── ...
 └── 📁 Noto_Serif/         # Custom font
 ```
 
