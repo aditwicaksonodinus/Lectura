@@ -1,24 +1,24 @@
 /**
  * tabs.js
  * ─────────────────────────────────────────────────────────────
- * Manajemen tab navigasi (Book Tabs).
- * Menangani state Active dan Completed untuk progress terintegrasi.
+ * Navigation tab management (Book Tabs).
+ * Handles Active and Completed states for integrated progress tracking.
  * ─────────────────────────────────────────────────────────────
  */
 
-// ── Cache DOM ─────────────────────────────────────────────────
+// ── DOM Cache ─────────────────────────────────────────────────
 let tabsCache = null;
 
 /**
- * Invalidate cache tab (dipanggil setelah slide di-rebuild).
+ * Invalidates the tab cache (called after slides are rebuilt).
  */
 export function resetTabsCache() {
     tabsCache = null;
 }
 
 /**
- * Update tampilan tab berdasarkan slide yang sedang aktif.
- * Menandai tab sebelum slide aktif sebagai 'completed'.
+ * Updates tab display based on the currently active slide.
+ * Marks tabs before the active slide as 'completed'.
  */
 export function updateActiveTab() {
     const currentSlideElement = Reveal.getCurrentSlide();
@@ -41,7 +41,7 @@ export function updateActiveTab() {
             activeFound = true;
         } else {
             tab.classList.remove('active');
-            // Tab sebelum tab aktif → completed
+            // Tab before active tab → completed
             if (!activeFound) {
                 tab.classList.add('completed');
             } else {

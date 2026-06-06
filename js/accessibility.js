@@ -1,14 +1,14 @@
 /**
  * accessibility.js
  * ─────────────────────────────────────────────────────────────
- * Manajemen dropdown menu aksesibilitas.
- * Menangani visibility, interaksi tombol, close-on-outside-click,
- * dan keyboard shortcut (Escape + 'A').
+ * Accessibility menu management.
+ * Handles visibility, button interactions, close-on-outside-click,
+ * and keyboard shortcuts (Escape + 'A').
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Inisialisasi menu aksesibilitas beserta semua event listener-nya.
+ * Initializes the accessibility menu and all its event listeners.
  */
 export function initAccessibilityMenu() {
     const container = document.querySelector('.accessibility-container');
@@ -18,8 +18,8 @@ export function initAccessibilityMenu() {
     if (!toggleBtn || !menu) return;
 
     /**
-     * Toggle menu buka/tutup.
-     * @param {boolean|undefined} forceState - Jika didefinisikan, paksa ke state ini
+     * Toggles the menu open/closed.
+     * @param {boolean|undefined} forceState - If defined, forces to this state
      */
     const toggleMenu = (forceState) => {
         const isExpanded = forceState !== undefined
@@ -30,24 +30,24 @@ export function initAccessibilityMenu() {
         menu.classList.toggle('active', isExpanded);
     };
 
-    // Tombol toggle utama
+    // Main toggle button
     toggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleMenu();
     });
 
-    // Tutup menu saat tombol aksi di dalamnya diklik
-    // (kecuali scribble toggle/clear yang butuh tetap terbuka)
+    // Close menu when internal action buttons are clicked
+    // (except scribble toggle/clear, which should remain open)
     const actionButtons = menu.querySelectorAll('button');
     actionButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             if (btn.id === 'scribble-toggle' || btn.id === 'scribble-clear') return;
-            // Delay singkat agar visual feedback tombol terlihat sebelum menu tertutup
+            // Short delay to allow visual feedback before menu closes
             setTimeout(() => toggleMenu(false), 150);
         });
     });
 
-    // Tutup menu saat klik di luar area container
+    // Close menu on click outside the container
     document.addEventListener('click', (e) => {
         if (
             menu.classList.contains('active') &&
@@ -58,16 +58,16 @@ export function initAccessibilityMenu() {
         }
     });
 
-    // Keyboard shortcuts: Escape (tutup) dan 'A' (toggle)
-    // Digabung dalam satu listener untuk efisiensi
+    // Keyboard shortcuts: Escape (close) and 'A' (toggle)
+    // Combined in a single listener for efficiency
     document.addEventListener('keydown', (e) => {
-        // Escape → tutup menu jika terbuka
+        // Escape → close menu if open
         if (e.key === 'Escape' && menu.classList.contains('active')) {
             toggleMenu(false);
             return;
         }
 
-        // 'A' → toggle menu (abaikan jika di input field atau modifier key)
+        // 'A' → toggle menu (ignore if in input fields or with modifier keys)
         if (
             e.key.toLowerCase() === 'a' &&
             !e.ctrlKey && !e.altKey && !e.metaKey

@@ -1,9 +1,9 @@
 /**
  * main.js
  * ─────────────────────────────────────────────────────────────
- * Entry point Lectura.
- * Mengimpor dan mengorkestrasi semua modul.
- * Semua init function dipanggil dari sini dalam urutan yang benar.
+ * Lectura entry point.
+ * Imports and orchestrates all modules.
+ * All init functions are called from here in the correct order.
  * ─────────────────────────────────────────────────────────────
  *
  * ⚠️ WARNING:
@@ -25,8 +25,8 @@ import { loadStylesheet }       from './styles.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // ── Stylesheet Integration ────────────────────────────────
-    // Kelola loading style.css dari JS untuk cache-busting terkontrol.
-    // Dipanggil pertama kali untuk mencegah FOUC.
+    // Manage loading style.css from JS for controlled cache-busting.
+    // Called first to prevent FOUC.
     loadStylesheet();
 
     // ── Watermark Console ─────────────────────────────────────
@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
         "color: #64748b; font-size: 13px; font-family: sans-serif;"
     );
 
-    // ── Inisialisasi Modul ────────────────────────────────────
-    // Urutan penting: theme & gestures sebelum presentasi dimuat,
-    // tools interaktif setelah presentasi siap.
+    // ── Module Initialization ─────────────────────────────────
+    // Order is important: theme & gestures before presentation loads,
+    // interactive tools after presentation is ready.
     initTheme();
     initGestures();
-    initPresentation();      // async — Reveal.js dan slide dimuat di sini
+    initPresentation();      // async — Reveal.js and slides are loaded here
     initImagePreview();
     initAccessibilityMenu();
     initLaserPointer();

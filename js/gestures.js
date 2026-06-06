@@ -1,41 +1,41 @@
 /**
  * gestures.js
  * ─────────────────────────────────────────────────────────────
- * Pencegahan gesture tidak disengaja:
- *   - Swipe back/forward browser
+ * Unintentional gesture prevention:
+ *   - Browser swipe back/forward
  *   - Pull-to-refresh
- *   - Horizontal wheel scroll (gesture back/forward trackpad)
- *   - Konfirmasi sebelum menutup tab saat presentasi berjalan
+ *   - Horizontal wheel scroll (trackpad back/forward gestures)
+ *   - Confirmation before closing tab during active presentation
  * ─────────────────────────────────────────────────────────────
  */
 
 import { isRunning } from './timer.js';
 
-// ── State posisi sentuhan ─────────────────────────────────────
+// ── Touch position state ─────────────────────────────────────
 let touchStartPosX = 0;
 let touchStartPosY = 0;
 
 /**
- * Pasang semua event listener pencegahan gesture.
- * Dipanggil satu kali dari main.js saat window.onload.
+ * Attaches all gesture prevention event listeners.
+ * Called once from main.js on window.onload.
  */
 export function initGestures() {
 
-    // Konfirmasi sebelum menutup tab (hanya saat timer berjalan)
+    // Confirmation before closing tab (only when timer is running)
     window.addEventListener('beforeunload', (e) => {
         if (isRunning()) {
             e.preventDefault();
-            e.returnValue = ''; // Standar untuk browser modern
+            e.returnValue = ''; // Standard for modern browsers
         }
     });
 
-    // Catat posisi awal sentuhan
+    // Record initial touch position
     window.addEventListener('touchstart', (e) => {
         touchStartPosX = e.touches[0].pageX;
         touchStartPosY = e.touches[0].pageY;
     }, { passive: true });
 
-    // Cegah gesture saat touchmove
+    // Prevent gestures on touchmove
     window.addEventListener('touchmove', (e) => {
         if (!e.touches || !e.touches[0]) return;
 
@@ -46,12 +46,12 @@ export function initGestures() {
         const absDiffX      = Math.abs(diffX);
         const absDiffY      = Math.abs(diffY);
 
-        // Scroll vertikal di dalam container? Biarkan saja (FPS lebih tinggi)
+        // Vertical scroll within container? Let it pass (higher FPS)
         if (absDiffY > absDiffX && e.target.closest('.content-wrapper')) {
             return;
         }
 
-        // 1. Cegah "Pull-to-refresh"
+        // 1. Prevent "Pull-to-refresh"
         if (window.scrollY === 0 && diffY < 0) {
             const scrollable = e.target.closest('.content-wrapper');
             if (!scrollable || scrollable.scrollTop === 0) {
@@ -60,20 +60,20 @@ export function initGestures() {
             }
         }
 
-        // 2. Cegah navigasi browser (back/forward swipe)
+        // 2. Prevent browser navigation (back/forward swipe)
         if (absDiffX > absDiffY && absDiffX > 10) {
             e.preventDefault();
             return;
         }
 
-        // 3. Cegah swipe dari tepi layar
+        // 3. Prevent swipe from screen edges
         const threshold = 50;
         if (touchStartPosX < threshold || touchStartPosX > window.innerWidth - threshold) {
             e.preventDefault();
         }
     }, { passive: false });
 
-    // Cegah horizontal wheel scroll (gesture back/forward trackpad)
+    // Prevent horizontal wheel scroll (trackpad back/forward gestures)
     window.addEventListener('wheel', (e) => {
         if (e.deltaX !== 0 && Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
             e.preventDefault();

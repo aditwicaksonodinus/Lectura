@@ -1,12 +1,12 @@
 /**
  * ui.js
  * ─────────────────────────────────────────────────────────────
- * Orchestrator update UI per pergantian slide.
- * Mengelola:
- *   - Visibility header/footer
- *   - Update nomor slide
- *   - Render Mermaid diagram dalam slide aktif
- *   - Delegasi ke modul tab dan animasi
+ * UI update orchestrator per slide change.
+ * Manages:
+ *   - Header/footer visibility
+ *   - Slide number update
+ *   - Mermaid diagram rendering in active slide
+ *   - Delegation to tabs and animation modules
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -15,7 +15,7 @@ import { processMermaidDiagram } from './mermaid.js';
 import { stopTimer } from './timer.js';
 
 // ── DOM Cache ─────────────────────────────────────────────────
-// Di-populate sekali, kemudian di-reuse di setiap slide change
+// Populated once, then reused on each slide change
 let headerCache       = null;
 let footerCache       = null;
 let slideNumberCache  = null;
@@ -23,15 +23,15 @@ let timerCache        = null;
 let tabsContainerCache = null;
 
 /**
- * Update seluruh UI berdasarkan slide yang sedang ditampilkan.
- * Dipanggil pada event: Reveal.ready, Reveal.slidechanged.
+ * Updates the entire UI based on the slide currently being displayed.
+ * Called on events: Reveal.ready, Reveal.slidechanged.
  * @param {HTMLElement|null} currentSlide
  * @returns {Promise<void>}
  */
 export async function updateUI(currentSlide) {
     if (!currentSlide) return;
 
-    // Populate cache hanya satu kali (query DOM mahal)
+    // Populate cache only once (DOM queries are expensive)
     headerCache        = headerCache        || document.querySelector('.header');
     footerCache        = footerCache        || document.querySelector('.footer');
     slideNumberCache   = slideNumberCache   || document.querySelector('.slide-number');
@@ -41,12 +41,12 @@ export async function updateUI(currentSlide) {
     const state         = currentSlide.getAttribute('data-state');
     const hideContent   = state === 'hide-header-footer';
 
-    // Hentikan timer otomatis di slide terakhir
+    // Stop timer automatically on the last slide
     if (Reveal.isLastSlide()) {
         stopTimer();
     }
 
-    // ── Visibility Header & Footer ────────────────────────────
+    // ── Header & Footer Visibility ────────────────────────────
     if (headerCache && footerCache) {
         headerCache.style.display = 'flex';
         footerCache.style.display = 'grid';
@@ -59,15 +59,15 @@ export async function updateUI(currentSlide) {
             footerCache.classList.remove('hidden-footer');
         }
 
-        // Timer dan tabs selalu visible
+        // Timer and tabs are always visible
         if (timerCache)        timerCache.style.visibility        = 'visible';
         if (tabsContainerCache) tabsContainerCache.style.visibility = 'visible';
     }
 
-    // ── Update Tab Navigasi ───────────────────────────────────
+    // ── Update Navigation Tab ─────────────────────────────────
     updateActiveTab();
 
-    // ── Nomor Slide (dengan override manual via data-page) ────
+    // ── Slide Number (with manual override via data-page) ─────
     if (slideNumberCache && !hideContent) {
         const manualPage = currentSlide.getAttribute('data-page');
         if (manualPage) {
@@ -79,11 +79,11 @@ export async function updateUI(currentSlide) {
         }
     }
 
-    // ── Render Mermaid (batch, tunggu semua selesai) ──────────
+    // ── Render Mermaid (batch, wait for all to finish) ────────
     const diagrams = currentSlide.querySelectorAll('.mermaid');
     if (diagrams.length > 0) {
         await Promise.all(Array.from(diagrams).map(processMermaidDiagram));
-        // Satu layout call setelah semua diagram dalam slide ini selesai
+        // One layout call after all diagrams in this slide are finished
         setTimeout(() => { Reveal.layout(); }, 50);
     }
 }

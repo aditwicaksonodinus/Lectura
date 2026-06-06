@@ -1,13 +1,13 @@
 /**
  * navigation.js
  * ─────────────────────────────────────────────────────────────
- * Kontrol navigasi manual (tombol Prev/Next).
- * Tombol fisik di UI sebagai alternatif keyboard/gesture.
+ * Manual navigation control (Prev/Next buttons).
+ * Physical UI buttons as an alternative to keyboard/gestures.
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Pasang event listener pada tombol prev/next.
+ * Attaches event listeners to the prev/next buttons.
  */
 export function initNavigation() {
     const prevBtn = document.getElementById('prev-btn');

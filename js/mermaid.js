@@ -1,13 +1,13 @@
 /**
  * mermaid.js
  * ─────────────────────────────────────────────────────────────
- * Inisialisasi Mermaid dan pemrosesan diagram per-slide.
+ * Mermaid initialization and diagram processing per slide.
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Inisialisasi Mermaid dengan konfigurasi sesuai ukuran font presentasi.
- * @param {string} baseFontSize - Ukuran font dasar (contoh: '18pt')
+ * Initializes Mermaid with configuration matching the presentation font size.
+ * @param {string} baseFontSize - Base font size (e.g., '18pt')
  */
 export function initMermaid(baseFontSize) {
     if (typeof mermaid === 'undefined') return;
@@ -49,15 +49,15 @@ export function initMermaid(baseFontSize) {
     });
 }
 
-// Counter deterministik untuk ID diagram — bebas collision, lebih cepat dari Math.random()
+// Deterministic counter for diagram IDs — collision-free, faster than Math.random()
 let _mermaidCounter = 0;
 
-// Decoder persisten untuk menghindari pembuatan DOM berulang
+// Persistent decoder to avoid repeated DOM creation
 const _htmlDecoder = document.createElement('div');
 
 /**
- * Render satu elemen diagram Mermaid secara async.
- * @param {HTMLElement} diagram - Elemen .mermaid yang akan di-render
+ * Render a single Mermaid diagram element asynchronously.
+ * @param {HTMLElement} diagram - The .mermaid element to render
  * @returns {Promise<void>}
  */
 export async function processMermaidDiagram(diagram) {
@@ -65,7 +65,7 @@ export async function processMermaidDiagram(diagram) {
 
     const id = `mermaid-svg-${_mermaidCounter++}`;
 
-    // Decode HTML entities dari konten diagram
+    // Decode HTML entities from diagram content
     _htmlDecoder.innerHTML = diagram.innerHTML.trim();
     let text = _htmlDecoder.textContent;
     text = text.replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
@@ -91,7 +91,7 @@ export async function processMermaidDiagram(diagram) {
             svg.style.display   = 'block';
             svg.style.margin    = '0 auto';
 
-            // Logika scaling spesifik per jenis diagram
+            // Scaling logic specific to diagram types
             if (text.includes('sequenceDiagram')) {
                 svg.style.maxHeight = '1300px';
             } else if (text.includes('graph LR') && text.includes('FLUTTER')) {

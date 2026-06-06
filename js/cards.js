@@ -1,14 +1,14 @@
 /**
  * cards.js
  * ─────────────────────────────────────────────────────────────
- * Interaksi kartu akademis (.academic-box).
- * Memberikan feedback sentuhan/mouse yang responsif.
- * Highlight tetap aktif sampai kartu lain dipilih atau slide berganti.
+ * Academic card interactions (.academic-box).
+ * Provides responsive touch/mouse feedback.
+ * Highlight remains active until another card is selected or the slide changes.
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Pasang event listener untuk interaksi kartu.
+ * Attaches event listeners for card interactions.
  */
 export function initCardInteractions() {
 
@@ -16,7 +16,7 @@ export function initCardInteractions() {
         const box = e.target.closest('.academic-box');
         if (!box) return;
 
-        // Hapus highlight dari kartu yang sebelumnya aktif (lebih cepat dari querySelectorAll loop)
+        // Remove highlight from the previously active card (faster than querySelectorAll loop)
         const activeBox = document.querySelector('.academic-box.is-interacting');
         if (activeBox && activeBox !== box) {
             activeBox.classList.remove('is-interacting');
@@ -25,11 +25,11 @@ export function initCardInteractions() {
         box.classList.add('is-interacting');
     };
 
-    // Support Touch dan Mouse untuk aktivasi
+    // Support Touch and Mouse for activation
     document.addEventListener('touchstart', handleInteractionStart, { passive: true });
     document.addEventListener('mousedown',  handleInteractionStart);
 
-    // Bersihkan highlight saat ganti slide
+    // Clear highlight on slide change
     Reveal.on('slidechanged', () => {
         const activeBox = document.querySelector('.academic-box.is-interacting');
         if (activeBox) {

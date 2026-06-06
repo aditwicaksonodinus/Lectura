@@ -62,7 +62,7 @@ html.dark-mode .reveal h5 {
     color: #FF9B05;
 }
 
-/* KHUSUS Slide Pembuka: Putih Clear (Paksa spesifisitas tinggi) */
+/* SPECIAL Title Slide: Clear White (Force high specificity) */
 html.dark-mode .reveal .slides section .layout-title-slide h2,
 html.dark-mode .reveal .slides section .layout-title-slide h2.thesis-title,
 html.dark-mode .layout-title-slide h2.thesis-title {

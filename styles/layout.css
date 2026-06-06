@@ -251,7 +251,7 @@
 }
 
 .layout-closing-slide .title-details {
-    border-top-color: var(--closing-border-color); /* Pembatas di slide penutup */
+    border-top-color: var(--closing-border-color); /* Divider on closing slide */
 }
 
 .layout-closing-slide .title-logo {

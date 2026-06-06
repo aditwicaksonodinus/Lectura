@@ -31,7 +31,7 @@
     --closing-border-color: rgba(245, 158, 11, 0.1);
     
     --bg-card: linear-gradient(135deg, rgba(255, 255, 255, 0.70), rgba(255, 255, 255, 0.50));
-    --bg-header-card: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75));
+    --bg-header-card: var(--bg-card);
     --bg-dot: rgba(27, 54, 93, 0.25);
     --shadow-card: 0 8px 32px 0 rgba(27, 54, 93, 0.08); /* Sophisticated subtle shadow */
     --shadow-active: 0 8px 32px 0 rgba(27, 54, 93, 0.15); /* Pronounced active shadow */

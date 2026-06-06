@@ -1,20 +1,20 @@
 /**
  * theme.js
  * ─────────────────────────────────────────────────────────────
- * Manajemen tema Dark/Light mode.
- * Membaca preferensi dari localStorage dan menangani toggle.
+ * Dark/Light mode theme management.
+ * Reads preferences from localStorage and handles toggling.
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Inisialisasi tema berdasarkan preferensi tersimpan,
- * dan pasang event listener untuk tombol toggle.
+ * Initializes the theme based on saved preferences,
+ * and attaches event listener for the toggle button.
  */
 export function initTheme() {
     const themeToggle = document.getElementById('theme-toggle');
     const html        = document.documentElement;
 
-    // Terapkan tema tersimpan
+    // Apply saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         html.classList.add('dark-mode');

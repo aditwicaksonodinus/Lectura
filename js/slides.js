@@ -1,8 +1,8 @@
 /**
  * slides.js
  * ─────────────────────────────────────────────────────────────
- * Inti engine slide: parsing metadata, pembangunan elemen slide,
- * dan inisialisasi penuh presentasi (termasuk Reveal.js).
+ * Core slide engine: metadata parsing, slide element construction,
+ * and full presentation initialization (including Reveal.js).
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -37,7 +37,7 @@ import { applyCSSConfig }       from './styles.js';
 // ─────────────────────────────────────────────────────────────
 
 /**
- * Ekstrak metadata dari komentar HTML dalam markdown slide.
+ * Extracts metadata from HTML comments in slide markdown.
  * Format: <!-- key: value -->
  * @param {string} markdown
  * @returns {{ metadata: Object, cleanContent: string }}
@@ -63,15 +63,15 @@ export function extractMetadata(markdown) {
 // ─────────────────────────────────────────────────────────────
 
 /**
- * Buat elemen <section> untuk satu slide berdasarkan data yang diekstrak.
+ * Creates a <section> element for a slide based on extracted data.
  * @param {{ metadata: Object, cleanContent: string }} slideData
- * @returns {HTMLElement} section element siap diappend ke .slides
+ * @returns {HTMLElement} section element ready to be appended to .slides
  */
 export function createSlideElement(slideData) {
     const { metadata, cleanContent } = slideData;
     const section = document.createElement('section');
 
-    // Set atribut Reveal.js
+    // Set Reveal.js attributes
     if (metadata.title)   section.setAttribute('data-title',   metadata.title);
     if (metadata.state)   section.setAttribute('data-state',   metadata.state);
     if (metadata.section) section.setAttribute('data-section', metadata.section);
@@ -80,15 +80,15 @@ export function createSlideElement(slideData) {
     const layout    = metadata.layout || 'default';
     const titleHtml = metadata.title ? `<h2>${metadata.title}</h2>` : '';
 
-    // Split content untuk template multi-bagian
+    // Split content for multi-part templates
     const splitParts = cleanContent
         .split(/<!--\s*split\s*-->/)
         .map(p => p.trim());
 
-    // Tambah class untuk CSS targeting
+    // Add class for CSS targeting
     section.classList.add(`layout-${layout}`);
 
-    // Render via registry, fallback ke default
+    // Render via registry, fallback to default
     const templateFn = LayoutTemplates[layout] || LayoutTemplates['default'];
     section.innerHTML = templateFn(metadata, cleanContent, titleHtml, splitParts);
 
@@ -100,26 +100,26 @@ export function createSlideElement(slideData) {
 // ─────────────────────────────────────────────────────────────
 
 /**
- * Muat config, parsing markdown, bangun slides & tabs, inisialisasi Reveal.js.
+ * Loads config, parses markdown, builds slides & tabs, initializes Reveal.js.
  * @returns {Promise<void>}
  */
 export async function initPresentation() {
     try {
-        // 1. Muat konfigurasi dari config.json
+        // 1. Load configuration from config.json
         await loadConfig();
 
-        // 2. Terapkan atribut dokumen dari config
+        // 2. Apply document attributes from config
         document.documentElement.setAttribute('lang', LANG);
 
-        // Sinkronkan CSS Custom Properties (--presentation-width, --base-font-size)
-        // dengan nilai config yang sudah dimuat. Ini memastikan layout CSS
-        // mencerminkan ASPECT_RATIO dari config.json secara real-time.
+        // Sync CSS Custom Properties (--presentation-width, --base-font-size)
+        // with loaded config values. This ensures CSS layout reflects
+        // ASPECT_RATIO from config.json in real-time.
         applyCSSConfig({
             aspectRatio: ASPECT_RATIO,
             baseFontSize: BASE_FONT_SIZE,
         });
 
-        // Aspect ratio class (untuk selector CSS tambahan jika diperlukan)
+        // Aspect ratio class (for additional CSS selectors if needed)
         document.documentElement.classList.remove('ratio-16-9', 'ratio-4-3');
         const ratioClass = `ratio-${ASPECT_RATIO.replace(':', '-')}`;
         document.documentElement.classList.add(ratioClass);
@@ -136,45 +136,45 @@ export async function initPresentation() {
             themeToggle.setAttribute('title', THEME_TOGGLE_TITLE);
         }
 
-        // Title dan footer info
+        // Title and footer info
         document.title = PRESENTATION_TITLE;
         const centerInfo = document.querySelector('.footer .center-info');
         if (centerInfo) centerInfo.textContent = INSTITUTION_INFO;
 
-        // Font size dan Mermaid
+        // Font size and Mermaid
         document.documentElement.style.fontSize = BASE_FONT_SIZE;
         initMermaid(BASE_FONT_SIZE);
 
-        // Sinkronkan timer state dengan config yang baru dimuat
+        // Sync timer state with newly loaded config
         setTimerDuration(PRESENTATION_MINUTES);
 
-        // 3. Fetch dan proses file konten markdown
+        // 3. Fetch and process markdown content file
         const response = await fetch(CONTENT_FILE);
         if (!response.ok) throw new Error(`Could not load ${CONTENT_FILE}`);
 
         let text = await response.text();
 
-        // Ganti placeholder dinamis
+        // Replace dynamic placeholders
         text = text.replace(/\{\{studyProgram\}\}/g,   STUDY_PROGRAM);
         text = text.replace(/\{\{authorName\}\}/g,     AUTHOR_NAME);
         text = text.replace(/\{\{studentId\}\}/g,      STUDENT_ID);
         text = text.replace(/\{\{institutionInfo\}\}/g, INSTITUTION_INFO);
 
-        // 4. Bangun elemen slide dan tab
+        // 4. Build slide elements and tabs
         const slideSections   = text.split(/\n---slide-break---\n/);
         const slidesContainer = document.querySelector('.slides');
         const tabsContainer   = document.getElementById('book-tabs');
 
-        // Gunakan DocumentFragment untuk manipulasi DOM yang efisien
+        // Use DocumentFragment for efficient DOM manipulation
         const slidesFragment = document.createDocumentFragment();
         const tabsFragment   = document.createDocumentFragment();
 
         slidesContainer.innerHTML = '';
         if (tabsContainer) tabsContainer.innerHTML = '';
 
-        // Set untuk deduplication O(1) — menggantikan Array.includes() O(n)
+        // Set for O(1) deduplication — replaces O(n) Array.includes()
         const uniqueSections = new Set();
-        const sectionMap     = {}; // sectionName → index slide pertama
+        const sectionMap     = {}; // sectionName → first slide index
 
         slideSections.forEach((sectionText, index) => {
             if (!sectionText.trim()) return;
@@ -190,10 +190,10 @@ export async function initPresentation() {
             }
         });
 
-        // Append semua slide sekaligus
+        // Append all slides at once
         slidesContainer.appendChild(slidesFragment);
 
-        // 5. Buat tab navigasi secara dinamis (event delegation — 1 listener)
+        // 5. Create navigation tabs dynamically (event delegation — 1 listener)
         if (tabsContainer) {
             for (const name of uniqueSections) {
                 const button = document.createElement('button');
@@ -204,7 +204,7 @@ export async function initPresentation() {
             }
             tabsContainer.appendChild(tabsFragment);
 
-            // Event delegation: satu listener untuk semua tab-item
+            // Event delegation: single listener for all tab-items
             tabsContainer.addEventListener('click', (e) => {
                 const tab = e.target.closest('.tab-item');
                 if (!tab) return;
@@ -215,17 +215,17 @@ export async function initPresentation() {
                 }
             });
 
-            // Reset cache tabs setelah rebuild
+            // Reset tabs cache after rebuild
             resetTabsCache();
         }
 
-        // 6. Set tampilan awal timer
+        // 6. Set initial timer view
         const timerDisplay = document.getElementById('timer-display');
         if (timerDisplay) {
             timerDisplay.textContent = `${PRESENTATION_MINUTES.toString().padStart(2, '0')}:00`;
         }
 
-        // 7. Inisialisasi Reveal.js
+        // 7. Initialize Reveal.js
         const revealWidth = ASPECT_RATIO === '4:3' ? 1440 : 1920;
 
         await Reveal.initialize({
@@ -254,7 +254,7 @@ export async function initPresentation() {
             plugins: [ RevealMath.MathJax3 ]
         });
 
-        // 8. Setup tombol timer setelah Reveal siap
+        // 8. Setup timer buttons after Reveal is ready
         const startBtn = document.getElementById('start-timer');
         if (startBtn) {
             startBtn.textContent = TIMER_START_TEXT;
@@ -266,14 +266,14 @@ export async function initPresentation() {
             resetBtn.addEventListener('click', resetTimer);
         }
 
-        // 9. Daftarkan Reveal event listeners
+        // 9. Register Reveal event listeners
         Reveal.on('slidechanged', event => {
             updateUI(event.currentSlide);
             applyStaggeredAnimation(event.currentSlide);
         });
         Reveal.on('ready', () => updateUI(Reveal.getCurrentSlide()));
 
-        // 10. Update UI untuk slide awal
+        // 10. Update UI for initial slide
         updateUI(Reveal.getCurrentSlide());
 
     } catch (error) {

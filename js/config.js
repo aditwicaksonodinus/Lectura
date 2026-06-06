@@ -1,13 +1,13 @@
 /**
  * config.js
  * ─────────────────────────────────────────────────────────────
- * Modul konfigurasi presentasi.
- * Menyimpan semua variabel global config dan menyediakan
- * fungsi loadConfig() untuk mengisi ulang nilainya dari config.json.
+ * Presentation configuration module.
+ * Stores all global config variables and provides
+ * loadConfig() function to re-populate values from config.json.
  * ─────────────────────────────────────────────────────────────
  */
 
-// ── Default values (fallback jika config.json gagal dimuat) ──
+// ── Default values (fallback if config.json fails to load) ──
 export let PRESENTATION_MINUTES = 15;
 export let BASE_FONT_SIZE       = '18pt';
 export let PRESENTATION_TITLE   = 'Sidang Tesis: Arsitektur Hibrida Lectura';
@@ -24,8 +24,8 @@ export let ASPECT_RATIO         = '16:9';
 export let CONTENT_FILE         = 'content-id.md';
 
 /**
- * Memuat konfigurasi dari config.json dan mengupdate variabel di atas.
- * Jika gagal, variabel default di atas tetap dipakai.
+ * Loads configuration from config.json and updates the variables above.
+ * If it fails, the default variables above remain used.
  * @returns {Promise<void>}
  */
 export async function loadConfig() {

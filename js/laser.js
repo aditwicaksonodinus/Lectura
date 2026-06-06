@@ -1,18 +1,18 @@
 /**
  * laser.js
  * ─────────────────────────────────────────────────────────────
- * Laser pointer virtual untuk presentasi.
- * Fitur:
- *   - Toggle via tombol atau shortcut 'L'
- *   - Adaptive offset untuk layar sentuh (geser 50px ke atas)
- *   - Non-aktifkan Reveal touch gestures saat laser aktif
- *   - Interaksi lintas modul: jika laser aktif, scribble dimatikan
+ * Virtual laser pointer for presentations.
+ * Features:
+ *   - Toggle via button or 'L' shortcut
+ *   - Adaptive offset for touchscreens (shift 50px up)
+ *   - Disable Reveal touch gestures when laser is active
+ *   - Cross-module interaction: if laser is active, scribble is disabled
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Inisialisasi laser pointer.
- * Mengekspos window.setLaserEnabled untuk koordinasi lintas modul.
+ * Initializes the laser pointer.
+ * Exposes window.setLaserEnabled for cross-module coordination.
  */
 export function initLaserPointer() {
     const toggleBtn = document.getElementById('laser-toggle');
@@ -20,7 +20,7 @@ export function initLaserPointer() {
     let enabled     = false;
 
     /**
-     * Aktifkan atau matikan laser pointer.
+     * Enables or disables the laser pointer.
      * @param {boolean} state
      */
     const setEnabled = (state) => {
@@ -30,16 +30,16 @@ export function initLaserPointer() {
             cursor.style.display = 'block';
             toggleBtn.setAttribute('aria-pressed', 'true');
 
-            // Jika laser aktif, matikan scribble
+            // If laser is active, disable scribble
             if (window.setScribbleEnabled) window.setScribbleEnabled(false);
 
-            // Nonaktifkan Reveal touch agar tidak slip slide saat pointing
+            // Disable Reveal touch to prevent slide slips while pointing
             if (typeof Reveal !== 'undefined') Reveal.configure({ touch: false });
         } else {
             cursor.style.display = 'none';
             toggleBtn.setAttribute('aria-pressed', 'false');
 
-            // Aktifkan kembali Reveal touch jika scribble juga tidak aktif
+            // Re-enable Reveal touch if scribble is also inactive
             if (!window.scribbleEnabled && typeof Reveal !== 'undefined') {
                 Reveal.configure({ touch: true });
             }
@@ -50,7 +50,7 @@ export function initLaserPointer() {
         toggleBtn.addEventListener('click', () => setEnabled(!enabled));
     }
 
-    // Shortcut keyboard: 'L' untuk toggle
+    // Keyboard shortcut: 'L' to toggle
     document.addEventListener('keydown', (e) => {
         if (e.key.toLowerCase() === 'l') {
             if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
@@ -59,14 +59,14 @@ export function initLaserPointer() {
         }
     });
 
-    // Gerakkan cursor laser (Mouse & Touch)
+    // Move laser cursor (Mouse & Touch)
     const handlePointer = (e) => {
         if (!enabled) return;
 
         let x = e.clientX;
         let y = e.clientY;
 
-        // Offset sentuh: geser 50px ke atas agar tidak tertutup jari
+        // Touch offset: shift 50px up to avoid being covered by the finger
         if (e.pointerType === 'touch') {
             y -= 50;
         }
@@ -78,11 +78,11 @@ export function initLaserPointer() {
     document.addEventListener('pointermove',  handlePointer);
     document.addEventListener('pointerdown', handlePointer);
 
-    // Cegah scroll saat laser aktif dan menyentuh layar
+    // Prevent scroll while laser is active and touching the screen
     document.addEventListener('touchmove', (e) => {
         if (enabled && e.cancelable) e.preventDefault();
     }, { passive: false });
 
-    // Ekspos untuk koordinasi lintas modul (scribble.js)
+    // Expose for cross-module coordination (scribble.js)
     window.setLaserEnabled = setEnabled;
 }

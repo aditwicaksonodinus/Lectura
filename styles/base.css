@@ -15,7 +15,7 @@ html.dark-mode {
     --primary-academic: #0466c8; /* Honolulu Blue */
     --secondary-academic: #33415c; /* Slate Blue */
     --bg-card: linear-gradient(145deg, rgba(5, 10, 20, 0.75), rgba(0, 0, 5, 0.55)); /* Very Dark/Black Glass */
-    --bg-header-card: var(--bg-card); /* Match academic-box background */
+    --bg-header-card: linear-gradient(135deg, rgba(4, 102, 200, 0.1), rgba(0, 24, 69, 0.3));
     --bg-dot: rgba(4, 102, 200, 0.15); 
     --shadow-card: 0 0 25px rgba(0, 0, 0, 0.5); /* Centered and reduced spread */
     --shadow-active: 0 0 50px rgba(4, 102, 200, 0.2); /* Centered and reduced spread */
@@ -46,7 +46,7 @@ html::before {
     background-image: url('../assets/background.png');
     background-size: cover;
     background-position: center;
-    opacity: 0.60; /* Transparansi 40% (Opacity 60%) */
+    opacity: 0.60; /* 40% Transparency (Opacity 60%) */
     z-index: 1; /* Render in front of html canvas background */
     pointer-events: none; /* Let clicks pass through to presentation */
     transition: opacity 0.4s ease, filter 0.4s ease;

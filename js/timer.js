@@ -1,9 +1,9 @@
 /**
  * timer.js
  * ─────────────────────────────────────────────────────────────
- * Manajemen timer presentasi.
- * State (timerInterval, timeLeft) disimpan di module-level —
- * tidak mengotori global scope.
+ * Presentation timer management.
+ * State (timerInterval, timeLeft) is stored at module-level —
+ * not polluting the global scope.
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -13,12 +13,12 @@ import { PRESENTATION_MINUTES } from './config.js';
 let timerInterval = null;
 let timeLeft      = PRESENTATION_MINUTES * 60;
 
-// ── DOM Cache (di-populate saat pertama kali dibutuhkan) ──────
+// ── DOM Cache (populated when first needed) ──────────────────
 let _display   = null;
 let _container = null;
 let _startBtn  = null;
 
-/** Lazy-init DOM cache untuk elemen timer */
+/** Lazy-init DOM cache for timer elements */
 function _initDOMCache() {
     if (!_display) {
         _display   = document.getElementById('timer-display');
@@ -29,18 +29,18 @@ function _initDOMCache() {
 
 // ── Getters ───────────────────────────────────────────────────
 
-/** @returns {boolean} true jika timer sedang berjalan */
+/** @returns {boolean} true if timer is running */
 export function isRunning() {
     return timerInterval !== null;
 }
 
-/** @returns {number} sisa waktu dalam detik */
+/** @returns {number} time left in seconds */
 export function getTimeLeft() {
     return timeLeft;
 }
 
 /**
- * Set total waktu timer (dipanggil setelah config dimuat).
+ * Set total timer duration (called after config is loaded).
  * @param {number} minutes
  */
 export function setTimerDuration(minutes) {
@@ -49,11 +49,11 @@ export function setTimerDuration(minutes) {
 
 // ── Actions ───────────────────────────────────────────────────
 
-/** Mulai menghitung mundur. Tidak melakukan apa-apa jika sudah berjalan. */
+/** Starts countdown. Does nothing if already running. */
 export function startTimer() {
     _initDOMCache();
 
-    if (timerInterval) return; // Sudah berjalan
+    if (timerInterval) return; // Already running
 
     if (_startBtn) _startBtn.style.display = 'none';
 
@@ -73,14 +73,14 @@ export function startTimer() {
             _display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // Mode alert (kurang dari 2 menit)
+        // Alert mode (less than 2 minutes)
         if (_container) {
             _container.classList.toggle('alert-mode', timeLeft <= 120);
         }
     }, 1000);
 }
 
-/** Hentikan timer tanpa reset. */
+/** Stops timer without resetting. */
 export function stopTimer() {
     if (timerInterval) {
         clearInterval(timerInterval);
@@ -88,12 +88,12 @@ export function stopTimer() {
     }
 }
 
-/** Reset timer ke nilai awal dan tampilkan kembali tombol START. */
+/** Resets timer to initial value and shows START button again. */
 export function resetTimer() {
     stopTimer();
     _initDOMCache();
 
-    // Reset ke durasi awal dari PRESENTATION_MINUTES (sudah di-update via setTimerDuration)
+    // Reset to initial duration from PRESENTATION_MINUTES (updated via setTimerDuration)
     timeLeft = PRESENTATION_MINUTES * 60;
 
     if (_display) {

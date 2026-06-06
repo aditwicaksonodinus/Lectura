@@ -1,20 +1,20 @@
 /**
  * scribble.js
  * ─────────────────────────────────────────────────────────────
- * Mode coretan (Scribble) di atas slide menggunakan Canvas API.
- * Fitur:
- *   - Toggle via tombol atau shortcut 'S'
- *   - Hapus semua coretan via tombol atau 'Ctrl+K'
- *   - Auto-clear saat ganti slide
- *   - Support Pointer Events (unified Mouse & Touch)
- *   - Non-aktifkan Reveal touch gestures saat scribble aktif
- *   - Interaksi lintas modul: jika scribble aktif, laser dimatikan
+ * Scribble mode over slides using Canvas API.
+ * Features:
+ *   - Toggle via button or 'S' shortcut
+ *   - Clear all scribbles via button or 'Ctrl+K'
+ *   - Auto-clear on slide change
+ *   - Supports Pointer Events (unified Mouse & Touch)
+ *   - Disable Reveal touch gestures when scribble is active
+ *   - Cross-module interaction: if scribble is active, laser is disabled
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Inisialisasi mode scribble.
- * Mengekspos window.setScribbleEnabled dan window.clearAllScribbles.
+ * Initializes scribble mode.
+ * Exposes window.setScribbleEnabled and window.clearAllScribbles.
  */
 export function initScribbleMode() {
     const canvas    = document.getElementById('scribble-canvas');
@@ -28,7 +28,7 @@ export function initScribbleMode() {
     window.scribbleEnabled = false;
 
     // ── Debounce Helper ───────────────────────────────────────
-    // Mencegah spike CPU saat window di-resize (firing ratusan kali/detik)
+    // Prevent CPU spikes during window resize (firing hundreds of times/sec)
     const debounce = (fn, delay) => {
         let timer;
         return (...args) => {
@@ -59,17 +59,17 @@ export function initScribbleMode() {
             toggleBtn.setAttribute('aria-pressed', 'true');
             clearBtn.style.display = 'flex';
 
-            // Jika scribble aktif, matikan laser
+            // If scribble is active, disable laser
             if (window.setLaserEnabled) window.setLaserEnabled(false);
 
-            // Nonaktifkan Reveal touch agar tidak slip slide saat menggambar
+            // Disable Reveal touch to prevent slide slips while drawing
             if (typeof Reveal !== 'undefined') Reveal.configure({ touch: false });
         } else {
             html.classList.remove('scribble-active');
             toggleBtn.setAttribute('aria-pressed', 'false');
             clearBtn.style.display = 'none';
 
-            // Aktifkan kembali Reveal touch jika laser juga tidak aktif
+            // Re-enable Reveal touch if laser is also inactive
             const laserCursor = document.getElementById('laser-cursor');
             const laserActive = laserCursor && laserCursor.style.display === 'block';
             if (!laserActive && typeof Reveal !== 'undefined') {
@@ -91,8 +91,8 @@ export function initScribbleMode() {
         ctx.beginPath();
         ctx.moveTo(e.clientX, e.clientY);
 
-        // Gaya stroke akademik
-        ctx.strokeStyle = '#ff3b30'; // Merah
+        // Academic stroke style
+        ctx.strokeStyle = '#ff3b30'; // Red
         ctx.lineWidth   = 4;
         ctx.lineCap     = 'round';
         ctx.lineJoin    = 'round';
@@ -109,7 +109,7 @@ export function initScribbleMode() {
         ctx.closePath();
     };
 
-    // Pointer events untuk unified Mouse/Touch support
+    // Pointer events for unified Mouse/Touch support
     canvas.addEventListener('pointerdown',  startDrawing);
     canvas.addEventListener('pointermove',  draw);
     canvas.addEventListener('pointerup',    stopDrawing);
@@ -123,7 +123,7 @@ export function initScribbleMode() {
         clearAll();
     });
 
-    // Shortcut keyboard
+    // Keyboard shortcut
     document.addEventListener('keydown', (e) => {
         const key = e.key.toLowerCase();
         if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
@@ -143,12 +143,12 @@ export function initScribbleMode() {
         }
     });
 
-    // Auto-clear saat ganti slide
+    // Auto-clear on slide change
     if (typeof Reveal !== 'undefined') {
         Reveal.on('slidechanged', clearAll);
     }
 
-    // Ekspos untuk koordinasi lintas modul (laser.js)
+    // Expose for cross-module coordination (laser.js)
     window.setScribbleEnabled  = setEnabled;
     window.clearAllScribbles   = clearAll;
 }

@@ -31,6 +31,10 @@
     will-change: transform;
 }
 
+html.dark-mode .academic-box {
+    background: linear-gradient(135deg, rgba(4, 102, 200, 0.1), rgba(0, 24, 69, 0.3));
+}
+
 .academic-box::before {
     content: '';
     position: absolute;
@@ -56,8 +60,6 @@
 .academic-box:active,
 .academic-box.is-interacting {
     transform: scale(1.02) !important;
-    background: var(--bg-card) !important;
-    box-shadow: none !important;
     z-index: 100 !important;
 }
 

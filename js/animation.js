@@ -1,16 +1,16 @@
 // ── Module-level state ────────────────────────────────────────
-// Menyimpan referensi elemen staggered dari slide sebelumnya
-// agar cleanup tidak perlu DOM scan global setiap slide change.
+// Keeps references to staggered elements from the previous slide
+// so cleanup doesn't require a global DOM scan on every slide change.
 let _prevStaggered = [];
 
 /**
- * Terapkan animasi staggered pada elemen dalam slide yang aktif.
- * Bersihkan animasi dari slide sebelumnya terlebih dahulu.
- * @param {HTMLElement|null} slide - Elemen section slide saat ini
+ * Applies staggered animation to elements in the active slide.
+ * Cleans up animations from the previous slide first.
+ * @param {HTMLElement|null} slide - The current slide section element
  */
 export function applyStaggeredAnimation(slide) {
-    // Bersihkan state stagger dari slide sebelumnya via tracked refs
-    // (lebih efisien dari querySelectorAll('.staggered') global scan)
+    // Clear stagger state from the previous slide via tracked refs
+    // (more efficient than a global querySelectorAll('.staggered') scan)
     for (const el of _prevStaggered) {
         el.classList.remove('staggered');
         el.style.removeProperty('--stagger-index');

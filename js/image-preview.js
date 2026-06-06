@@ -1,16 +1,16 @@
 /**
  * image-preview.js
  * ─────────────────────────────────────────────────────────────
- * Preview gambar full-screen saat gambar dalam slide diklik.
- * Overlay menutup saat:
- *   - Tombol close diklik
- *   - Area di luar gambar diklik
- *   - Escape ditekan
+ * Full-screen image preview when an image in a slide is clicked.
+ * Overlay closes when:
+ *   - Close button is clicked
+ *   - Area outside the image is clicked
+ *   - Escape is pressed
  * ─────────────────────────────────────────────────────────────
  */
 
 /**
- * Inisialisasi overlay image preview.
+ * Initializes the image preview overlay.
  */
 export function initImagePreview() {
     const overlay   = document.getElementById('image-preview');
@@ -19,7 +19,7 @@ export function initImagePreview() {
 
     if (!overlay || !previewImg) return;
 
-    // ── Buka Preview ──────────────────────────────────────────
+    // ── Open Preview ──────────────────────────────────────────
     document.addEventListener('click', (e) => {
         const img = e.target.closest('img');
         if (img && !img.closest('.image-preview-overlay')) {
@@ -28,12 +28,12 @@ export function initImagePreview() {
             previewImg.src = img.src;
             previewImg.alt = img.alt || 'Preview';
             overlay.style.display = 'flex';
-            // Delay kecil agar transisi CSS berjalan
+            // Short delay to allow CSS transitions to run
             setTimeout(() => overlay.classList.add('active'), 10);
         }
     });
 
-    // ── Tutup Preview ─────────────────────────────────────────
+    // ── Close Preview ─────────────────────────────────────────
     const closePreview = () => {
         overlay.classList.remove('active');
         setTimeout(() => {
@@ -49,7 +49,7 @@ export function initImagePreview() {
         });
     }
 
-    // Klik di luar gambar (di area overlay)
+    // Click outside image (in overlay area)
     overlay.addEventListener('click', (e) => {
         if (e.target === overlay) {
             closePreview();

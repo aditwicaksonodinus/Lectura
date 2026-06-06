@@ -1,10 +1,10 @@
 /**
  * markdown.js
  * ─────────────────────────────────────────────────────────────
- * Setup Marked.js dan fungsi renderMarkdown.
- * Menangani:
+ * Marked.js setup and renderMarkdown function.
+ * Handles:
  *   - Custom renderer (Mermaid code blocks, academic tables)
- *   - Footnote akademik [^1)] 
+ *   - Academic footnote [^1)] 
  *   - IEEE Equation Style $$eq$$ (label)
  *   - Footnote references [^1] & definitions [^1]: content
  * ─────────────────────────────────────────────────────────────
@@ -13,7 +13,7 @@
 // ── Custom Marked Renderer ────────────────────────────────────
 const renderer = new marked.Renderer();
 
-// Render Mermaid code blocks sebagai <div class="mermaid">
+// Render Mermaid code blocks as <div class="mermaid">
 renderer.code = function(code, language) {
     if (language === 'mermaid') {
         return `<div class="mermaid">${code}</div>`;
@@ -21,7 +21,7 @@ renderer.code = function(code, language) {
     return `<pre><code class="language-${language}">${code}</code></pre>`;
 };
 
-// Render tabel dengan academic wrapper (Booktabs style)
+// Render tables with academic wrapper (Booktabs style)
 renderer.table = function(header, body) {
     return `
         <div class="academic-table-wrapper">
@@ -48,31 +48,31 @@ marked.setOptions({
 });
 
 // ── Regex Module-Level Constants ──────────────────────────────
-// Dikompilasi sekali saat module di-load, bukan setiap renderMarkdown() call.
-// Aman dengan String.replace() karena setiap call reset lastIndex secara implisit.
+// Compiled once when module is loaded, not on every renderMarkdown() call.
+// Safe with String.replace() as each call implicitly resets lastIndex.
 
-/** Kelompok footnote akademik berurutan: [^1)] content */
+/** Academic footnote grouping: [^1)] content */
 const FOOTNOTE_GROUP_RE = /((?:\[\^[^\]]*?\)\][^\n\r]*(?:\r?\n|$)\s*)+)/g;
 
-/** IEEE Equation: $$eq$$ (label) di awal baris */
+/** IEEE Equation: $$eq$$ (label) at start of line */
 const IEEE_EQ_RE = /^[ \t]*\$\$([^\$]+?)\$\$\s*\(([^)]+)\)/gm;
 
-/** Footnote reference inline: [^1] (bukan definisi) */
+/** Inline footnote reference: [^1] (not a definition) */
 const FOOTNOTE_REF_RE = /\[\^([^\]]+)\](?!\:)/g;
 
 /** Footnote definition: [^1]: content */
 const FOOTNOTE_DEF_RE = /^\[\^([^\]]+)\]:\s*(.*)$/gm;
 
 /**
- * Enhanced markdown parser dengan footnote dan IEEE equation support.
+ * Enhanced markdown parser with footnote and IEEE equation support.
  * @param {string} md - Raw markdown string
- * @returns {string} HTML yang sudah di-render
+ * @returns {string} Rendered HTML
  */
 export function renderMarkdown(md) {
     if (!md) return '';
 
     // 0. Academic Footnotes: [^1)] content
-    // Grupkan footnote berurutan ke dalam satu container (side-by-side display)
+    // Group consecutive footnotes into a single container (side-by-side display)
     md = md.replace(FOOTNOTE_GROUP_RE, (match) => {
         const lines = match.trim().split(/\r?\n/);
         const footnoteSpans = lines.map(line => {
@@ -85,7 +85,7 @@ export function renderMarkdown(md) {
         return `<div class="footnote-container">${footnoteSpans}</div>`;
     });
 
-    // 1. IEEE Equation Style: $$eq$$ (label) — harus di awal baris
+    // 1. IEEE Equation Style: $$eq$$ (label) — must be at the start of a line
     md = md.replace(IEEE_EQ_RE, (match, eq, label) => {
         return `\n<div class="ieee-equation-container">\n<div class="ieee-equation-content">\n\n$$\n${eq.trim()}\n$$\n\n</div>\n<div class="ieee-equation-number">(${label})</div>\n</div>\n`;
     });

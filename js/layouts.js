@@ -1,22 +1,22 @@
 /**
  * layouts.js
  * ─────────────────────────────────────────────────────────────
- * Registry Template Layout Slide.
- * Setiap key adalah nama layout yang didefinisikan di markdown
- * via <!-- layout: nama-layout -->.
- * Setiap value adalah fungsi yang mengembalikan HTML string.
+ * Slide Layout Template Registry.
+ * Each key is a layout name defined in markdown
+ * via <!-- layout: layout-name -->.
+ * Each value is a function that returns an HTML string.
  * ─────────────────────────────────────────────────────────────
  */
 
 import { renderMarkdown } from './markdown.js';
 
 /**
- * Template Registry untuk semua layout slide yang tersedia.
- * Signature fungsi: (metadata, cleanContent, titleHtml, splitParts) => HTMLString
+ * Template Registry for all available slide layouts.
+ * Function signature: (metadata, cleanContent, titleHtml, splitParts) => HTMLString
  */
 export const LayoutTemplates = {
 
-    // ── Helper internal: render academic box ─────────────────
+    // ── Internal helper: render academic box ─────────────────
     _box: (content, title = '', extraClass = '') => `
         <div class="academic-box ${extraClass}">
             ${title ? `<h4>${title}</h4>` : ''}
@@ -45,7 +45,7 @@ export const LayoutTemplates = {
             ${renderMarkdown(cleanContent)}
         </div>`,
 
-    // ── 1 Column Stacked (beberapa box vertikal) ─────────────
+    // ── 1 Column Stacked (multiple vertical boxes) ───────────
     '1-column-stacked': (metadata, cleanContent, titleHtml, splitParts) => {
         const boxes = splitParts.map((part, i) => {
             const extra = i % 2 === 0 ? 'full-width' : 'full-width red-top';
@@ -76,7 +76,7 @@ export const LayoutTemplates = {
             </div>
         </div>`,
 
-    // ── 2 Content: Mermaid atas, Text bawah ──────────────────
+    // ── 2 Content: Mermaid top, Text bottom ──────────────────
     '2-content-center-mermaid': (metadata, cleanContent, titleHtml, splitParts) => `
         ${titleHtml}
         <div class="content-wrapper">
@@ -103,10 +103,10 @@ export const LayoutTemplates = {
         ${titleHtml}
         <div class="content-wrapper">${LayoutTemplates._box(cleanContent, '', 'full-width')}</div>`,
 
-    // ── 1 Content dengan Gambar (alias) ──────────────────────
+    // ── 1 Content with Image (alias) ─────────────────────────
     '1-content-with-img': (...args) => LayoutTemplates['1-content-with-text'](...args),
 
-    // ── 2 Column Grid (markdown langsung, tanpa box) ─────────
+    // ── 2 Column Grid (direct markdown, without boxes) ───────
     '2-column-grid': (metadata, cleanContent, titleHtml, splitParts) => `
         ${titleHtml}
         <div class="content-wrapper">
@@ -116,6 +116,6 @@ export const LayoutTemplates = {
             </div>
         </div>`,
 
-    // ── Default: fallback ke 1-content-with-text ─────────────
+    // ── Default: fallback to 1-content-with-text ─────────────
     'default': (...args) => LayoutTemplates['1-content-with-text'](...args)
 };
