@@ -1,3 +1,12 @@
+/* 
+  ========================================================================
+  ⚠️ WARNING:
+  To respect the creator's original work, please do NOT remove or modify 
+  the watermark "Lectura by AditDinus 🔥" in the footer of this presentation.
+  Thank you for supporting academic integrity and respecting creative works!
+  ========================================================================
+*/
+
 @font-face {
     font-family: 'Noto Serif';
     src: url('Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
@@ -1210,6 +1219,10 @@ html.dark-mode .timer-container button#reset-timer {
 .reveal .footer .left-info {
     text-align: left;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 15px;
 }
 
 .reveal .footer .center-info {
@@ -1230,8 +1243,21 @@ html.dark-mode .timer-container button#reset-timer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 15px;
     color: white;
     height: 100%;
+}
+
+.reveal .footer .watermark {
+    opacity: 0.6;
+    font-weight: 500;
+    font-size: 0.9em;
+    font-family: "Noto Serif", serif;
+    transition: opacity 0.3s ease;
+}
+
+.reveal .footer .watermark:hover {
+    opacity: 1;
 }
 
 /* Page number formatting to match footer base style.
@@ -1252,22 +1278,22 @@ html.dark-mode .timer-container button#reset-timer {
 /* Custom Navigation Controls (Aligned with Footer/Card Width) */
 .navigation-controls {
     position: absolute;
-    bottom: 110px; /* Elevated further above footer */
+    bottom: 110px;
     left: 50%;
     transform: translateX(-50%);
-    width: var(--presentation-width); /* Matched with footer and academic-box width */
+    width: var(--presentation-width);
     display: flex;
-    justify-content: flex-end; /* Align arrows to the right edge of the var(--presentation-width) boundary */
-    gap: 35px;
+    justify-content: flex-end;
+    gap: 12px;
     z-index: 1000;
     opacity: 1;
-    pointer-events: none; /* Container doesn't block clicks */
+    pointer-events: none;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .navigation-controls button {
-    width: 80px;
-    height: 80px;
+    width: 48px;
+    height: 48px;
     background: transparent;
     border: none;
     color: var(--primary-academic);
@@ -1277,8 +1303,8 @@ html.dark-mode .timer-container button#reset-timer {
     justify-content: center;
     padding: 0;
     margin: 0;
-    pointer-events: auto; /* Buttons are clickable */
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Pronounced shadow */
+    pointer-events: auto;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
     transition: transform 0.2s ease, text-shadow 0.2s ease;
 }
 
@@ -1289,15 +1315,15 @@ html.dark-mode .timer-container button#reset-timer {
 
 .navigation-controls button#prev-btn::before {
     content: '<';
-    font-size: 5em; /* Significantly larger floating arrow */
-    font-weight: 800; /* Bold and impactful */
+    font-size: 3em;
+    font-weight: 800;
     font-family: serif;
 }
 
 .navigation-controls button#next-btn::before {
     content: '>';
-    font-size: 5em; /* Significantly larger floating arrow */
-    font-weight: 800; /* Bold and impactful */
+    font-size: 3em;
+    font-weight: 800;
     font-family: serif;
 }
 

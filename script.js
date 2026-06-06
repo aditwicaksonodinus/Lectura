@@ -1,3 +1,12 @@
+/* 
+  ========================================================================
+  ⚠️ WARNING:
+  To respect the creator's original work, please do NOT remove or modify 
+  the watermark "Lectura by AditDinus 🔥" in the footer of this presentation.
+  Thank you for supporting academic integrity and respecting creative works!
+  ========================================================================
+*/
+
 /**
  * CONFIGURATION: Presentation
  * Dynamic configs loaded from config.json (with local fallbacks).
@@ -709,8 +718,6 @@ async function initPresentation() {
         }
 
         document.title = PRESENTATION_TITLE;
-        const leftInfo = document.querySelector('.footer .left-info');
-        if (leftInfo) leftInfo.textContent = AUTHOR_NAME;
         const centerInfo = document.querySelector('.footer .center-info');
         if (centerInfo) centerInfo.textContent = INSTITUTION_INFO;
 
@@ -1146,6 +1153,12 @@ function initCardInteractions() {
 
 // Kick off the load process
 window.onload = () => {
+    console.log(
+        "%c✨ Lectura Presentation %cby AditDinus <3\n%cPlease do not remove the watermark to respect the creator's work. Thank you for your support! 😊\n\n",
+        "color: #1b365d; font-size: 18px; font-weight: bold; font-family: serif;",
+        "color: #f59e0b; font-size: 18px; font-weight: bold; font-family: serif; font-style: italic;",
+        "color: #64748b; font-size: 13px; font-family: sans-serif;"
+    );
     initTheme();
     initPresentation();
     initImagePreview();
