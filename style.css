@@ -900,20 +900,24 @@ li {
 .accessibility-menu {
     position: absolute;
     top: calc(100% + 15px);
-    right: 0;
+    left: 50%;
+    right: auto;
     background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border-subtle);
-    border-radius: 25px; /* More rounded for icon list */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    padding: 6px;
+    border-radius: 15px; /* Matched with header/footer */
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 8px;
     display: flex;
     flex-direction: column;
     align-items: center; /* Ensure icons are centered */
     gap: 8px;
-    width: 48px; /* Exact width: 36px button + 12px horizontal padding */
+    width: auto;
+    min-width: 48px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateX(-50%) translateY(-10px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
 }
@@ -921,7 +925,7 @@ li {
 .accessibility-menu.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 .accessibility-menu button {
@@ -947,6 +951,7 @@ li {
 /* Icons for Accessibility Menu */
 .accessibility-icon::before { content: '⚙️'; font-size: 1.2em; }
 .scribble-icon::before { content: '✏️'; font-size: 1.1em; }
+.clear-icon::before { content: '🗑️'; font-size: 1.1em; }
 
 #laser-toggle[aria-pressed="true"] {
     background: rgba(255, 0, 0, 0.4);
@@ -1237,22 +1242,68 @@ html.dark-mode .timer-container button#reset-timer {
     z-index: auto !important;
 }
 
-/* Adjust Reveal.js Controls position to be above footer */
+/* Custom Navigation Controls (Aligned with Footer/Card Width) */
+.navigation-controls {
+    position: absolute;
+    bottom: 80px; /* Above footer (15+50=65 + 15 gap) */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1600px; /* Matched with footer and academic-box width */
+    display: flex;
+    justify-content: flex-end; /* Align arrows to the right edge of the 1600px boundary */
+    gap: 30px;
+    z-index: 1000;
+    opacity: 1;
+    pointer-events: none; /* Container doesn't block clicks */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.navigation-controls button {
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border: none;
+    color: var(--primary-academic);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    pointer-events: auto; /* Buttons are clickable */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-controls button#prev-btn::before {
+    content: '<';
+    font-size: 3.5em; /* Large floating arrow */
+    font-weight: 800; /* Bold and impactful */
+    font-family: serif;
+}
+
+.navigation-controls button#next-btn::before {
+    content: '>';
+    font-size: 3.5em; /* Large floating arrow */
+    font-weight: 800; /* Bold and impactful */
+    font-family: serif;
+}
+
+/* Ensure visibility in Dark Mode (White/Light Cyan) */
+html.dark-mode .navigation-controls button {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Hide Reveal navigation controls when on title/closing slides if requested, 
+   but usually we want them always available for presenter */
+.footer.hidden-footer + .navigation-controls {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Hide default Reveal.js controls */
 .reveal .controls {
-    bottom: 90px !important; /* Raised further to accommodate floating footer (15px + 50px) */
-    right: 30px !important;
-    transform: scale(1.8); /* Make controls 1.8x larger */
-    transform-origin: bottom right;
-}
-
-/* Make control arrows more visible */
-.reveal .controls button {
-    color: var(--primary-academic) !important;
-    opacity: 0.8 !important;
-}
-
-.reveal .controls button:hover {
-    opacity: 1 !important;
+    display: none !important;
 }
 
 /* Adjust Progress Bar if needed */
@@ -1383,4 +1434,27 @@ html.dark-mode .timer-container button#reset-timer {
     opacity: 0;
     animation: fadeUpStagger 0.5s ease forwards;
     animation-delay: calc(var(--stagger-index) * 0.1s);
+}
+
+/* Scribble Mode Styles */
+.scribble-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 90; /* Lower than header (100) and menu (1000) */
+    pointer-events: none;
+    display: block;
+}
+
+/* Enable pointer events only when mode is active */
+.scribble-active .scribble-canvas {
+    pointer-events: auto;
+    cursor: cell; /* Pencil-like cursor */
+    touch-action: none;
+}
+
+/* Ensure laser pointer stays on top of scribble */
+.laser-pointer {
+    z-index: 10000;
 }

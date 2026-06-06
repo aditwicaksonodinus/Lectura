@@ -60,9 +60,24 @@ function initAccessibilityMenu() {
         toggleMenu();
     });
 
+    // Close menu when any action button inside is clicked (except scribble controls)
+    const actionButtons = menu.querySelectorAll('button');
+    actionButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Don't auto-close if clicking scribble toggle or clear
+            if (btn.id === 'scribble-toggle' || btn.id === 'scribble-clear') return;
+            
+            // Short delay to allow visual feedback on the button before closing
+            setTimeout(() => toggleMenu(false), 150);
+        });
+    });
+
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (menu.classList.contains('active') && !container.contains(e.target)) {
+        // Don't close if clicking inside container OR clicking on the scribble canvas
+        if (menu.classList.contains('active') && 
+            !container.contains(e.target) && 
+            e.target.id !== 'scribble-canvas') {
             toggleMenu(false);
         }
     });
@@ -873,9 +888,17 @@ function initLaserPointer() {
             toggleBtn.setAttribute('aria-pressed', 'true');
             // If laser is enabled, disable scribble
             if (window.scribbleEnabled) window.setScribbleEnabled(false);
+            
+            // Disable Reveal gestures to prevent accidental slide changes while pointing
+            if (typeof Reveal !== 'undefined') Reveal.configure({ touch: false });
         } else {
             cursor.style.display = 'none';
             toggleBtn.setAttribute('aria-pressed', 'false');
+            
+            // Re-enable Reveal gestures if no other interaction mode is active
+            if (!window.scribbleEnabled && typeof Reveal !== 'undefined') {
+                Reveal.configure({ touch: true });
+            }
         }
     };
 
@@ -893,46 +916,176 @@ function initLaserPointer() {
         }
     });
 
-    // Move cursor when active
-    document.addEventListener('mousemove', (e) => {
+    // Move cursor when active (Optimized for Mouse & Touch)
+    const handlePointer = (e) => {
         if (!enabled) return;
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-    });
+        
+        let x = e.clientX;
+        let y = e.clientY;
+
+        // Adaptive Offset: If using touch, shift the laser 50px up 
+        // so it's not covered by the user's finger.
+        if (e.pointerType === 'touch') {
+            y -= 50;
+        }
+
+        cursor.style.left = `${x}px`;
+        cursor.style.top = `${y}px`;
+    };
+
+    document.addEventListener('pointermove', handlePointer);
+    document.addEventListener('pointerdown', handlePointer);
+
+    // Prevent scrolling when laser is enabled and touching the screen
+    document.addEventListener('touchmove', (e) => {
+        if (enabled && e.cancelable) e.preventDefault();
+    }, { passive: false });
 
     // Expose for cross-feature interaction
     window.setLaserEnabled = setEnabled;
 }
 
 function initScribbleMode() {
+    const canvas = document.getElementById('scribble-canvas');
     const toggleBtn = document.getElementById('scribble-toggle');
+    const clearBtn = document.getElementById('scribble-clear');
+    if (!canvas || !toggleBtn || !clearBtn) return;
+
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
     window.scribbleEnabled = false;
 
-    window.setScribbleEnabled = (state) => {
+    // Resize canvas to match window
+    const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    };
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const setEnabled = (state) => {
         window.scribbleEnabled = state;
+        const html = document.documentElement;
+        
         if (window.scribbleEnabled) {
+            html.classList.add('scribble-active');
             toggleBtn.setAttribute('aria-pressed', 'true');
+            clearBtn.style.display = 'flex';
+            
             // If scribble is enabled, disable laser
             if (window.setLaserEnabled) window.setLaserEnabled(false);
-            console.log('Scribble mode enabled (Placeholder)');
+            
+            // Disable Reveal gestures while scribbling
+            if (typeof Reveal !== 'undefined') Reveal.configure({ touch: false });
         } else {
+            html.classList.remove('scribble-active');
             toggleBtn.setAttribute('aria-pressed', 'false');
-            console.log('Scribble mode disabled (Placeholder)');
+            clearBtn.style.display = 'none';
+            
+            // Re-enable Reveal gestures if laser is not active
+            const laserCursor = document.getElementById('laser-cursor');
+            const laserActive = laserCursor && laserCursor.style.display === 'block';
+            
+            if (!laserActive && typeof Reveal !== 'undefined') {
+                 Reveal.configure({ touch: true });
+            }
         }
     };
 
+    const clearAll = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
+    // Drawing logic (Mouse & Touch)
+    const startDrawing = (e) => {
+        if (!window.scribbleEnabled) return;
+        isDrawing = true;
+        
+        // Use clientX/Y which are relative to the viewport
+        ctx.beginPath();
+        ctx.moveTo(e.clientX, e.clientY);
+        
+        // Academic Style Stroke
+        ctx.strokeStyle = '#ff3b30'; // Red
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+    };
+
+    const draw = (e) => {
+        if (!isDrawing || !window.scribbleEnabled) return;
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+    };
+
+    const stopDrawing = () => {
+        isDrawing = false;
+        ctx.closePath();
+    };
+
+    // Pointer events for unified Mouse/Touch support
+    canvas.addEventListener('pointerdown', startDrawing);
+    canvas.addEventListener('pointermove', draw);
+    canvas.addEventListener('pointerup', stopDrawing);
+    canvas.addEventListener('pointerleave', stopDrawing);
+
     if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => window.setScribbleEnabled(!window.scribbleEnabled));
+        toggleBtn.addEventListener('click', () => setEnabled(!window.scribbleEnabled));
+    }
+    
+    if (clearBtn) {
+        clearBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent closing menu immediately if desired, or keep it
+            clearAll();
+        });
     }
 
-    // Keyboard shortcut: press 'S'
+    // Keyboard shortcut integration
     document.addEventListener('keydown', (e) => {
-        if (e.key.toLowerCase() === 's') {
-            if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+        const key = e.key.toLowerCase();
+        if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+        // 'S' for Toggle
+        if (key === 's' && !e.ctrlKey && !e.altKey && !e.metaKey) {
             e.preventDefault();
-            window.setScribbleEnabled(!window.scribbleEnabled);
+            setEnabled(!window.scribbleEnabled);
+        }
+        
+        // 'Ctrl+K' for Clear All
+        if (key === 'k' && (e.ctrlKey || e.metaKey)) {
+            if (window.scribbleEnabled) {
+                e.preventDefault();
+                clearAll();
+            }
         }
     });
+
+    // Auto-clear on slide change
+    if (typeof Reveal !== 'undefined') {
+        Reveal.on('slidechanged', clearAll);
+    }
+
+    // Expose for cross-feature interaction
+    window.setScribbleEnabled = setEnabled;
+    window.clearAllScribbles = clearAll;
+}
+
+function initNavigation() {
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (typeof Reveal !== 'undefined') Reveal.prev();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (typeof Reveal !== 'undefined') Reveal.next();
+        });
+    }
 }
 
 function applyStaggeredAnimation(slide) {
@@ -989,5 +1142,6 @@ window.onload = () => {
     initAccessibilityMenu();
     initLaserPointer();
     initScribbleMode();
+    initNavigation();
     initCardInteractions();
 };

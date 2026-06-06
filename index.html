@@ -36,6 +36,9 @@
                         <button id="scribble-toggle" title="Toggle Scribble Mode (S)" aria-pressed="false">
                             <span class="scribble-icon"></span>
                         </button>
+                        <button id="scribble-clear" title="Clear All Scribbles (Ctrl+K)" style="display: none;">
+                            <span class="clear-icon"></span>
+                        </button>
                         <button id="theme-toggle" title="Toggle Dark/Light Mode">
                             <span class="theme-icon"></span>
                         </button>
@@ -47,6 +50,11 @@
             <div class="left-info"></div>
             <div class="center-info"></div>
             <div class="right-info"><span class="slide-number"></span></div>
+        </div>
+
+        <div class="navigation-controls">
+            <button id="prev-btn" title="Previous Slide (←)"></button>
+            <button id="next-btn" title="Next Slide (→)"></button>
         </div>
 
         <div class="slides">
@@ -62,6 +70,7 @@
         <span class="image-preview-close" id="image-preview-close">&times;</span>
         <img src="" alt="Preview" id="image-preview-img">
     </div>
+    <canvas id="scribble-canvas" class="scribble-canvas"></canvas>
     <div id="laser-cursor" class="laser-pointer"></div>
 
     <!-- Reveal.js Scripts -->
