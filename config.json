@@ -1,15 +1,16 @@
 {
   "presentationMinutes": 15,
   "baseFontSize": "18pt",
-  "presentationTitle": "Thesis Defense: Lectura Hybrid Architecture",
-  "authorName": "Telo Godhok",
-  "institutionInfo": "Institute of Tire Repair (ITR)",
-  "studyProgram": "Tire Repair Engineering",
-  "lang": "en",
+  "presentationTitle": "Sidang Tesis: Arsitektur Hibrida Lectura",
+  "authorName": "Praditya Wicaksono",
+  "studentId": "P31.2024.02610",
+  "institutionInfo": "Universitas Dian Nuswantoro © 2026",
+  "studyProgram": "Teknik Informatika",
+  "lang": "id",
   "revealTheme": "black",
   "timerStartText": "START",
   "timerResetText": "RESET",
   "themeToggleTitle": "Toggle Dark/Light Mode",
   "aspectRatio": "16:9",
-  "contentFile": "content-en.md"
+  "contentFile": "content-id.md"
 }

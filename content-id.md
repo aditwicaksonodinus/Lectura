@@ -1,15 +1,14 @@
 <!-- layout: title -->
 <!-- logo: assets/udinus-logo.png -->
 <!-- section: Pendahuluan -->
-<!-- state: hide-header-footer -->
 
 # TESIS
 ## ARSITEKTUR HIBRIDA Q-LEARNING DAN LARGE LANGUAGE MODELS (LLM) UNTUK INTELLIGENT TUTORING SYSTEM (ITS) DENGAN KEBIJAKAN PEDAGOGIS ADAPTIF
 
-
 <div class="title-details">
-<strong>Praditya Wicaksono</strong><br>
-<strong>P31.2024.02610</strong><br><br>
+<strong>{{authorName}}</strong><br>
+<strong>{{studentId}}</strong><br><br>
+<strong>Program Studi {{studyProgram}} — {{institutionInfo}}</strong><br><br>
 <strong>Dosen Pembimbing:</strong><br>
 Prof. Dr. Pulung Nurtantio Andono, S.T., M.Kom.<br>
 Dr. Ir. Pujiono, S.Si., M.Kom., IPM., ASEAN Eng<br>
