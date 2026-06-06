@@ -13,7 +13,7 @@ let REVEAL_THEME = 'black';
 let TIMER_START_TEXT = 'START';
 let TIMER_RESET_TEXT = 'RESET';
 let THEME_TOGGLE_TITLE = 'Toggle Dark/Light Mode';
-let CONTENT_FILE = 'content.md';
+let CONTENT_FILE = LANG === 'en' ? 'content-en.md' : 'content-id.md';
 
 /**
  * Theme Management
@@ -620,7 +620,7 @@ async function initPresentation() {
                 TIMER_START_TEXT = config.timerStartText || TIMER_START_TEXT;
                 TIMER_RESET_TEXT = config.timerResetText || TIMER_RESET_TEXT;
                 THEME_TOGGLE_TITLE = config.themeToggleTitle || THEME_TOGGLE_TITLE;
-                CONTENT_FILE = config.contentFile || CONTENT_FILE;
+                CONTENT_FILE = config.contentFile || (LANG === 'en' ? 'content-en.md' : 'content-id.md');
             }
         } catch (configErr) {
             console.warn('Error loading config.json, using default presentation values:', configErr);
@@ -648,7 +648,7 @@ async function initPresentation() {
         timeLeft = PRESENTATION_MINUTES * 60; // Initialize timeLeft with fetched config value
 
         const response = await fetch(CONTENT_FILE);
-        if (!response.ok) throw new Error('Could not load content.md');
+        if (!response.ok) throw new Error(`Could not load ${CONTENT_FILE}`);
 
         let text = await response.text();
         // Replace dynamic placeholders

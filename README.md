@@ -62,9 +62,10 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 | File | Role |
 |------|------|
 | **[index.html](index.html)** | Loads Reveal.js, Marked.js, MathJax 3, Mermaid via CDN. Provides empty containers for header, footer, slides, and lightbox modal. All metadata is driven from `config.json`. |
-| **[script.js](script.js)** | Reads `config.json` → sets language, Reveal.js theme, title, footer. Fetches & parses `content.md` → extracts metadata → renders layouts → manages timer, tabs, lightbox, card interactions, navigation protection. |
+| **[script.js](script.js)** | Reads `config.json` → sets language, Reveal.js theme, title, footer. Fetches & parses `content-en.md` or `content-id.md` (based on language setting) → extracts metadata → renders layouts → manages timer, tabs, lightbox, card interactions, navigation protection. |
 | **[style.css](style.css)** | Glassmorphism, grid layouts, lightbox, card hover/click effects, dark/light mode — no JS dependency for visuals. |
-| **[content.md](content.md)** | Your slides in Markdown + HTML comment metadata. Zero configuration needed. |
+| **[content-en.md](content-en.md)** | Your slides in English (Markdown + HTML comment metadata). |
+| **[content-id.md](content-id.md)** | Your slides in Bahasa Indonesia (Markdown + HTML comment metadata). |
 | **[config.json](config.json)** | Single source of truth for presentation metadata, timing, labels. |
 
 ---
@@ -72,7 +73,7 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 ## 🚀 Getting Started
 
 > [!IMPORTANT]
-> The system uses `fetch()` to load `content.md` and `config.json`. **Do not** open `index.html` directly via `file://` — it will throw a CORS error.
+> The system uses `fetch()` to load the content files (`content-en.md` or `content-id.md`) and `config.json`. **Do not** open `index.html` directly via `file://` — it will throw a CORS error.
 
 You need a local HTTP server. Pick your weapon:
 
@@ -146,7 +147,7 @@ Global settings live in [`config.json`](config.json):
 
 ## 📝 Writing Slides
 
-Slides are authored sequentially in `content.md`. Two rules to remember:
+Slides are authored sequentially in `content-en.md` (English) or `content-id.md` (Bahasa Indonesia) depending on the configuration. Two rules to remember:
 
 ### 🔹 1. Slide Separation
 
