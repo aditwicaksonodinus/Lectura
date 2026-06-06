@@ -10,7 +10,10 @@
 
 **Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with a modern *Glassmorphism* dashboard and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
 
-![Preview](placeholder.png)
+<p align="center">
+  <img src="assets/dark-mode.png" alt="High-Contrast Dark Mode" width="49%">
+  <img src="assets/light-mode.png" alt="Light Mode" width="49%">
+</p>
 
 </div>
 
@@ -55,6 +58,8 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 ├── 🖼️ placeholder.png     # Preview / demo image
 ├── 📁 assets/             # Assets directory (images)
 │   ├── 🖼️ background.png  # Transparent background image
+│   ├── 🖼️ dark-mode.png   # Presentation in Dark Mode
+│   ├── 🖼️ light-mode.png  # Presentation in Light Mode
 │   └── 🖼️ University-logo.png # Institution logo (title slide)
 └── 📁 Noto_Serif/         # Custom font
 ```
