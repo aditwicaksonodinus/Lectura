@@ -860,25 +860,104 @@ li {
     gap: 15px;
 }
 
-#theme-toggle {
+/* Accessibility Menu Styling */
+.accessibility-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#accessibility-toggle,
+.accessibility-menu button {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
     transition: all 0.3s ease;
 }
 
-#theme-toggle:hover {
+#accessibility-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    justify-content: center;
+}
+
+#accessibility-toggle:hover {
     background: rgba(255, 255, 255, 0.25);
     transform: scale(1.1);
+}
+
+#accessibility-toggle[aria-expanded="true"] {
+    background: var(--primary-academic);
+    border-color: var(--primary-academic);
+}
+
+.accessibility-menu {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    background: var(--header-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 25px; /* More rounded for icon list */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensure icons are centered */
+    gap: 8px;
+    width: 48px; /* Exact width: 36px button + 12px horizontal padding */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.accessibility-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.accessibility-menu button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.accessibility-menu button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+/* Icons for Accessibility Menu */
+.accessibility-icon::before { content: '⚙️'; font-size: 1.2em; }
+.scribble-icon::before { content: '✏️'; font-size: 1.1em; }
+
+#laser-toggle[aria-pressed="true"] {
+    background: rgba(255, 0, 0, 0.4);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    border-color: rgba(255, 0, 0, 0.6);
+}
+
+#scribble-toggle[aria-pressed="true"] {
+    background: var(--accent-orange);
+    box-shadow: 0 0 10px var(--accent-orange);
+    border-color: var(--accent-orange);
 }
 
 .theme-icon::before {
@@ -1269,4 +1348,39 @@ html.dark-mode .timer-container button#reset-timer {
 }
 .layout-1-column-stacked .academic-box h4 {
     margin-bottom: 10px !important;
+}
+
+/* Laser Pointer Styles */
+.laser-pointer {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,0,0,0.8);
+    box-shadow: 0 0 8px rgba(255,0,0,0.8);
+    pointer-events: none;
+    transform: translate(-5px, -5px);
+    transition: transform 0.05s linear;
+    z-index: 10000;
+    display: none;
+}
+
+/* Laser toggle button icon */
+.laser-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: red;
+    border-radius: 50%;
+}
+
+/* Staggered fade-up animation */
+@keyframes fadeUpStagger {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.staggered {
+    opacity: 0;
+    animation: fadeUpStagger 0.5s ease forwards;
+    animation-delay: calc(var(--stagger-index) * 0.1s);
 }

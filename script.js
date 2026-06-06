@@ -29,10 +29,58 @@ function initTheme() {
         html.classList.add('dark-mode');
     }
 
-    themeToggle.addEventListener('click', () => {
-        html.classList.toggle('dark-mode');
-        const isDark = html.classList.contains('dark-mode');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark-mode');
+            const isDark = html.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
+}
+
+/**
+ * Accessibility Menu Management
+ * Handles the dropdown menu visibility and interactions
+ */
+function initAccessibilityMenu() {
+    const container = document.querySelector('.accessibility-container');
+    const toggleBtn = document.getElementById('accessibility-toggle');
+    const menu = document.getElementById('accessibility-menu');
+
+    if (!toggleBtn || !menu) return;
+
+    const toggleMenu = (forceState) => {
+        const isExpanded = forceState !== undefined ? forceState : toggleBtn.getAttribute('aria-expanded') !== 'true';
+        toggleBtn.setAttribute('aria-expanded', isExpanded);
+        menu.classList.toggle('active', isExpanded);
+    };
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (menu.classList.contains('active') && !container.contains(e.target)) {
+            toggleMenu(false);
+        }
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('active')) {
+            toggleMenu(false);
+        }
+    });
+
+    // Keyboard shortcut: press 'A' to toggle menu
+    document.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'a' && !e.ctrlKey && !e.altKey && !e.metaKey) {
+            if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+            e.preventDefault();
+            toggleMenu();
+        }
     });
 }
 
@@ -761,7 +809,7 @@ async function initPresentation() {
 
 
 // Event Listeners
-Reveal.on('slidechanged', event => updateUI(event.currentSlide));
+Reveal.on('slidechanged', event => { updateUI(event.currentSlide); applyStaggeredAnimation(event.currentSlide); });
 Reveal.on('ready', () => updateUI(Reveal.getCurrentSlide()));
 
 // Image Preview Functionality
@@ -813,6 +861,93 @@ function initImagePreview() {
     });
 }
 
+function initLaserPointer() {
+    const toggleBtn = document.getElementById('laser-toggle');
+    const cursor = document.getElementById('laser-cursor');
+    let enabled = false;
+
+    const setEnabled = (state) => {
+        enabled = state;
+        if (enabled) {
+            cursor.style.display = 'block';
+            toggleBtn.setAttribute('aria-pressed', 'true');
+            // If laser is enabled, disable scribble
+            if (window.scribbleEnabled) window.setScribbleEnabled(false);
+        } else {
+            cursor.style.display = 'none';
+            toggleBtn.setAttribute('aria-pressed', 'false');
+        }
+    };
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => setEnabled(!enabled));
+    }
+
+    // Keyboard shortcut: press 'L'
+    document.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'l') {
+            // Don't trigger if user is typing
+            if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+            e.preventDefault();
+            setEnabled(!enabled);
+        }
+    });
+
+    // Move cursor when active
+    document.addEventListener('mousemove', (e) => {
+        if (!enabled) return;
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+    });
+
+    // Expose for cross-feature interaction
+    window.setLaserEnabled = setEnabled;
+}
+
+function initScribbleMode() {
+    const toggleBtn = document.getElementById('scribble-toggle');
+    window.scribbleEnabled = false;
+
+    window.setScribbleEnabled = (state) => {
+        window.scribbleEnabled = state;
+        if (window.scribbleEnabled) {
+            toggleBtn.setAttribute('aria-pressed', 'true');
+            // If scribble is enabled, disable laser
+            if (window.setLaserEnabled) window.setLaserEnabled(false);
+            console.log('Scribble mode enabled (Placeholder)');
+        } else {
+            toggleBtn.setAttribute('aria-pressed', 'false');
+            console.log('Scribble mode disabled (Placeholder)');
+        }
+    };
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => window.setScribbleEnabled(!window.scribbleEnabled));
+    }
+
+    // Keyboard shortcut: press 'S'
+    document.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 's') {
+            if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+            e.preventDefault();
+            window.setScribbleEnabled(!window.scribbleEnabled);
+        }
+    });
+}
+
+function applyStaggeredAnimation(slide) {
+    // Clean previous staggered elements
+    document.querySelectorAll('.staggered').forEach(el => {
+        el.classList.remove('staggered');
+        el.style.removeProperty('--stagger-index');
+    });
+    if (!slide) return;
+    const elements = slide.querySelectorAll('.academic-box > *');
+    elements.forEach((el, i) => {
+        el.style.setProperty('--stagger-index', i);
+        el.classList.add('staggered');
+    });
+}
 /**
  * Card Interaction Functionality
  * Adds responsive touch and mouse feedback for academic cards
@@ -851,5 +986,8 @@ window.onload = () => {
     initTheme();
     initPresentation();
     initImagePreview();
+    initAccessibilityMenu();
+    initLaserPointer();
+    initScribbleMode();
     initCardInteractions();
 };

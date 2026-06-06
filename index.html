@@ -25,9 +25,22 @@
                     <button id="reset-timer"></button>
                     <span id="timer-display"></span>
                 </div>
-                <button id="theme-toggle">
-                    <span class="theme-icon"></span>
-                </button>
+                <div class="accessibility-container">
+                    <button id="accessibility-toggle" title="Accessibility Menu (A)" aria-expanded="false">
+                        <span class="accessibility-icon"></span>
+                    </button>
+                    <div id="accessibility-menu" class="accessibility-menu">
+                        <button id="laser-toggle" title="Toggle Laser Pointer (L)" aria-pressed="false">
+                            <span class="laser-icon"></span>
+                        </button>
+                        <button id="scribble-toggle" title="Toggle Scribble Mode (S)" aria-pressed="false">
+                            <span class="scribble-icon"></span>
+                        </button>
+                        <button id="theme-toggle" title="Toggle Dark/Light Mode">
+                            <span class="theme-icon"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer" style="display: none;">
@@ -49,6 +62,7 @@
         <span class="image-preview-close" id="image-preview-close">&times;</span>
         <img src="" alt="Preview" id="image-preview-img">
     </div>
+    <div id="laser-cursor" class="laser-pointer"></div>
 
     <!-- Reveal.js Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
