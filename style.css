@@ -31,6 +31,13 @@
     --header-bg: linear-gradient(135deg, rgba(3, 4, 94, 0.98), rgba(2, 62, 138, 0.95)); /* Navy to Royal Blue Glass */
     --tab-text: rgba(255, 255, 255, 0.65);
     --footer-text: white;
+
+    --presentation-width: 1600px; /* Default for 16:9 */
+}
+
+/* Aspect Ratio Adjustments */
+html.ratio-4-3 {
+    --presentation-width: 1200px;
 }
 
 /* Dark Mode Overrides */
@@ -153,7 +160,7 @@ body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section,
     box-shadow: none;
     border-radius: 12px;
     width: 100%;
-    max-width: 1600px;
+    max-width: var(--presentation-width);
     margin: 0 auto 20px auto;
     text-align: left;
     box-sizing: border-box;
@@ -176,7 +183,7 @@ body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section,
     top: 90px; /* Adjusted from 125px to match slimmer header (15+40=55 + 35 gap) */
     left: 50%;
     transform: translateX(-50%);
-    width: 1600px; /* Fixed width to match academic-box max-width */
+    width: var(--presentation-width); /* Fixed width to match academic-box max-width */
     background: var(--bg-header-card);
     border: 1px solid var(--border-subtle);
     border-left: 4px solid var(--primary-academic); /* Unified 10px left border */
@@ -241,7 +248,7 @@ body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section,
 }
 
 .layout-title-slide {
-    width: 1600px !important;
+    width: var(--presentation-width) !important;
     height: auto !important;
     min-height: 800px; /* Increased from 650px for more presence */
     display: flex;
@@ -317,7 +324,7 @@ body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section,
 
 /* --- LAYOUT CLOSING SLIDE --- */
 .layout-closing-slide {
-    width: 1600px !important;
+    width: var(--presentation-width) !important;
     height: auto !important;
     min-height: 550px;
     display: flex;
@@ -395,7 +402,7 @@ body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section,
     margin-bottom: 20px;
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
     width: 100%;
-    max-width: 1600px;
+    max-width: var(--presentation-width);
     box-sizing: border-box;
     border-radius: 15px;
     text-align: left;
@@ -467,7 +474,7 @@ body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section,
     align-items: stretch;
     gap: 20px;
     width: 100%;
-    max-width: 1600px; /* Same as academic-box for alignment */
+    max-width: var(--presentation-width); /* Same as academic-box for alignment */
     margin: 0 auto;
 }
 
@@ -480,7 +487,7 @@ body, .reveal, .reveal-viewport, .reveal .slides, .reveal .slides section,
 
 /* Ensure 1-content-with-text and default templates match the width */
 .academic-box.full-width {
-    max-width: 1600px;
+    max-width: var(--presentation-width);
     margin: 0 auto;
 }
 
@@ -680,7 +687,7 @@ mjx-container:not([display="true"]) {
 
 .mermaid-container {
     width: 100%;
-    max-width: 1600px;
+    max-width: var(--presentation-width);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -838,7 +845,7 @@ li {
     top: 15px; /* Floating slightly */
     left: 50%;
     transform: translateX(-50%);
-    width: 1600px;
+    width: var(--presentation-width);
     height: 46px; /* Slightly taller for better alignment with footer style */
     background: var(--header-bg); /* Themed header bg */
     border: 1px solid var(--border-subtle);
@@ -1175,7 +1182,7 @@ html.dark-mode .timer-container button#reset-timer {
     bottom: 15px; /* Floating slightly above bottom */
     left: 50%;
     transform: translateX(-50%);
-    width: 1600px;
+    width: var(--presentation-width);
     height: 50px;
     background: var(--header-bg); /* Themed header bg */
     border: 1px solid var(--border-subtle);
@@ -1245,13 +1252,13 @@ html.dark-mode .timer-container button#reset-timer {
 /* Custom Navigation Controls (Aligned with Footer/Card Width) */
 .navigation-controls {
     position: absolute;
-    bottom: 80px; /* Above footer (15+50=65 + 15 gap) */
+    bottom: 110px; /* Elevated further above footer */
     left: 50%;
     transform: translateX(-50%);
-    width: 1600px; /* Matched with footer and academic-box width */
+    width: var(--presentation-width); /* Matched with footer and academic-box width */
     display: flex;
-    justify-content: flex-end; /* Align arrows to the right edge of the 1600px boundary */
-    gap: 30px;
+    justify-content: flex-end; /* Align arrows to the right edge of the var(--presentation-width) boundary */
+    gap: 35px;
     z-index: 1000;
     opacity: 1;
     pointer-events: none; /* Container doesn't block clicks */
@@ -1259,8 +1266,8 @@ html.dark-mode .timer-container button#reset-timer {
 }
 
 .navigation-controls button {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     background: transparent;
     border: none;
     color: var(--primary-academic);
@@ -1271,19 +1278,25 @@ html.dark-mode .timer-container button#reset-timer {
     padding: 0;
     margin: 0;
     pointer-events: auto; /* Buttons are clickable */
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25); /* Pronounced shadow */
+    transition: transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+.navigation-controls button:hover {
+    transform: scale(1.15);
+    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .navigation-controls button#prev-btn::before {
     content: '<';
-    font-size: 3.5em; /* Large floating arrow */
+    font-size: 5em; /* Significantly larger floating arrow */
     font-weight: 800; /* Bold and impactful */
     font-family: serif;
 }
 
 .navigation-controls button#next-btn::before {
     content: '>';
-    font-size: 3.5em; /* Large floating arrow */
+    font-size: 5em; /* Significantly larger floating arrow */
     font-weight: 800; /* Bold and impactful */
     font-family: serif;
 }

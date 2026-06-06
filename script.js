@@ -13,6 +13,7 @@ let REVEAL_THEME = 'black';
 let TIMER_START_TEXT = 'START';
 let TIMER_RESET_TEXT = 'RESET';
 let THEME_TOGGLE_TITLE = 'Toggle Dark/Light Mode';
+let ASPECT_RATIO = '16:9';
 let CONTENT_FILE = LANG === 'en' ? 'content-en.md' : 'content-id.md';
 
 /**
@@ -683,6 +684,7 @@ async function initPresentation() {
                 TIMER_START_TEXT = config.timerStartText || TIMER_START_TEXT;
                 TIMER_RESET_TEXT = config.timerResetText || TIMER_RESET_TEXT;
                 THEME_TOGGLE_TITLE = config.themeToggleTitle || THEME_TOGGLE_TITLE;
+                ASPECT_RATIO = config.aspectRatio || ASPECT_RATIO;
                 CONTENT_FILE = config.contentFile || (LANG === 'en' ? 'content-en.md' : 'content-id.md');
             }
         } catch (configErr) {
@@ -691,6 +693,12 @@ async function initPresentation() {
 
         // Apply dynamically loaded attributes, theme, title, and footer info
         document.documentElement.setAttribute('lang', LANG);
+        
+        // Apply aspect ratio class
+        document.documentElement.classList.remove('ratio-16-9', 'ratio-4-3');
+        const ratioClass = `ratio-${ASPECT_RATIO.replace(':', '-')}`;
+        document.documentElement.classList.add(ratioClass);
+
         const themeLink = document.getElementById('theme');
         if (themeLink) {
             themeLink.href = `https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/${REVEAL_THEME}.min.css`;
@@ -775,8 +783,10 @@ async function initPresentation() {
         }
 
         // Initialize Reveal.js with await for cleaner flow
+        const revealWidth = ASPECT_RATIO === '4:3' ? 1440 : 1920;
+
         await Reveal.initialize({
-            width: 1920,
+            width: revealWidth,
             height: 1080,
             margin: 0,
             minScale: 0.1,

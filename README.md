@@ -132,7 +132,9 @@ Global settings live in [`config.json`](config.json):
   "revealTheme": "black",
   "timerStartText": "START",
   "timerResetText": "RESET",
-  "themeToggleTitle": "Toggle Dark/Light Mode"
+  "themeToggleTitle": "Toggle Dark/Light Mode",
+  "aspectRatio": "16:9",
+  "contentFile": "content-id.md"
 }
 ```
 
@@ -149,6 +151,8 @@ Global settings live in [`config.json`](config.json):
 | `timerStartText` | String | Start button label |
 | `timerResetText` | String | Reset button label |
 | `themeToggleTitle` | String | Theme toggle tooltip |
+| `aspectRatio` | String | Presentation ratio (`"16:9"` or `"4:3"`) |
+| `contentFile` | String | Path to markdown content file |
 
 ---
 
@@ -478,6 +482,7 @@ The parser collects all footnotes per slide into a dedicated bottom container.
 | **🖼️ Image Lightbox** | Click any image → full-screen overlay. Close via ✕, click outside, or `Escape` key. |
 | **🃏 Card Interaction** | `academic-box` cards respond with subtle shadow + scale on hover. Clicked card retains `is-interacting` highlight. |
 | **🌓 Theme Toggle** | Dark/Light mode switch. Preference saved in `localStorage` — persists on reload. |
+| **🚀 Enhanced Navigation** | High-visibility floating arrows (80px) with 5em icons, interactive 1.15x hover scaling, and elevated positioning (110px) for maximum accessibility. |
 | **🛡️ Navigation Protection** | Blocks accidental close/reload (`beforeunload`). Disables swipe-back gestures and pull-to-refresh to protect Reveal.js navigation. |
 
 ---
