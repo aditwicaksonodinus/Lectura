@@ -1,4 +1,30 @@
-assets/
+# Ignore all assets by default
+assets/*
+
+# Allow specific essential UI assets
+!assets/University-logo.png
+!assets/udinus-logo.png
+!assets/placeholder.png
+!assets/background.png
+!assets/dark-mode.png
+!assets/light-mode.png
+!assets/Maestro-log.png
+!assets/Maestro-visual-phone.png
+!assets/qr-code.jpg
+
+# Still ignore research data/graphs if they are too heavy or sensitive
+# (Uncomment the ones you want to keep if needed)
+# !assets/Metode-eksperiment.png
+# !assets/Kontruk-SEM.png
+# !assets/SEM-GRAPH.png
+# !assets/Result-SEM.png
+
+# Specifically ignore the RL experiment results directory
+assets/adversarial_inactive_reward/
+
+# Ignore content-id as requested
 content-id.md
+
+# Agent internal folders
 .agents/
 .antigravitycli/
