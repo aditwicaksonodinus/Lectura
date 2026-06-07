@@ -9,7 +9,7 @@
 
 <div class="title-details">
 <strong>A Practical Guide &amp; Reference</strong><br>
-<strong>Department of {{studyProgram}} - {{institutionInfo}}</strong><br><br>
+<strong>{{institutionInfo}}</strong><br><br>
 <strong>Supervisors:</strong><br>
 Prof. First Supervisor Name<br>
 Prof. Second Supervisor Name<br>

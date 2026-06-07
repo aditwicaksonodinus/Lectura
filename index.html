@@ -58,6 +58,20 @@
             }
         })();
     </script>
+    <!-- Register Service Worker for offline support -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js')
+                    .then(function(reg) {
+                        console.log('[Service Worker] Registered successfully with scope:', reg.scope);
+                    })
+                    .catch(function(err) {
+                        console.error('[Service Worker] Registration failed:', err);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <!-- Premium Loading Overlay -->

@@ -7,21 +7,23 @@
 */
 
 /* ── Main Slide Section ── */
+/* IMPORTANT: Do NOT use display: none / display: flex toggling here.
+   Reveal.js manages slide visibility natively via opacity, visibility, and
+   transform on absolutely-positioned sections. Forcing display toggling causes
+   a layout reflow snap (the "jump to left" glitch) because the incoming slide
+   gets its flex layout calculated instantly before opacity can fade in.
+   Instead, all sections stay display: flex (they're hidden by opacity: 0 +
+   visibility: hidden from reveal.min.css). */
 .reveal .slides section {
-    display: none;
+    display: flex !important;
     flex-direction: column;
     justify-content: flex-start; /* Align content to top */
     align-items: center;
     height: 100%;
-    padding: 140px 60px 80px 60px; /* Reduced top padding now that header flows naturally */
+    padding: 110px 60px 75px 60px; /* Reduced top/bottom padding to give more breathing room to content */
     box-sizing: border-box;
     text-align: left;
     overflow: visible !important; /* Allow card zoom/shadow to spill out */
-}
-
-.reveal .slides section.present,
-.reveal .slides section.visible {
-    display: flex !important;
 }
 
 /* Floating Slide Title (H2) — Now follows academic-box style rules */
@@ -50,35 +52,42 @@
 }
 
 
-/* ── Scrollable Content Wrapper ── */
+/* ── Content Wrapper ── */
+/* Scrollable container for slide content. Uses flex: 1 + min-height: 0
+   to fill remaining vertical space after the H2 title, and overflow-y: auto
+   to enable a scrollbar when content (tables, images, stacked boxes) 
+   exceeds the available slide height. */
 .content-wrapper {
     width: 100%;
     max-width: 1700px; /* Slightly wider than cards to prevent clipping on zoom */
-    height: auto;
-    max-height: 790px; /* Prevents container from overflowing into the footer */
-    overflow-y: auto;
-    overflow-x: visible; /* Allow zoom and shadows to exceed boundaries */
-    padding: 20px 50px; /* Room for card expansion and red line indicator */
+    flex: 1 1 auto;    /* Fill remaining slide height after H2 title */
+    min-height: 0;     /* Required for flex children to respect overflow */
+    overflow-x: visible; /* Allow zoom and shadows to exceed horizontal boundaries */
+    overflow-y: auto;    /* Enable Y-axis scrollbar for long content */
+    padding: 10px 50px 15px 50px; /* Reduced vertical padding to prevent overflow */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* Firefox scrollbar styling */
     scrollbar-width: thin;
     scrollbar-color: var(--color-academic-primary) transparent;
-    -webkit-overflow-scrolling: touch; 
-    overscroll-behavior-y: contain; 
 }
 
-/* Custom Scrollbar for Webkit */
+/* WebKit scrollbar styling (Chrome, Edge, Safari) */
 .content-wrapper::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 .content-wrapper::-webkit-scrollbar-track {
     background: transparent;
+    border-radius: 3px;
 }
 .content-wrapper::-webkit-scrollbar-thumb {
-    background-color: var(--color-academic-primary);
-    border-radius: 20px;
+    background: var(--color-academic-primary);
+    border-radius: 3px;
+}
+.content-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
 }
 
 /* Ensure containers inside wrapper flow naturally */
@@ -148,7 +157,7 @@ html.style-formal .plain-ui {
     padding: 40px 60px !important; /* Slightly more vertical breathing room */
     box-sizing: border-box;
     text-align: center !important;
-    background: var(--bg-card) !important; /* Themed background */
+    background: transparent !important; /* Background moved to ::before */
     border: var(--border-card);
     border-left: var(--border-accent-secondary); 
     box-shadow: var(--shadow-card-active);
@@ -156,8 +165,24 @@ html.style-formal .plain-ui {
     position: relative;
     z-index: 10;
     border-radius: var(--radius-card);
-    backdrop-filter: var(--blur-backdrop);
-    -webkit-backdrop-filter: var(--blur-backdrop);
+    /* backdrop-filter removed to avoid text blur */
+}
+
+.layout-title-slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    z-index: -1;
+}
+
+.layout-title-slide,
+.layout-title-slide * {
+    transform: none !important;
+    backface-visibility: visible !important;
+    will-change: auto !important;
+    text-rendering: optimizeLegibility;
 }
 
 .layout-title-slide > * {
@@ -234,8 +259,24 @@ html.style-formal .plain-ui {
     position: relative;
     z-index: 10;
     border-radius: var(--radius-card);
-    backdrop-filter: var(--blur-backdrop);
-    -webkit-backdrop-filter: var(--blur-backdrop);
+    /* backdrop-filter removed to avoid text blur */
+}
+
+.layout-closing-slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    z-index: -1;
+}
+
+.layout-closing-slide,
+.layout-closing-slide * {
+    transform: none !important;
+    backface-visibility: visible !important;
+    will-change: auto !important;
+    text-rendering: optimizeLegibility;
 }
 
 .layout-closing-slide h1 {

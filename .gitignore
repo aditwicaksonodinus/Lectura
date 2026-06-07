@@ -36,3 +36,8 @@ content-id.md
 # Local development overrides
 *.local
 local/
+
+# Local configuration files - do not push
+GEMINI.md
+.agents/*
+!.agents/web-developer-lectura/

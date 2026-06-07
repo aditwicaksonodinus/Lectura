@@ -6,8 +6,8 @@
 */
 
 @font-face {
-    font-family: 'Noto Serif';
-    src: url('../Noto_Serif/NotoSerif-VariableFont_wdth,wght.ttf') format('truetype');
+    font-family: 'Noto Serif Fallback';
+    src: url('../fonts/NotoSerif-Variable.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;

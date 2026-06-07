@@ -24,21 +24,21 @@ You need a local HTTP server. Pick your weapon:
 
 ```bash
 # Python 3.x
-python3 -m http.server 8000
+python3 -m http.server 3000
 
 # Python 2.x
-python -m SimpleHTTPServer 8000
+python -m SimpleHTTPServer 3000
 ```
-Open `http://localhost:8000/`
+Open `http://localhost:3000/`
 </details>
 
 <details>
 <summary><b>⬡ Node.js http-server</b></summary>
 
 ```bash
-npx http-server -p 8080
+npx http-server -p 3000 -c-1
 ```
-Open `http://localhost:8080/`
+Open `http://localhost:3000/`
 </details>
 
 ---
@@ -54,7 +54,6 @@ Global settings live in [`config.json`](config.json):
   "presentationTitle": "Sidang Tesis: Arsitektur Hibrida Lectura",
   "authorName": "Telo Godhok",
   "institutionInfo": "Institute Tambal Ban (ITB)",
-  "studyProgram": "Teknik Tambal Ban",
   "lang": "id",
   "revealTheme": "black",
   "timerStartText": "START",
@@ -72,7 +71,6 @@ Global settings live in [`config.json`](config.json):
 | `presentationTitle` | String | `<title>` tag content |
 | `authorName` | String | Left footer + `{{authorName}}` placeholder |
 | `institutionInfo` | String | Center footer + `{{institutionInfo}}` placeholder |
-| `studyProgram` | String | `{{studyProgram}}` placeholder |
 | `lang` | String | HTML `lang` attribute (`"id"` / `"en"`) |
 | `revealTheme` | String | Reveal.js theme (`"black"`, `"white"`, `"league"`, etc.) |
 | `timerStartText` | String | Start button label |

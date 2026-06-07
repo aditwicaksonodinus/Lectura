@@ -5,15 +5,54 @@
   ========================================================================
 */
 
+/* ═══════════════════════════════════════════════════════════════
+   REVEAL.JS TRANSITION COORDINATION
+   
+   Reveal.js manages slide transitions through:
+   - opacity/visibility for fading
+   - transform for slide positioning (centering, scaling)
+   - transform-origin for animation pivot points
+   
+   The fade mode in reveal.min.css sets:
+     .reveal.fade .slides section { transform: none; transition: opacity .5s; }
+   
+   This ONLY transitions opacity, meaning any transform repositioning
+   Reveal.js applies via JavaScript (for centering/scaling) will snap
+   instantly — causing the "jump to left" visual glitch.
+   
+   Fix: Override the fade transition to include transform properties,
+   ensuring repositioning animates smoothly alongside the opacity fade.
+   Uses the same cubic-bezier as Reveal.js's native transitions.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Fade transition fix: include transform in the transition shorthand
+   so Reveal.js's position recalculations animate instead of snapping. */
+.reveal.fade .slides > section:not([data-transition]) {
+    transition:
+        transform-origin 0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985),
+        transform        0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985),
+        visibility       0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985),
+        opacity          0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985) !important;
+}
+
+/* Respect Reveal.js transition speed overrides */
+.reveal.fade[data-transition-speed="slow"] .slides > section:not([data-transition]) {
+    transition-duration: 1.2s !important;
+}
+.reveal.fade[data-transition-speed="fast"] .slides > section:not([data-transition]) {
+    transition-duration: 0.4s !important;
+}
+
 /* Staggered Fade-Up Animation */
 @keyframes fadeUpStagger {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 /* Preparatory state for staggered elements to avoid premature fade-in */
 .staggered-prepare {
     opacity: 0;
+    transform: translateY(10px);
 }
 
 .staggered {

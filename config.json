@@ -1,17 +1,17 @@
 {
   "presentationMinutes": 15,
   "baseFontSize": "18pt",
-  "presentationTitle": "Sidang Tesis: Arsitektur Hibrida Lectura",
-  "authorName": "Telo Godok",
-  "studentId": "xxxxxxxxxx",
-  "institutionInfo": "Universitas Gajah Duduk © 2026",
-  "studyProgram": "Sastra Mesin",
+  "presentationTitle": "",
+  "authorName": "Praditya Wicaksono",
+  "studentId": "",
+  "institutionInfo": "",
+  "studyProgram": "",
   "lang": "id",
   "revealTheme": "black",
   "timerStartText": "START",
   "timerResetText": "RESET",
   "themeToggleTitle": "Toggle Dark/Light Mode",
   "aspectRatio": "16:9",
-  "stylePreset": "glass",
-  "contentFile": "content-en.md"
+  "stylePreset": "ieee",
+  "contentFile": "content-id.md"
 }

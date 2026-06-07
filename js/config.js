@@ -14,7 +14,6 @@ export let PRESENTATION_TITLE   = 'Sidang Tesis: Arsitektur Hibrida Lectura';
 export let AUTHOR_NAME          = 'Praditya Wicaksono';
 export let STUDENT_ID           = 'P31.2024.02610';
 export let INSTITUTION_INFO     = 'Universitas Dian Nuswantoro © 2026';
-export let STUDY_PROGRAM        = 'Teknik Informatika';
 export let LANG                 = 'id';
 export let REVEAL_THEME         = 'black';
 export let TIMER_START_TEXT     = 'START';
@@ -42,7 +41,6 @@ export async function loadConfig() {
         AUTHOR_NAME          = config.authorName          || AUTHOR_NAME;
         STUDENT_ID           = config.studentId           || STUDENT_ID;
         INSTITUTION_INFO     = config.institutionInfo     || INSTITUTION_INFO;
-        STUDY_PROGRAM        = config.studyProgram        || STUDY_PROGRAM;
         LANG                 = config.lang                || LANG;
         REVEAL_THEME         = config.revealTheme         || REVEAL_THEME;
         TIMER_START_TEXT     = config.timerStartText      || TIMER_START_TEXT;

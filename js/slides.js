@@ -14,7 +14,6 @@ import {
     AUTHOR_NAME,
     STUDENT_ID,
     INSTITUTION_INFO,
-    STUDY_PROGRAM,
     LANG,
     REVEAL_THEME,
     TIMER_START_TEXT,
@@ -126,7 +125,7 @@ export async function initPresentation() {
         document.documentElement.classList.add(ratioClass);
 
         // Apply Style Preset class
-        document.documentElement.classList.remove('style-glass', 'style-formal', 'style-retro', 'style-cyber', 'style-minimal');
+        document.documentElement.classList.remove('style-glass', 'style-formal', 'style-retro', 'style-cyber', 'style-minimal', 'style-ieee');
         const stylePresetClass = `style-${STYLE_PRESET}`;
         document.documentElement.classList.add(stylePresetClass);
 
@@ -161,7 +160,6 @@ export async function initPresentation() {
         let text = await response.text();
 
         // Replace dynamic placeholders
-        text = text.replace(/\{\{studyProgram\}\}/g,   STUDY_PROGRAM);
         text = text.replace(/\{\{authorName\}\}/g,     AUTHOR_NAME);
         text = text.replace(/\{\{studentId\}\}/g,      STUDENT_ID);
         text = text.replace(/\{\{institutionInfo\}\}/g, INSTITUTION_INFO);
@@ -277,14 +275,16 @@ export async function initPresentation() {
             updateUI(event.currentSlide);
             prepareStaggeredAnimation(event.currentSlide);
 
-            // Safety fallback: play animation after 400ms in case slidetransitionend doesn't fire
+            // Safety fallback: play animation after 900ms in case slidetransitionend doesn't fire
+            // Must exceed the CSS transition duration (0.8s default, 1.2s slow) to avoid
+            // triggering stagger mid-transition.
             if (event.currentSlide) {
                 if (event.currentSlide._staggerTimeout) {
                     clearTimeout(event.currentSlide._staggerTimeout);
                 }
                 event.currentSlide._staggerTimeout = setTimeout(() => {
                     playStaggeredAnimation(event.currentSlide);
-                }, 400);
+                }, 900);
             }
         });
 

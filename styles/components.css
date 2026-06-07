@@ -22,8 +22,9 @@
     border-radius: var(--radius-card);
     text-align: left;
     position: relative;
-    backdrop-filter: var(--blur-backdrop);
-    -webkit-backdrop-filter: var(--blur-backdrop);
+    overflow: hidden; /* Prevent child blur */
+    isolation: isolate; /* Stop blur bleed between stacking contexts */
+    /* backdrop-filter removed to avoid text blur */
     /* Separate cubic-bezier transitions specifically for interactive scale feedback and shadow scaling.
        These are distinct from the general theme color transitions defined in the global transit rules. */
     transition: 
@@ -31,6 +32,16 @@
         box-shadow 0.25s ease,
         border-left-width 0.2s ease;
     will-change: transform;
+}
+.academic-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    backdrop-filter: var(--blur-backdrop);
+    -webkit-backdrop-filter: var(--blur-backdrop);
+    border-radius: var(--radius-card);
+    z-index: -1;
 }
 
 /* Academic boxes are unified via CSS variables and follow the same layout */
@@ -67,7 +78,6 @@
 .academic-box:hover,
 .academic-box:active,
 .academic-box.is-interacting {
-    transform: scale(1.02) !important;
     z-index: 100 !important;
 }
 
@@ -84,7 +94,7 @@
     font-size: 1.2em;
     margin-bottom: 15px;
     text-transform: none;
-    font-family: "Noto Serif", serif;
+    font-family: "Noto Serif", "Noto Serif Fallback", serif;
     font-weight: 700;
     letter-spacing: 0.01em;
     padding-bottom: 8px;
@@ -157,7 +167,7 @@ table {
 thead th {
     background-color: transparent;
     color: var(--text-primary);
-    font-family: "Noto Serif", serif;
+    font-family: "Noto Serif", "Noto Serif Fallback", serif;
     font-weight: 700;
     text-align: left;
     padding: 12px 15px;
@@ -199,7 +209,7 @@ tbody tr:last-child td {
     border-collapse: collapse;
     width: auto;
     min-width: 85%;
-    font-family: "Noto Serif", serif;
+    font-family: "Noto Serif", "Noto Serif Fallback", serif;
     box-shadow: none;
     border-top: 3px solid var(--color-academic-primary);
     border-bottom: 3px solid var(--color-academic-primary);
@@ -218,7 +228,7 @@ html.dark-mode .academic-table-wrapper table {
 .academic-table-wrapper thead th {
     background-color: transparent;
     color: var(--text-primary);
-    font-family: "Noto Serif", serif;
+    font-family: "Noto Serif", "Noto Serif Fallback", serif;
     padding: 10px 25px;
     font-weight: 700;
     text-align: center;
@@ -272,7 +282,7 @@ mjx-container:not([display="true"]) {
     font-weight: bold;
     position: absolute;
     right: 20px;
-    font-family: "Noto Serif", serif;
+    font-family: "Noto Serif", "Noto Serif Fallback", serif;
     font-size: 0.85em;
     color: var(--text-secondary);
 }
@@ -359,7 +369,7 @@ mjx-container:not([display="true"]) {
     display: inline-flex;
     align-items: baseline;
     gap: 6px;
-    font-family: "Noto Serif", serif;
+    font-family: "Noto Serif", "Noto Serif Fallback", serif;
 }
 
 .academic-footnote * {
@@ -384,7 +394,27 @@ mjx-container:not([display="true"]) {
     padding-top: 5px;
 }
 
-/* Formal preset style override for equations */
-html.style-formal .ieee-equation-container {
-    border: 1px dashed var(--color-academic-primary);
+/* ════════════════════════════════════════════════════
+   IEEE STYLE OVERRIDES
+   ════════════════════════════════════════════════════ */
+html.style-ieee table {
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
 }
+
+html.style-ieee thead th {
+    border-bottom: 1px solid #000000;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+html.style-ieee blockquote {
+    border-left: 0 !important;
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 15px 0 !important;
+    margin: 20px 0 !important;
+}
+
