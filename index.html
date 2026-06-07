@@ -31,6 +31,32 @@
     <link rel="modulepreload" href="js/tabs.js">
     <!-- Marked.js for dynamic markdown parsing -->
     <script src="js/vendor/marked.min.js" defer></script>
+    <!-- Synchronously load theme and stylePreset from localStorage / config.json 
+         to prevent style flashing and overlay stacking during page load -->
+    <script>
+        (function() {
+            var html = document.documentElement;
+            // 1. Synchronously apply dark-mode theme
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                html.classList.add('dark-mode');
+            }
+            // 2. Synchronously apply style preset class
+            try {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'config.json', false); // Synchronous
+                xhr.send(null);
+                if (xhr.status === 200) {
+                    var config = JSON.parse(xhr.responseText);
+                    var preset = config.stylePreset || 'glassmorph';
+                    html.classList.add('style-' + preset);
+                }
+            } catch (e) {
+                console.warn('Failed to load config synchronously:', e);
+                html.classList.add('style-glassmorph');
+            }
+        })();
+    </script>
 </head>
 <body>
     <!-- Premium Loading Overlay -->

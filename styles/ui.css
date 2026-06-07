@@ -706,6 +706,28 @@ html.dark-mode.style-retro-academic .loading-progress {
     background-color: #fafafa;
 }
 
+/* Cyber-Terminal Specific Console Loader */
+html.style-cyber-terminal .loading-spinner-bar {
+    border: 1px solid #586e75;
+    background-color: #eee8d5;
+    border-radius: 0px;
+    height: 12px;
+}
+
+html.style-cyber-terminal .loading-progress {
+    background-color: #cb4b16; /* Solarized Orange progress */
+    border-radius: 0px;
+}
+
+html.dark-mode.style-cyber-terminal .loading-spinner-bar {
+    border: 1px solid #2aa198; /* Solarized Cyan border */
+    background-color: #073642; /* Solarized Base02 */
+}
+
+html.dark-mode.style-cyber-terminal .loading-progress {
+    background-color: #2aa198; /* Solarized Cyan progress */
+}
+
 @keyframes loadingProgress {
     0% {
         left: -50%;
