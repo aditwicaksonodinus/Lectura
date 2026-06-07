@@ -217,6 +217,55 @@ html.style-cyber {
     --secondary-academic: #d33682; /* Solarized Magenta */
 }
 
+/* ════════════════════════════════════════════════════
+   STYLE PRESET 5 — MINIMAL (Ultra-clean Modern)
+   ════════════════════════════════════════════════════ */
+html.style-minimal {
+    --bg-gray: #ffffff; /* Pure white backdrop */
+    --bg-card: #fafafa; /* Off-white card background */
+    --bg-header-card: #fafafa;
+    --bg-dot: transparent;
+    --border-card: 1px solid #e5e5e5; /* Subtle border line */
+    --accent-left: 1px solid #111111; /* Clean thin black accent */
+    --accent-left-navy: 1px solid #e5e5e5;
+    --shadow-card: none;
+    --shadow-active: none;
+    --card-radius: 4px; /* Crisp modern corners */
+    --backdrop-blur: none;
+    --math-bg: #fafafa;
+    --header-bg: #ffffff;
+    --tab-text: rgba(17, 17, 17, 0.4);
+    --tab-color-hover: #111111;
+    --tab-bg-hover: rgba(0, 0, 0, 0.04);
+    --tab-color-active: #111111;
+    --tab-bg-active: #ffffff;
+    --tab-border-active: 1px solid #e5e5e5;
+    --tab-line-active: #111111;
+    --tab-color-completed: #111111;
+    --tab-bg-completed: rgba(0, 0, 0, 0.02);
+    --tab-line-completed: #e5e5e5;
+    --footer-text: #888888;
+    --grid-opacity: 0.0;
+    --table-bg: #fafafa;
+    --equation-border: 1px solid #e5e5e5;
+
+    /* UI Specific Flat Styles */
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+    --bg-timer: #ffffff;
+    --border-timer: 1px solid #e5e5e5;
+    --color-timer: #111111;
+    --bg-timer-btn: #111111;
+    --border-timer-btn: 1px solid #111111;
+    --color-timer-btn: #ffffff;
+
+    /* Typography / Colors Overrides */
+    --text-primary: #111111; /* Monochromatic rich black */
+    --text-secondary: #444444; /* Clean slate-charcoal secondary */
+    --primary-academic: #111111;
+    --secondary-academic: #666666;
+}
+
 /* Aspect Ratio Adjustments */
 html.ratio-4-3 {
     --presentation-width: 1200px;

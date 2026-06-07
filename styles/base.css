@@ -190,6 +190,53 @@ html.dark-mode.style-cyber {
     --secondary-academic: #b58900; /* Solarized Yellow */
 }
 
+/* Preset 5: Dark Mode Minimal Overrides */
+html.dark-mode.style-minimal {
+    --bg-gray: #0a0a0a; /* Pure black */
+    --bg-card: #121212; /* Subtle dark gray card */
+    --bg-header-card: #121212;
+    --bg-dot: transparent;
+    --border-card: 1px solid #262626; /* Dark slate line */
+    --accent-left: 1px solid #e5e5e5; /* Thin off-white accent */
+    --accent-left-navy: 1px solid #262626;
+    --shadow-card: none;
+    --shadow-active: none;
+    --card-radius: 4px;
+    --backdrop-blur: none;
+    --math-bg: #121212;
+    --header-bg: #0a0a0a;
+    --tab-text: rgba(229, 229, 229, 0.4);
+    --tab-color-hover: #e5e5e5;
+    --tab-bg-hover: rgba(255, 255, 255, 0.04);
+    --tab-color-active: #e5e5e5;
+    --tab-bg-active: #121212;
+    --tab-border-active: 1px solid #262626;
+    --tab-line-active: #e5e5e5;
+    --tab-color-completed: #e5e5e5;
+    --tab-bg-completed: rgba(255, 255, 255, 0.02);
+    --tab-line-completed: #262626;
+    --footer-text: #777777;
+    --grid-opacity: 0.0;
+    --table-bg: #121212;
+    --equation-border: 1px solid #262626;
+
+    /* UI Dark Flat Styles */
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+    --bg-timer: #121212;
+    --border-timer: 1px solid #262626;
+    --color-timer: #e5e5e5;
+    --bg-timer-btn: #e5e5e5;
+    --border-timer-btn: 1px solid #e5e5e5;
+    --color-timer-btn: #0a0a0a;
+
+    /* Typography / Colors Overrides */
+    --text-primary: #e5e5e5; /* Off-white for readability */
+    --text-secondary: #a3a3a3; /* Charcoal slate secondary */
+    --primary-academic: #e5e5e5;
+    --secondary-academic: #737373;
+}
+
 /* Global Stacking Context */
 html {
     transition: background-color 0.4s ease;

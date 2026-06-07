@@ -8,7 +8,7 @@
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)]()
 
-**Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with 4 distinct aesthetic presets (*Glass*, *Formal*, *Retro*, or *Cyber*) and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
+**Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with 5 distinct aesthetic presets (*Glass*, *Formal*, *Retro*, *Cyber*, or *Minimal*) and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
 
 <p align="center">
   <img src="assets/dark-mode.png" alt="High-Contrast Dark Mode" width="49%">
@@ -39,7 +39,7 @@
 | Area | Highlights |
 |------|------------|
 | **Content** | Markdown-based ✅ LaTeX Math (MathJax 3) ✅ Mermaid Diagrams ✅ |
-| **UI/UX** | Glass / Formal / Retro / Cyber preset 🌓 Dark/Light Mode 🚀 Loading Overlay 🔖 Chapter Tabs ⏱️ Timer 📐 16:9 & 4:3 Ratios |
+| **UI/UX** | Glass / Formal / Retro / Cyber / Minimal preset 🌓 Dark/Light Mode 🚀 Loading Overlay 🔖 Chapter Tabs ⏱️ Timer 📐 16:9 & 4:3 Ratios |
 | **Layouts** | 9 slide layouts 🖼️ Image Lightbox 🎴 Booktabs Tables |
 | **Control** | Server-side parsed 🛡️ Navigation Protection 🚀 Enhanced Navigation |
 
@@ -47,11 +47,12 @@
 
 ## 🎨 Style Presets
 
-Lectura provides 4 custom styling presets selectable via [config.json](config.json):
+Lectura provides 5 custom styling presets selectable via [config.json](config.json):
 *   **Glass (`glass`)**: Modern, fluid design with semi-transparent elements, backdrop blurs, and soft shadows.
 *   **Formal (`formal`)**: Traditional academic style (IEEE paper-like) with solid backgrounds, sharp edges, high contrast, and clean layout structures.
 *   **Retro (`retro`)**: Bold neobrutalist style with thick dark borders, flat solid offset shadows, and warm paper backdrops (cream in light mode, warm stone-slate in dark mode).
 *   **Cyber (`cyber`)**: Retro-futuristic hacker console styled with Ethan Schoonover's **Solarized** color scheme. Sharp corners (radius 0px), monospace typography, base teal backgrounds, cyan/orange accents, and low-contrast high-readability text.
+*   **Minimal (`minimal`)**: Monochromatic flat design using pure black/white backgrounds, system sans-serif typography, sharp corners (radius 4px or less), flat layout structures with no shadows, and a simplified thin loading progress indicator.
 
 ---
 

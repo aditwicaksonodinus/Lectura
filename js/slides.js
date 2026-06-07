@@ -126,7 +126,7 @@ export async function initPresentation() {
         document.documentElement.classList.add(ratioClass);
 
         // Apply Style Preset class
-        document.documentElement.classList.remove('style-glass', 'style-formal', 'style-retro', 'style-cyber');
+        document.documentElement.classList.remove('style-glass', 'style-formal', 'style-retro', 'style-cyber', 'style-minimal');
         const stylePresetClass = `style-${STYLE_PRESET}`;
         document.documentElement.classList.add(stylePresetClass);
 

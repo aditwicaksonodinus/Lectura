@@ -149,3 +149,28 @@ html.style-cyber .loading-logo-sub,
 html.style-cyber .loading-status {
     font-family: "Courier New", Courier, monospace !important;
 }
+
+/* ════════════════════════════════════════════════════
+   MINIMAL SANS-SERIF OVERRIDES
+   ════════════════════════════════════════════════════ */
+html.style-minimal .reveal,
+html.style-minimal .reveal p,
+html.style-minimal .reveal span,
+html.style-minimal .reveal li,
+html.style-minimal .reveal td,
+html.style-minimal .reveal th,
+html.style-minimal .reveal h1,
+html.style-minimal .reveal h2,
+html.style-minimal .reveal h3,
+html.style-minimal .reveal h4,
+html.style-minimal .reveal h5,
+html.style-minimal .reveal h6,
+html.style-minimal .reveal blockquote,
+html.style-minimal .reveal .slide-number,
+html.style-minimal .reveal .footer,
+html.style-minimal .reveal .header,
+html.style-minimal .loading-logo-text,
+html.style-minimal .loading-logo-sub,
+html.style-minimal .loading-status {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}

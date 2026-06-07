@@ -728,6 +728,28 @@ html.dark-mode.style-cyber .loading-progress {
     background-color: #2aa198; /* Solarized Cyan progress */
 }
 
+/* Minimal Specific Loader */
+html.style-minimal .loading-spinner-bar {
+    border: 1px solid #e5e5e5;
+    background-color: #fafafa;
+    border-radius: 2px;
+    height: 6px;
+}
+
+html.style-minimal .loading-progress {
+    background-color: #111111;
+    border-radius: 2px;
+}
+
+html.dark-mode.style-minimal .loading-spinner-bar {
+    border: 1px solid #262626;
+    background-color: #121212;
+}
+
+html.dark-mode.style-minimal .loading-progress {
+    background-color: #e5e5e5;
+}
+
 @keyframes loadingProgress {
     0% {
         left: -50%;
