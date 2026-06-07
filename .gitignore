@@ -28,7 +28,7 @@ assets/*
 assets/adversarial_inactive_reward/
 
 # Ignore content-id as requested
-content-id.md
+#content-id.md
 
 # Agent internal folders
 .antigravitycli/

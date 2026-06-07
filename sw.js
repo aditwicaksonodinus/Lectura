@@ -53,7 +53,9 @@ const PRECACHE_ASSETS = [
     './fonts/Inter-Regular.ttf',
     './fonts/Inter-Bold.ttf',
     './fonts/JetBrainsMono-Regular.ttf',
-    './fonts/JetBrainsMono-Bold.ttf'
+    './fonts/JetBrainsMono-Bold.ttf',
+    './fonts/LibreBaskerville-Regular.ttf',
+    './fonts/Lato-Regular.ttf'
 ];
 
 // ── Service Worker Install Event ─────────────────────────────────────────────
