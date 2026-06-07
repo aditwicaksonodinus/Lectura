@@ -8,7 +8,7 @@
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)]()
 
-**Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with a modern *Glassmorphism* dashboard and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
+**Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with 2 distinct aesthetic presets (modern *Glassmorphism* or traditional *Formal*) and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
 
 <p align="center">
   <img src="assets/dark-mode.png" alt="High-Contrast Dark Mode" width="49%">
@@ -39,7 +39,7 @@
 | Area | Highlights |
 |------|------------|
 | **Content** | Markdown-based ✅ LaTeX Math (MathJax 3) ✅ Mermaid Diagrams ✅ |
-| **UI/UX** | Glassmorphism 🌓 Dark/Light Mode 🔖 Chapter Tabs ⏱️ Timer 📐 16:9 & 4:3 Ratios |
+| **UI/UX** | Glassmorphism / Formal preset 🌓 Dark/Light Mode 🔖 Chapter Tabs ⏱️ Timer 📐 16:9 & 4:3 Ratios |
 | **Layouts** | 9 slide layouts 🖼️ Image Lightbox 🎴 Booktabs Tables |
 | **Control** | Server-side parsed 🛡️ Navigation Protection 🚀 Enhanced Navigation |
 
@@ -47,17 +47,21 @@
 
 ## 📁 Architecture & File Structure
 
-The system is **server-side parsed**: slide content is dynamically read from external markdown files when the page loads.
+The system is **server-side parsed**: slide content is dynamically read from external markdown files when the page loads, managed by modular ES modules.
 
 ```
 📦 Lectura
 ├── 📄 index.html          # HTML scaffold + CDN deps
-├── 📄 script.js           # Core engine: config, markdown parsing, UI
 ├── 📄 style.css           # CSS entrypoint — imports all 7 style layers
-├── 📄 config.json         # Global presentation settings
+├── 📄 config.json         # Global settings (timer, theme, stylePreset, etc.)
 ├── 📄 GUIDE.md            # Detailed user guide & documentation 👈
 ├── 📄 content-id.md       # Slide content (Bahasa Indonesia)
 ├── 📄 content-en.md       # Slide content (English)
+├── 📁 js/                 # ES Module codebase (19 modules orchestrated from main.js)
+│   ├── 📄 main.js         # Entry point and initializations
+│   ├── 📄 slides.js       # Core slide engine & Reveal.js setup
+│   ├── 📄 config.js       # Configuration loader
+│   └── ...
 ├── 📁 styles/             # CSS modules (7-layer clean architecture)
 │   ├── 🎨 tokens.css      # Layer 1 — Design tokens & CSS variables
 │   ├── 🎨 base.css        # Layer 2 — Reset, html/body, dark mode vars
@@ -74,12 +78,12 @@ The system is **server-side parsed**: slide content is dynamically read from ext
 
 ### 🔧 Core Files
 
-| File | Role |
-|------|------|
+| File/Folder | Role |
+|-------------|------|
 | **[index.html](index.html)** | Loads Reveal.js, Marked.js, MathJax 3, Mermaid via CDN. |
-| **[script.js](script.js)** | Reads `config.json` → Fetches & parses Markdown → Renders layouts & UI. |
+| **[js/](js/)** | ES Module codebase that loads configuration, parses Markdown, and renders layouts. |
 | **[style.css](style.css)** | CSS entrypoint — imports all 7 modular style layers from `styles/`. |
-| **[config.json](config.json)** | Single source of truth for presentation metadata and settings. |
+| **[config.json](config.json)** | Single source of truth for presentation metadata, theme toggles, and style presets. |
 | **[GUIDE.md](GUIDE.md)** | **Complete documentation for setup and usage.** |
 
 ---

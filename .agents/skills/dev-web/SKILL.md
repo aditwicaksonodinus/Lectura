@@ -16,7 +16,7 @@ description: Skill for Lectura academic presentation website development. Stack 
 📦 Lectura
 ├── 📄 index.html           # Entry point — CDN deps (Reveal.js, Marked, Mermaid)
 ├── 📄 style.css            # CSS entrypoint — only contains @import
-├── 📄 config.json          # Presentation configuration (duration, theme, etc.)
+├── 📄 config.json          # Presentation configuration (duration, theme, stylePreset, etc.)
 ├── 📄 content-{lang}.md   # Slide content in markdown
 ├── 📁 js/                  # 19 ES modules — orchestrated from main.js
 ├── 📁 styles/              # 7 CSS files — layer architecture
@@ -125,7 +125,11 @@ python3 -m http.server 8000
 - Edit CSS variables in `styles/tokens.css`.
 - Dark mode overrides in `styles/base.css`.
 
-**4. Adding card interactions**
+**4. Changing the style preset**
+- Edit `stylePreset` in `config.json` (supported values: `"glassmorph"` or `"formal"`).
+- Customize preset rules under `styles/base.css` (`Preset 1: Dark Mode Glassmorphism Overrides` and `Preset 2: Dark Mode Formal Overrides`).
+
+**5. Adding card interactions**
 - Edit the `.academic-box` CSS selector in `styles/components.css`.
 - Edit logic in `js/cards.js`.
 
