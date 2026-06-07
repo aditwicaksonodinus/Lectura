@@ -18,6 +18,7 @@
 */
 
 @import url('styles/tokens.css');      /* Layer 1 — Design Tokens & CSS Variables  */
+@import url('styles/themes.css');      /* Layer 1.5 — Theme Presets & Color Blocks  */
 @import url('styles/base.css');        /* Layer 2 — Reset, html/body, Dark Mode Vars */
 @import url('styles/typography.css'); /* Layer 3 — Headings, Lists, Blockquotes    */
 @import url('styles/layout.css');     /* Layer 4 — Slide Layout, Title/Closing     */

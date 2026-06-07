@@ -46,13 +46,14 @@
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', 'config.json', false); // Synchronous
                 xhr.send(null);
+                var preset = 'glass';
                 if (xhr.status === 200) {
                     var config = JSON.parse(xhr.responseText);
-                    var preset = config.stylePreset || 'glass';
-                    html.classList.add('style-' + preset);
+                    preset = config.stylePreset || 'glass';
                 }
+                html.classList.add('style-' + preset);
             } catch (e) {
-                console.warn('Failed to load config synchronously:', e);
+                console.warn('Failed to load theme config synchronously:', e);
                 html.classList.add('style-glass');
             }
         })();

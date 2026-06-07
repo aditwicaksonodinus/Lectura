@@ -1,0 +1,351 @@
+/* 
+  ========================================================================
+  LAYER 1.5 — THEME PRESETS
+  Streamlined semantic color variables for layout presets.
+  ========================================================================
+*/
+
+/* ─────────────────────────────────────────────────────────────
+   1. GLASS THEME
+   ───────────────────────────────────────────────────────────── */
+html.style-glass {
+    /* Layout & Backgrounds */
+    --bg-main: #f8fafc;
+    --bg-card: linear-gradient(135deg, #ffffffb2, #ffffff80);
+    --bg-secondary: linear-gradient(135deg, #ffffff40, #ffffff1a);
+    --border-primary: 1px solid #1b365d1f;
+    --border-accent-primary: 4px solid #f59e0b;
+    --border-accent-secondary: 4px solid #1b365d;
+    --shadow-card: 0 8px 32px 0 #1b365d14;
+    --shadow-card-active: 0 8px 32px 0 #1b365d26;
+    --radius-card: 15px;
+    --blur-backdrop: blur(5px);
+    --bg-header: linear-gradient(135deg, #03045efa, #023e8af2);
+    --text-footer: white;
+    --opacity-grid: 0.60;
+    --shadow-ui: inset 0 1px 0 0 #ffffff26, 0 5px 25px #00000033;
+    --shadow-tab-active: 0 0 15px #ffffff26;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #ffffffa6;
+    --text-tab-active: #ffffff;
+    --bg-tab-active: #ffffff38;
+    --bg-tab-highlight: #ffffff1a;
+    --text-tab-highlight: #ffffffe6;
+    --border-tab-line-active: #f59e0b;
+
+    /* Typography & Branding */
+    --text-primary: #111827;
+    --text-secondary: #1e3a8a;
+    --color-academic-primary: #1b365d;
+    --color-academic-secondary: #8b0000;
+}
+
+html.dark-mode.style-glass {
+    /* Layout & Backgrounds */
+    --bg-main: #001845;
+    --bg-card: linear-gradient(145deg, #050a14bf, #0000058c);
+    --bg-secondary: linear-gradient(135deg, #0466c80d, #0018454c);
+    --border-primary: 1px solid #0466c859;
+    --border-accent-primary: 4px solid #f59e0b;
+    --border-accent-secondary: 4px solid #0466c8;
+    --shadow-card: 0 0 25px #00000080;
+    --shadow-card-active: 0 0 50px #0466c833;
+    --radius-card: 15px;
+    --blur-backdrop: blur(5px);
+    --bg-header: linear-gradient(135deg, #001233f2, #001845f2, #002855f2);
+    --text-footer: #62b6cb;
+    --opacity-grid: 0.60;
+    --shadow-ui: inset 0 1px 0 0 #ffffff1a, 0 5px 25px #00000066;
+    --shadow-tab-active: 0 0 20px #cae9ff33;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #62b6cb80;
+    --text-tab-active: #ffffff;
+    --bg-tab-active: #0466c866;
+    --bg-tab-highlight: #cae9ff1f;
+    --text-tab-highlight: #cae9ffe6;
+    --border-tab-line-active: #f59e0b;
+
+    /* Typography & Branding */
+    --text-primary: #cae9ff;
+    --text-secondary: #98c1d9;
+    --color-academic-primary: #0466c8;
+    --color-academic-secondary: #33415c;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. FORMAL THEME
+   ───────────────────────────────────────────────────────────── */
+html.style-formal {
+    /* Layout & Backgrounds */
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-secondary: #ffffff;
+    --border-primary: 1px solid #1b365d1f;
+    --border-accent-primary: 4px solid #f59e0b;
+    --border-accent-secondary: 4px solid #1b365d;
+    --shadow-card: none;
+    --shadow-card-active: none;
+    --radius-card: 15px;
+    --blur-backdrop: none;
+    --bg-header: #1b365d;
+    --text-footer: white;
+    --opacity-grid: 0.0;
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #ffffffd9;
+    --text-tab-active: #ffffff;
+    --bg-tab-active: #ffffff40;
+    --bg-tab-highlight: #ffffff26;
+    --text-tab-highlight: #ffffff;
+    --border-tab-line-active: #f59e0b;
+
+    /* Typography & Branding */
+    --text-primary: #111827;
+    --text-secondary: #1e3a8a;
+    --color-academic-primary: #1b365d;
+    --color-academic-secondary: #8b0000;
+}
+
+html.dark-mode.style-formal {
+    /* Layout & Backgrounds */
+    --bg-main: #001845;
+    --bg-card: #001233;
+    --bg-secondary: #001233;
+    --border-primary: 1px solid #0466c859;
+    --border-accent-primary: 4px solid #f59e0b;
+    --border-accent-secondary: 4px solid #0466c8;
+    --shadow-card: none;
+    --shadow-card-active: none;
+    --radius-card: 15px;
+    --blur-backdrop: none;
+    --bg-header: #0b3c43;
+    --text-footer: #62b6cb;
+    --opacity-grid: 0.0;
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #cae9ffd9;
+    --text-tab-active: #ffffff;
+    --bg-tab-active: #0466c8;
+    --bg-tab-highlight: #cae9ff26;
+    --text-tab-highlight: #cae9ff;
+    --border-tab-line-active: #f59e0b;
+
+    /* Typography & Branding */
+    --text-primary: #cae9ff;
+    --text-secondary: #98c1d9;
+    --color-academic-primary: #0466c8;
+    --color-academic-secondary: #33415c;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3. RETRO THEME
+   ───────────────────────────────────────────────────────────── */
+html.style-retro {
+    /* Layout & Backgrounds */
+    --bg-main: #faf6a8;
+    --bg-card: #fefcf1;
+    --bg-secondary: #fefcf0;
+    --border-primary: 3px solid #111111;
+    --border-accent-primary: 3px solid #f59e0b;
+    --border-accent-secondary: 3px solid #111111;
+    --shadow-card: 5px 5px 0px #111111;
+    --shadow-card-active: 8px 8px 0px #111111;
+    --radius-card: 4px;
+    --blur-backdrop: none;
+    --bg-header: #111111;
+    --text-footer: #ffffff;
+    --opacity-grid: 0.0;
+    --shadow-ui: 4px 4px 0px #111111;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #ffffffb2;
+    --text-tab-active: #111111;
+    --bg-tab-active: #faf6e8;
+    --bg-tab-highlight: #ffffff26;
+    --text-tab-highlight: #ffffff;
+    --border-tab-line-active: #f59e0b;
+
+    /* Typography & Branding */
+    --text-primary: #111111;
+    --text-secondary: #2d3fe7;
+    --color-academic-primary: #111111;
+    --color-academic-secondary: #e11d48;
+}
+
+html.dark-mode.style-retro {
+    /* Layout & Backgrounds */
+    --bg-main: #291507;
+    --bg-card: #3d1f0b;
+    --bg-secondary: #3d1f0b;
+    --border-primary: 3px solid #111111;
+    --border-accent-primary: 3px solid #f59e0b;
+    --border-accent-secondary: 3px solid #111111;
+    --shadow-card: 5px 5px 0px #111111;
+    --shadow-card-active: 8px 8px 0px #111111;
+    --radius-card: 4px;
+    --blur-backdrop: none;
+    --bg-header: #3d1f0b;
+    --text-footer: #eae6df;
+    --opacity-grid: 0.0;
+    --shadow-ui: 4px 4px 0px #111111;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #eae6df99;
+    --text-tab-active: #3d1f0b;
+    --bg-tab-active: #eae6df;
+    --bg-tab-highlight: #eae6df1a;
+    --text-tab-highlight: #eae6df;
+    --border-tab-line-active: #f59e0b;
+
+    /* Typography & Branding */
+    --text-primary: #eae6df;
+    --text-secondary: #f59e0b;
+    --color-academic-primary: #facc15;
+    --color-academic-secondary: #f43f5e;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. CYBER THEME
+   ───────────────────────────────────────────────────────────── */
+html.style-cyber {
+    /* Layout & Backgrounds */
+    --bg-main: #f5f6fa;
+    --bg-card: #ffffff;
+    --bg-secondary: #ffffff;
+    --border-primary: 2px solid #00c8ff;
+    --border-accent-primary: 2px solid #e6006f;
+    --border-accent-secondary: 2px solid #00c8ff;
+    --shadow-card: 4px 4px 0px #dcdfe6;
+    --shadow-card-active: 6px 6px 0px #dcdfe6;
+    --radius-card: 0px;
+    --blur-backdrop: none;
+    --bg-header: #121422;
+    --text-footer: #ffffff;
+    --opacity-grid: 0.0;
+    --shadow-ui: 4px 4px 0px #dcdfe6;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #ffffffb2;
+    --text-tab-active: #00c8ff;
+    --bg-tab-active: #121422;
+    --bg-tab-highlight: #ffffff26;
+    --text-tab-highlight: #ffffff;
+    --border-tab-line-active: #e6006f;
+
+    /* Typography & Branding */
+    --text-primary: #121422;
+    --text-secondary: #e6006f;
+    --color-academic-primary: #00c8ff;
+    --color-academic-secondary: #ffb800;
+}
+
+html.dark-mode.style-cyber {
+    /* Layout & Backgrounds */
+    --bg-main: #07080f;
+    --bg-card: #121422;
+    --bg-secondary: #121422;
+    --border-primary: 2px solid #00f0ff;
+    --border-accent-primary: 2px solid #ff007f;
+    --border-accent-secondary: 2px solid #00f0ff;
+    --shadow-card: 4px 4px 0px #020305;
+    --shadow-card-active: 6px 6px 0px #020305;
+    --radius-card: 0px;
+    --blur-backdrop: none;
+    --bg-header: #121422;
+    --text-footer: #ffffff;
+    --opacity-grid: 0.0;
+    --shadow-ui: 4px 4px 0px #020305;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #ffffff99;
+    --text-tab-active: #00f0ff;
+    --bg-tab-active: #07080f;
+    --bg-tab-highlight: #ffffff26;
+    --text-tab-highlight: #ffffff;
+    --border-tab-line-active: #ff007f;
+
+    /* Typography & Branding */
+    --text-primary: #ffffff;
+    --text-secondary: #ff007f;
+    --color-academic-primary: #00f0ff;
+    --color-academic-secondary: #ffb800;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. MINIMAL THEME
+   ───────────────────────────────────────────────────────────── */
+html.style-minimal {
+    /* Layout & Backgrounds */
+    --bg-main: #ffffff;
+    --bg-card: #fafafa;
+    --bg-secondary: #fafafa;
+    --border-primary: 1px solid #e5e5e5;
+    --border-accent-primary: 1px solid #111111;
+    --border-accent-secondary: 1px solid #e5e5e5;
+    --shadow-card: none;
+    --shadow-card-active: none;
+    --radius-card: 4px;
+    --blur-backdrop: none;
+    --bg-header: #ffffff;
+    --text-footer: #888888;
+    --opacity-grid: 0.0;
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #11111166;
+    --text-tab-active: #111111;
+    --bg-tab-active: #ffffff;
+    --bg-tab-highlight: #0000000a;
+    --text-tab-highlight: #111111;
+    --border-tab-line-active: #111111;
+
+    /* Typography & Branding */
+    --text-primary: #111111;
+    --text-secondary: #444444;
+    --color-academic-primary: #111111;
+    --color-academic-secondary: #666666;
+}
+
+html.dark-mode.style-minimal {
+    /* Layout & Backgrounds */
+    --bg-main: #0a0a0a;
+    --bg-card: #121212;
+    --bg-secondary: #121212;
+    --border-primary: 1px solid #262626;
+    --border-accent-primary: 1px solid #e5e5e5;
+    --border-accent-secondary: 1px solid #262626;
+    --shadow-card: none;
+    --shadow-card-active: none;
+    --radius-card: 4px;
+    --blur-backdrop: none;
+    --bg-header: #0a0a0a;
+    --text-footer: #777777;
+    --opacity-grid: 0.0;
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+
+    /* Interactive Elements (Tabs & Buttons) */
+    --text-tab: #e5e5e566;
+    --text-tab-active: #e5e5e5;
+    --bg-tab-active: #121212;
+    --bg-tab-highlight: #ffffff0a;
+    --text-tab-highlight: #e5e5e5;
+    --border-tab-line-active: #e5e5e5;
+
+    /* Typography & Branding */
+    --text-primary: #e5e5e5;
+    --text-secondary: #a3a3a3;
+    --color-academic-primary: #e5e5e5;
+    --color-academic-secondary: #737373;
+}

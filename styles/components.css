@@ -12,18 +12,18 @@
 .academic-box {
     background: var(--bg-card);
     border: var(--border-card);
-    border-left: var(--accent-left);
+    border-left: var(--border-accent-primary);
     padding: 30px 40px;
     margin-bottom: 20px;
     box-shadow: var(--shadow-card), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
     width: 100%;
     max-width: var(--presentation-width);
     box-sizing: border-box;
-    border-radius: var(--card-radius);
+    border-radius: var(--radius-card);
     text-align: left;
     position: relative;
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: var(--backdrop-blur);
+    backdrop-filter: var(--blur-backdrop);
+    -webkit-backdrop-filter: var(--blur-backdrop);
     /* Separate cubic-bezier transitions specifically for interactive scale feedback and shadow scaling.
        These are distinct from the general theme color transitions defined in the global transit rules. */
     transition: 
@@ -48,7 +48,7 @@
 /* Variants with colored borders — Using tokens to ensure style consistency */
 .academic-box.red-top,
 .academic-box.blue-top {
-    border-left: var(--accent-left);
+    border-left: var(--border-accent-primary);
 }
 
 .academic-box.red-top {
@@ -80,7 +80,7 @@
 
 .academic-box h4 {
     margin-top: 0;
-    color: var(--primary-academic);
+    color: var(--color-academic-primary);
     font-size: 1.2em;
     margin-bottom: 15px;
     text-transform: none;
@@ -99,7 +99,7 @@
     max-width: 100%;
     max-height: 700px;
     object-fit: contain;
-    border-radius: var(--card-radius);
+    border-radius: var(--radius-card);
     border: var(--border-card);
     box-shadow: var(--shadow-card);
 }
@@ -115,7 +115,7 @@
     max-width: 100%;
     max-height: 450px;
     object-fit: contain;
-    border-radius: var(--card-radius);
+    border-radius: var(--radius-card);
     border: var(--border-card);
     box-shadow: var(--shadow-card);
 }
@@ -126,7 +126,7 @@
 
 .two-image-row .flex-item img {
     max-height: 350px;
-    border-radius: var(--card-radius);
+    border-radius: var(--radius-card);
     border: var(--border-card);
 }
 
@@ -161,7 +161,7 @@ thead th {
     font-weight: 700;
     text-align: left;
     padding: 12px 15px;
-    border-bottom: 2px solid var(--primary-academic);
+    border-bottom: 2px solid var(--color-academic-primary);
 }
 
 tbody tr:nth-child(even) {
@@ -184,7 +184,7 @@ tbody td {
 }
 
 tbody tr:last-child td {
-    border-bottom: 2px solid var(--primary-academic);
+    border-bottom: 2px solid var(--color-academic-primary);
 }
 
 /* Academic table wrapper from markdown renderer */
@@ -201,18 +201,18 @@ tbody tr:last-child td {
     min-width: 85%;
     font-family: "Noto Serif", serif;
     box-shadow: none;
-    border-top: 3px solid var(--primary-academic);
-    border-bottom: 3px solid var(--primary-academic);
-    background: var(--table-bg); /* Use themed bg */
+    border-top: 3px solid var(--color-academic-primary);
+    border-bottom: 3px solid var(--color-academic-primary);
+    background: var(--bg-secondary); /* Use themed bg */
 }
 /* Tables are unified using variables */
 
 html.dark-mode .academic-table-wrapper table {
-    border-color: var(--primary-academic);
+    border-color: var(--color-academic-primary);
 }
 
 .academic-table-wrapper thead {
-    border-bottom: 2px solid var(--primary-academic);
+    border-bottom: 2px solid var(--color-academic-primary);
 }
 
 .academic-table-wrapper thead th {
@@ -243,8 +243,8 @@ html.dark-mode .academic-table-wrapper table {
     margin: 1.5em 0;
     position: relative;
     padding: 20px 25px;
-    background: var(--math-bg); /* Themed math bg */
-    border: var(--equation-border);
+    background: var(--bg-secondary); /* Themed math bg */
+    border: var(--border-primary);
     border-radius: 8px;
     box-sizing: border-box;
 }
@@ -321,17 +321,17 @@ mjx-container:not([display="true"]) {
 /* Mermaid Specific Refinements for Projector Visibility */
 .mermaid svg .edgePath path {
     stroke-width: 3.5px !important; /* Even thicker from 2.5px */
-    stroke: var(--primary-academic) !important;
+    stroke: var(--color-academic-primary) !important;
 }
 .mermaid svg .marker path {
-    fill: var(--primary-academic) !important;
-    stroke: var(--primary-academic) !important;
+    fill: var(--color-academic-primary) !important;
+    stroke: var(--color-academic-primary) !important;
 }
 .mermaid svg .node rect, 
 .mermaid svg .node circle, 
 .mermaid svg .node polygon {
     stroke-width: 3px !important; /* Thicker from 2px */
-    stroke: var(--primary-academic) !important;
+    stroke: var(--color-academic-primary) !important;
 }
 
 /* ════════════════════════════════════════════════════
@@ -382,4 +382,9 @@ mjx-container:not([display="true"]) {
     margin-top: 15px;
     border-top: 1px solid var(--border-light);
     padding-top: 5px;
+}
+
+/* Formal preset style override for equations */
+html.style-formal .ieee-equation-container {
+    border: 1px dashed var(--color-academic-primary);
 }

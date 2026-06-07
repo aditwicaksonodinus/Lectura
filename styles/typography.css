@@ -34,20 +34,20 @@
 
 /* Base Heading Color Defaults */
 .reveal h1, .reveal h3 {
-    color: var(--primary-academic);
+    color: var(--color-academic-primary);
 }
 
 /* Card styling for H3 (Note: Redefined as a container card component; affects ### markdown headers) */
 .reveal .slides section h3 {
-    color: var(--primary-academic);
+    color: var(--color-academic-primary);
     background: var(--bg-card);
     border: var(--border-card);
-    border-left: var(--accent-left);
+    border-left: var(--border-accent-primary);
     padding: 30px 40px;
     box-shadow: var(--shadow-card), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-    border-radius: var(--card-radius);
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: var(--backdrop-blur);
+    border-radius: var(--radius-card);
+    backdrop-filter: var(--blur-backdrop);
+    -webkit-backdrop-filter: var(--blur-backdrop);
     width: 100%;
     max-width: var(--presentation-width);
     margin: 0 auto 20px auto;
@@ -95,7 +95,7 @@ li {
 
 /* Blockquotes — IEEE Formal Style */
 blockquote {
-    border-left: var(--accent-left) !important;
+    border-left: var(--border-accent-primary) !important;
     background: var(--bg-card) !important;
     padding: 20px 30px !important;
     margin: 25px 0 !important;
@@ -107,9 +107,9 @@ blockquote {
     box-shadow: var(--shadow-card) !important;
     width: auto !important;
     align-self: stretch !important;
-    border-radius: var(--card-radius) !important;
-    backdrop-filter: var(--backdrop-blur) !important;
-    -webkit-backdrop-filter: var(--backdrop-blur) !important;
+    border-radius: var(--radius-card) !important;
+    backdrop-filter: var(--blur-backdrop) !important;
+    -webkit-backdrop-filter: var(--blur-backdrop) !important;
 }
 
 blockquote p {

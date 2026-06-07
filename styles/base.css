@@ -8,248 +8,27 @@
 
 /* Dark Mode — Base Variables (Shared / Theme Parity) */
 html.dark-mode {
-    --bg-gray: #001845; /* Oxford Blue Background */
+    --bg-main: #001845; /* Oxford Blue Background */
     --text-primary: #cae9ff; /* Light Cyan-White */
     --text-secondary: #98c1d9; /* Powder Blue */
     --text-muted: #62b6cb; /* Muted Cyan */
-    --primary-academic: #0466c8; /* Honolulu Blue */
-    --secondary-academic: #33415c; /* Slate Blue */
+    --color-academic-primary: #0466c8; /* Honolulu Blue */
+    --color-academic-secondary: #33415c; /* Slate Blue */
     --teal-dark: #0b3c43; /* Dark Teal */
     --border-subtle: rgba(4, 102, 200, 0.35); /* Slightly stronger border for glass */
     --row-alt: rgba(4, 102, 200, 0.08); /* Subtle gradient for tables */
-    --footnote-color: var(--text-muted); /* Sync with footer color */
-}
-
-/* Preset 1: Dark Mode Glass Overrides */
-html.dark-mode.style-glass {
-    --bg-card: linear-gradient(145deg, rgba(5, 10, 20, 0.75), rgba(0, 0, 5, 0.55)); /* Very Dark/Black Glass */
-    --bg-header-card: linear-gradient(135deg, rgba(4, 102, 200, 0.1), rgba(0, 24, 69, 0.3));
-    --bg-dot: rgba(4, 102, 200, 0.15); 
-    --border-card: 1px solid var(--border-subtle);
-    --shadow-card: 0 0 25px rgba(0, 0, 0, 0.5); /* Centered and reduced spread */
-    --shadow-active: 0 0 50px rgba(4, 102, 200, 0.2); /* Centered and reduced spread */
-    --card-radius: 15px;
-    --backdrop-blur: blur(5px);
-    --math-bg: rgba(0, 24, 69, 0.4); /* Deep Navy Glass */
-    --header-bg: linear-gradient(135deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95), rgba(0, 40, 85, 0.95)); /* Deep Classic Navy Glass */
-    --tab-text: rgba(98, 182, 203, 0.5);
-    --tab-color-hover: rgba(202, 233, 255, 0.9);
-    --tab-bg-hover: rgba(202, 233, 255, 0.12);
-    --tab-color-active: #ffffff;
-    --tab-bg-active: rgba(4, 102, 200, 0.4);
-    --tab-border-active: 1px solid rgba(202, 233, 255, 0.3);
-    --tab-line-active: var(--accent-orange);
-    --tab-color-completed: var(--text-primary);
-    --tab-bg-completed: rgba(202, 233, 255, 0.12);
-    --tab-line-completed: rgba(255, 255, 255, 0.3);
-    --footer-text: #62b6cb;
-    --grid-opacity: 0.60;
-    --table-bg: linear-gradient(135deg, rgba(4, 102, 200, 0.05), rgba(0, 24, 69, 0.3));
-    --equation-border: var(--border-card);
-
-    /* UI Dark Glassy Styles */
-    --shadow-ui: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 5px 25px rgba(0, 0, 0, 0.4);
-    --shadow-tab-active: 0 0 20px rgba(202, 233, 255, 0.2);
-    --bg-timer: rgba(4, 102, 200, 0.2);
-    --border-timer: 1px solid rgba(202, 233, 255, 0.4);
-    --color-timer: #ffffff;
-    --bg-timer-btn: rgba(255, 255, 255, 0.22);
-    --border-timer-btn: 1px solid rgba(202, 233, 255, 0.4);
-    --color-timer-btn: #ffffff;
-}
-
-/* Preset 2: Dark Mode Formal Overrides */
-html.dark-mode.style-formal {
-    --bg-card: #001233; /* Dark solid card background */
-    --bg-header-card: var(--bg-card); /* Solid header */
-    --bg-dot: transparent;
-    --border-card: 1px solid var(--border-subtle); /* Unify border structure */
-    --shadow-card: none;
-    --shadow-active: none;
-    --card-radius: 15px;
-    --backdrop-blur: none;
-    --math-bg: #001233; /* Solid dark blue */
-    --header-bg: var(--teal-dark); /* Solid Dark Teal */
-    --tab-text: rgba(202, 233, 255, 0.85);
-    --tab-color-hover: rgba(202, 233, 255, 1.0);
-    --tab-bg-hover: rgba(202, 233, 255, 0.15);
-    --tab-color-active: #ffffff;
-    --tab-bg-active: var(--primary-academic);
-    --tab-border-active: 1px solid var(--border-subtle);
-    --tab-line-active: var(--accent-orange);
-    --tab-color-completed: var(--text-primary);
-    --tab-bg-completed: rgba(202, 233, 255, 0.15);
-    --tab-line-completed: rgba(255, 255, 255, 0.4);
-    --footer-text: #62b6cb;
-    --grid-opacity: 0.0;
-    --table-bg: var(--bg-card);
-    --equation-border: 1px dashed var(--primary-academic);
-
-    /* UI Dark Flat Styles */
-    --shadow-ui: none;
-    --shadow-tab-active: none;
-    --bg-timer: #001233;
-    --border-timer: 1px solid var(--text-primary);
-    --color-timer: var(--text-primary);
-    --bg-timer-btn: var(--primary-academic);
-    --border-timer-btn: 1px solid var(--primary-academic);
-    --color-timer-btn: #ffffff;
-}
-
-/* Preset 3: Dark Mode Retro Overrides */
-html.dark-mode.style-retro {
-    --bg-gray: #1c1917; /* Warm Stone-900 background */
-    --bg-card: #2b2624; /* Stone-800 warm paper card */
-    --bg-header-card: #2b2624;
-    --bg-dot: transparent;
-    --border-card: 3px solid #111111; /* Dark ink border */
-    --accent-left: 3px solid var(--accent-orange);
-    --accent-left-navy: 3px solid #111111;
-    --shadow-card: 5px 5px 0px #111111; /* Dark ink shadow */
-    --shadow-active: 8px 8px 0px #111111;
-    --card-radius: 4px;
-    --backdrop-blur: none;
-    --math-bg: #231f1e;
-    --header-bg: #2b2624;
-    --tab-text: rgba(234, 230, 223, 0.6);
-    --tab-color-hover: #eae6df;
-    --tab-bg-hover: rgba(234, 230, 223, 0.1);
-    --tab-color-active: #2b2624;
-    --tab-bg-active: #eae6df;
-    --tab-border-active: 2px solid #111111;
-    --tab-line-active: var(--accent-orange);
-    --tab-color-completed: #eae6df;
-    --tab-bg-completed: rgba(234, 230, 223, 0.1);
-    --tab-line-completed: rgba(234, 230, 223, 0.3);
-    --footer-text: #eae6df; /* Warm paper white */
-    --grid-opacity: 0.0;
-    --table-bg: var(--bg-card);
-    --equation-border: 3px solid #111111;
-
-    /* UI Dark Neobrutalist Styles */
-    --shadow-ui: 4px 4px 0px #111111;
-    --shadow-tab-active: none;
-    --bg-timer: #2b2624;
-    --border-timer: 3px solid #111111;
-    --color-timer: #eae6df;
-    --bg-timer-btn: #111111;
-    --border-timer-btn: 3px solid #111111;
-    --color-timer-btn: #eae6df;
-
-    /* Typography / Colors Overrides */
-    --text-primary: #eae6df; /* Warm cream text */
-    --text-secondary: #f59e0b; /* Retro orange */
-    --primary-academic: #facc15; /* Academic gold */
-    --secondary-academic: #f43f5e; /* Retro rose */
-}
-
-/* Preset 4: Dark Mode Cyber Overrides */
-html.dark-mode.style-cyber {
-    --bg-gray: #002b36; /* Solarized Dark Background: Base03 */
-    --bg-card: #073642; /* Solarized Dark Card: Base02 */
-    --bg-header-card: #073642;
-    --bg-dot: transparent;
-    --border-card: 2px solid #2aa198; /* Solarized Cyan */
-    --accent-left: 2px solid #cb4b16; /* Solarized Orange */
-    --accent-left-navy: 2px solid #2aa198;
-    --shadow-card: 4px 4px 0px #001f27; /* Solid dark offset shadow */
-    --shadow-active: 6px 6px 0px #001f27;
-    --card-radius: 0px;
-    --backdrop-blur: none;
-    --math-bg: #073642;
-    --header-bg: #073642;
-    --tab-text: rgba(147, 161, 161, 0.6);
-    --tab-color-hover: #93a1a1;
-    --tab-bg-hover: rgba(147, 161, 161, 0.15);
-    --tab-color-active: #2aa198;
-    --tab-bg-active: #002b36;
-    --tab-border-active: 2px solid #2aa198;
-    --tab-line-active: #cb4b16;
-    --tab-color-completed: #93a1a1;
-    --tab-bg-completed: rgba(147, 161, 161, 0.15);
-    --tab-line-completed: rgba(147, 161, 161, 0.3);
-    --footer-text: #93a1a1; /* Solarized Base1 */
-    --grid-opacity: 0.0;
-    --table-bg: #073642;
-    --equation-border: 2px solid #2aa198;
-
-    /* UI Dark Terminal Styles */
-    --shadow-ui: 4px 4px 0px #001f27;
-    --shadow-tab-active: none;
-    --bg-timer: #073642;
-    --border-timer: 2px solid #2aa198;
-    --color-timer: #93a1a1;
-    --bg-timer-btn: #2aa198;
-    --border-timer-btn: 2px solid #2aa198;
-    --color-timer-btn: #002b36;
-    --timer-alert-bg: #dc322f; /* Solarized Red */
-    --timer-alert-color: #002b36; /* Solarized Base03 */
-
-    /* Typography / Colors Overrides */
-    --text-primary: #93a1a1; /* Solarized Base1 */
-    --text-secondary: #268bd2; /* Solarized Blue */
-    --primary-academic: #2aa198; /* Solarized Cyan */
-    --secondary-academic: #b58900; /* Solarized Yellow */
-}
-
-/* Preset 5: Dark Mode Minimal Overrides */
-html.dark-mode.style-minimal {
-    --bg-gray: #0a0a0a; /* Pure black */
-    --bg-card: #121212; /* Subtle dark gray card */
-    --bg-header-card: #121212;
-    --bg-dot: transparent;
-    --border-card: 1px solid #262626; /* Dark slate line */
-    --accent-left: 1px solid #e5e5e5; /* Thin off-white accent */
-    --accent-left-navy: 1px solid #262626;
-    --shadow-card: none;
-    --shadow-active: none;
-    --card-radius: 4px;
-    --backdrop-blur: none;
-    --math-bg: #121212;
-    --header-bg: #0a0a0a;
-    --tab-text: rgba(229, 229, 229, 0.4);
-    --tab-color-hover: #e5e5e5;
-    --tab-bg-hover: rgba(255, 255, 255, 0.04);
-    --tab-color-active: #e5e5e5;
-    --tab-bg-active: #121212;
-    --tab-border-active: 1px solid #262626;
-    --tab-line-active: #e5e5e5;
-    --tab-color-completed: #e5e5e5;
-    --tab-bg-completed: rgba(255, 255, 255, 0.02);
-    --tab-line-completed: #262626;
-    --footer-text: #777777;
-    --grid-opacity: 0.0;
-    --table-bg: #121212;
-    --equation-border: 1px solid #262626;
-
-    /* UI Dark Flat Styles */
-    --shadow-ui: none;
-    --shadow-tab-active: none;
-    --bg-timer: #121212;
-    --border-timer: 1px solid #262626;
-    --color-timer: #e5e5e5;
-    --bg-timer-btn: #e5e5e5;
-    --border-timer-btn: 1px solid #e5e5e5;
-    --color-timer-btn: #0a0a0a;
-    --timer-alert-bg: #f43f5e;
-    --timer-alert-color: #0a0a0a;
-
-    /* Typography / Colors Overrides */
-    --text-primary: #e5e5e5; /* Off-white for readability */
-    --text-secondary: #a3a3a3; /* Charcoal slate secondary */
-    --primary-academic: #e5e5e5;
-    --secondary-academic: #737373;
+    --footnote-color: var(--text-muted); /* Sync with footnote color */
 }
 
 /* Global Stacking Context */
 html {
     transition: background-color 0.4s ease;
-    background-color: var(--bg-gray);
+    background-color: var(--bg-main);
     position: relative;
 }
 
-/* Transparent Background Image */
-html::before {
+/* Transparent Background Image (Only for Glass Preset) */
+html.style-glass::before {
     content: '';
     position: fixed;
     top: 0;
@@ -259,14 +38,14 @@ html::before {
     background-image: url('../assets/background.png');
     background-size: cover;
     background-position: center;
-    opacity: var(--grid-opacity);
+    opacity: var(--opacity-grid);
     z-index: 1; /* Render in front of html canvas background */
     pointer-events: none; /* Let clicks pass through to presentation */
     transition: opacity 0.4s ease, filter 0.4s ease;
     filter: invert(0.8) contrast(0.5); /* Invert white grid to dark grid in light mode, with contrast 0.5 */
 }
 
-html.dark-mode::before {
+html.dark-mode.style-glass::before {
     filter: invert(0) contrast(0.5); /* Keep original white grid in dark mode, with contrast 0.5 */
 }
 
