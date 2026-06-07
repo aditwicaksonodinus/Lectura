@@ -18,31 +18,6 @@
  * ─────────────────────────────────────────────────────────────
  */
 
-/** CSS Version — increment when style.css changes for cache-busting */
-const CSS_VERSION = '2';
-
-/**
- * Loads style.css dynamically with the version as a cache-buster.
- * Replaces the static <link> tag in index.html for version control via JS.
- *
- * Note: This function must be called BEFORE content is rendered
- * to prevent FOUC (Flash of Unstyled Content).
- */
-export function loadStylesheet() {
-    // Check if the style.css link from HTML already exists (avoid duplication)
-    const existing = document.querySelector('link[href^="style.css"]');
-    if (existing) {
-        // Update version on the existing link
-        existing.href = `style.css?v=${CSS_VERSION}`;
-        return;
-    }
-
-    // Create a new link element if it doesn't exist
-    const link  = document.createElement('link');
-    link.rel    = 'stylesheet';
-    link.href   = `style.css?v=${CSS_VERSION}`;
-    document.head.appendChild(link);
-}
 
 /**
  * Sync CSS Custom Properties with presentation configuration values.

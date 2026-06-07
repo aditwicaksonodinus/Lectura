@@ -25,7 +25,7 @@ import {
     STYLE_PRESET,
 } from './config.js';
 
-import { initMermaid }          from './mermaid.js';
+
 import { LayoutTemplates }      from './layouts.js';
 import { updateUI }             from './ui.js';
 import { prepareStaggeredAnimation, playStaggeredAnimation } from './animation.js';
@@ -126,14 +126,14 @@ export async function initPresentation() {
         document.documentElement.classList.add(ratioClass);
 
         // Apply Style Preset class
-        document.documentElement.classList.remove('style-glassmorph', 'style-formal');
+        document.documentElement.classList.remove('style-glassmorph', 'style-formal', 'style-retro-academic');
         const stylePresetClass = `style-${STYLE_PRESET}`;
         document.documentElement.classList.add(stylePresetClass);
 
         // Reveal theme
         const themeLink = document.getElementById('theme');
         if (themeLink) {
-            themeLink.href = `https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/${REVEAL_THEME}.min.css`;
+            themeLink.href = `styles/vendor/theme-${REVEAL_THEME}.min.css`;
         }
 
         // Theme toggle title
@@ -149,7 +149,7 @@ export async function initPresentation() {
 
         // Font size and Mermaid
         document.documentElement.style.fontSize = BASE_FONT_SIZE;
-        initMermaid(BASE_FONT_SIZE);
+
 
         // Sync timer state with newly loaded config
         setTimerDuration(PRESENTATION_MINUTES);
@@ -276,9 +276,23 @@ export async function initPresentation() {
         Reveal.on('slidechanged', event => {
             updateUI(event.currentSlide);
             prepareStaggeredAnimation(event.currentSlide);
+
+            // Safety fallback: play animation after 400ms in case slidetransitionend doesn't fire
+            if (event.currentSlide) {
+                if (event.currentSlide._staggerTimeout) {
+                    clearTimeout(event.currentSlide._staggerTimeout);
+                }
+                event.currentSlide._staggerTimeout = setTimeout(() => {
+                    playStaggeredAnimation(event.currentSlide);
+                }, 400);
+            }
         });
 
         Reveal.on('slidetransitionend', event => {
+            if (event.currentSlide && event.currentSlide._staggerTimeout) {
+                clearTimeout(event.currentSlide._staggerTimeout);
+                event.currentSlide._staggerTimeout = null;
+            }
             playStaggeredAnimation(event.currentSlide);
         });
 
@@ -290,6 +304,15 @@ export async function initPresentation() {
         // 10. Update UI and play initial animation
         updateUI(Reveal.getCurrentSlide());
         playStaggeredAnimation(Reveal.getCurrentSlide());
+
+        // 11. Fade out premium loading overlay after a brief delay for assets to cache
+        setTimeout(() => {
+            const loader = document.getElementById('loading-overlay');
+            if (loader) {
+                loader.classList.add('fade-out');
+                setTimeout(() => loader.remove(), 600);
+            }
+        }, 800);
 
     } catch (error) {
         console.error('Presentation Load Error:', error);

@@ -203,12 +203,11 @@ tbody tr:last-child td {
     box-shadow: none;
     border-top: 3px solid var(--primary-academic);
     border-bottom: 3px solid var(--primary-academic);
-    background: var(--math-bg); /* Use themed bg */
+    background: var(--table-bg); /* Use themed bg */
 }
 /* Tables are unified using variables */
 
 html.dark-mode .academic-table-wrapper table {
-    background: linear-gradient(135deg, rgba(4, 102, 200, 0.05), rgba(0, 24, 69, 0.3));
     border-color: var(--primary-academic);
 }
 
@@ -245,7 +244,7 @@ html.dark-mode .academic-table-wrapper table {
     position: relative;
     padding: 20px 25px;
     background: var(--math-bg); /* Themed math bg */
-    border: 1px dashed var(--primary-academic); /* Formal academic border */
+    border: var(--equation-border);
     border-radius: 8px;
     box-sizing: border-box;
 }

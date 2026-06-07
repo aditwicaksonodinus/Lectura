@@ -13,7 +13,7 @@
     justify-content: flex-start; /* Align content to top */
     align-items: center;
     height: 100%;
-    padding: 80px 60px 80px 60px; /* Reduced top padding now that header flows naturally */
+    padding: 140px 60px 80px 60px; /* Reduced top padding now that header flows naturally */
     box-sizing: border-box;
     text-align: left;
     overflow: visible !important; /* Allow card zoom/shadow to spill out */

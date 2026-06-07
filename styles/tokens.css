@@ -29,6 +29,7 @@
     --footnote-color: #1d4ed8;
     --title-border-color: rgba(245, 158, 11, 0.1);
     --closing-border-color: rgba(245, 158, 11, 0.1);
+    --h2-color: var(--accent-orange);
     
     --presentation-width: 1600px; /* Default for 16:9 */
 }
@@ -53,6 +54,8 @@ html.style-glassmorph {
     --tab-text: rgba(255, 255, 255, 0.65);
     --footer-text: white;
     --grid-opacity: 0.60;
+    --table-bg: var(--math-bg);
+    --equation-border: var(--border-card);
 
     /* UI Specific Glassy Styles */
     --shadow-ui: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 5px 25px rgba(0, 0, 0, 0.2);
@@ -84,6 +87,8 @@ html.style-formal {
     --tab-text: rgba(255, 255, 255, 0.85);
     --footer-text: white; /* Navy text on navy footer would be invisible, sync with white */
     --grid-opacity: 0.0;
+    --table-bg: #ffffff;
+    --equation-border: 1px dashed var(--primary-academic);
 
     /* UI Specific Flat Styles */
     --shadow-ui: none;
@@ -94,6 +99,46 @@ html.style-formal {
     --bg-timer-btn: var(--primary-academic);
     --border-timer-btn: 1px solid var(--primary-academic);
     --color-timer-btn: #ffffff;
+}
+
+/* ════════════════════════════════════════════════════
+   STYLE PRESET 3 — RETRO-ACADEMIC (Neobrutalist)
+   ════════════════════════════════════════════════════ */
+html.style-retro-academic {
+    --bg-gray: #faf6e8;
+    --bg-card: #fefcf0;
+    --bg-header-card: #fefcf0;
+    --bg-dot: transparent;
+    --border-card: 3px solid #111111;
+    --accent-left: 3px solid var(--accent-orange);
+    --accent-left-navy: 3px solid #111111;
+    --shadow-card: 5px 5px 0px #111111;
+    --shadow-active: 8px 8px 0px #111111;
+    --card-radius: 4px;
+    --backdrop-blur: none;
+    --math-bg: #fefcf0;
+    --header-bg: #111111;
+    --tab-text: rgba(255, 255, 255, 0.7);
+    --footer-text: #ffffff;
+    --grid-opacity: 0.0;
+    --table-bg: #fefcf0;
+    --equation-border: 3px solid #111111;
+
+    /* UI Specific Neobrutalist Styles */
+    --shadow-ui: 4px 4px 0px #111111;
+    --shadow-tab-active: none;
+    --bg-timer: #fefcf0;
+    --border-timer: 3px solid #111111;
+    --color-timer: #111111;
+    --bg-timer-btn: #111111;
+    --border-timer-btn: 3px solid #111111;
+    --color-timer-btn: #ffffff;
+
+    /* Typography / Colors Overrides */
+    --text-primary: #111111;
+    --text-secondary: #2d3fe7;
+    --primary-academic: #111111;
+    --secondary-academic: #e11d48;
 }
 
 /* Aspect Ratio Adjustments */

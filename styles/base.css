@@ -21,7 +21,6 @@ html.dark-mode {
 }
 
 /* Preset 1: Dark Mode Glassmorphism Overrides */
-html.dark-mode,
 html.dark-mode.style-glassmorph {
     --bg-card: linear-gradient(145deg, rgba(5, 10, 20, 0.75), rgba(0, 0, 5, 0.55)); /* Very Dark/Black Glass */
     --bg-header-card: linear-gradient(135deg, rgba(4, 102, 200, 0.1), rgba(0, 24, 69, 0.3));
@@ -36,6 +35,8 @@ html.dark-mode.style-glassmorph {
     --tab-text: rgba(98, 182, 203, 0.5);
     --footer-text: #62b6cb;
     --grid-opacity: 0.60;
+    --table-bg: linear-gradient(135deg, rgba(4, 102, 200, 0.05), rgba(0, 24, 69, 0.3));
+    --equation-border: var(--border-card);
 
     /* UI Dark Glassy Styles */
     --shadow-ui: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 5px 25px rgba(0, 0, 0, 0.4);
@@ -63,6 +64,8 @@ html.dark-mode.style-formal {
     --tab-text: rgba(202, 233, 255, 0.85);
     --footer-text: #62b6cb;
     --grid-opacity: 0.0;
+    --table-bg: var(--bg-card);
+    --equation-border: 1px dashed var(--primary-academic);
 
     /* UI Dark Flat Styles */
     --shadow-ui: none;
@@ -73,6 +76,44 @@ html.dark-mode.style-formal {
     --bg-timer-btn: var(--primary-academic);
     --border-timer-btn: 1px solid var(--primary-academic);
     --color-timer-btn: #ffffff;
+}
+
+/* Preset 3: Dark Mode Retro-Academic Overrides */
+html.dark-mode.style-retro-academic {
+    --bg-gray: #1c1917; /* Warm Stone-900 background */
+    --bg-card: #2b2624; /* Stone-800 warm paper card */
+    --bg-header-card: #2b2624;
+    --bg-dot: transparent;
+    --border-card: 3px solid #111111; /* Dark ink border */
+    --accent-left: 3px solid var(--accent-orange);
+    --accent-left-navy: 3px solid #111111;
+    --shadow-card: 5px 5px 0px #111111; /* Dark ink shadow */
+    --shadow-active: 8px 8px 0px #111111;
+    --card-radius: 4px;
+    --backdrop-blur: none;
+    --math-bg: #231f1e;
+    --header-bg: #2b2624;
+    --tab-text: rgba(234, 230, 223, 0.6);
+    --footer-text: #eae6df; /* Warm paper white */
+    --grid-opacity: 0.0;
+    --table-bg: var(--bg-card);
+    --equation-border: 3px solid #111111;
+
+    /* UI Dark Neobrutalist Styles */
+    --shadow-ui: 4px 4px 0px #111111;
+    --shadow-tab-active: none;
+    --bg-timer: #2b2624;
+    --border-timer: 3px solid #111111;
+    --color-timer: #eae6df;
+    --bg-timer-btn: #111111;
+    --border-timer-btn: 3px solid #111111;
+    --color-timer-btn: #eae6df;
+
+    /* Typography / Colors Overrides */
+    --text-primary: #eae6df; /* Warm cream text */
+    --text-secondary: #f59e0b; /* Retro orange */
+    --primary-academic: #facc15; /* Academic gold */
+    --secondary-academic: #f43f5e; /* Retro rose */
 }
 
 /* Global Stacking Context */

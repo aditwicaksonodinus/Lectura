@@ -5,6 +5,49 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+// State variables for lazy loading
+let mermaidPromise = null;
+let mermaidConfigured = false;
+
+/**
+ * Dynamically loads the Mermaid library from CDN if not already loaded,
+ * and initializes it.
+ * @param {string} baseFontSize - Base font size
+ * @returns {Promise<void>}
+ */
+function loadMermaid(baseFontSize) {
+    if (mermaidPromise) return mermaidPromise;
+
+    mermaidPromise = new Promise((resolve, reject) => {
+        if (typeof mermaid !== 'undefined') {
+            if (!mermaidConfigured) {
+                initMermaid(baseFontSize);
+                mermaidConfigured = true;
+            }
+            return resolve();
+        }
+
+        const script = document.createElement('script');
+        script.src = 'js/vendor/mermaid.min.js';
+        script.onload = () => {
+            if (typeof mermaid !== 'undefined') {
+                initMermaid(baseFontSize);
+                mermaidConfigured = true;
+                resolve();
+            } else {
+                reject(new Error('Mermaid defined as global but not found.'));
+            }
+        };
+        script.onerror = (err) => {
+            mermaidPromise = null; // allow retry
+            reject(err);
+        };
+        document.head.appendChild(script);
+    });
+
+    return mermaidPromise;
+}
+
 /**
  * Initializes Mermaid with configuration matching the presentation font size.
  * @param {string} baseFontSize - Base font size (e.g., '18pt')
@@ -61,7 +104,19 @@ const _htmlDecoder = document.createElement('div');
  * @returns {Promise<void>}
  */
 export async function processMermaidDiagram(diagram) {
-    if (typeof mermaid === 'undefined' || diagram.hasAttribute('data-processed')) return;
+    if (diagram.hasAttribute('data-processed')) return;
+
+    const baseFontSize = document.documentElement.style.fontSize || '18pt';
+    try {
+        await loadMermaid(baseFontSize);
+    } catch (err) {
+        console.error('Failed to load Mermaid library:', err);
+        diagram.innerHTML = `<pre style="color:red; font-size: 0.5em; background: #fff0f0; padding: 10px; border: 1px solid red;">Failed to load Mermaid library: ${err.message}</pre>`;
+        diagram.setAttribute('data-processed', 'error');
+        return;
+    }
+
+    if (typeof mermaid === 'undefined') return;
 
     const id = `mermaid-svg-${_mermaidCounter++}`;
 

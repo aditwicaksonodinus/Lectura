@@ -28,17 +28,6 @@
     margin-bottom: 0.5em;
     letter-spacing: 0.02em;
 }
-
-/* Glassmorph Style H2 */
-html, html.style-glassmorph {
-    --h2-color: var(--accent-orange);
-}
-
-/* Formal Style H2 */
-html.style-formal {
-    --h2-color: var(--accent-orange);
-}
-
 .reveal h2 {
     color: var(--h2-color);
 }

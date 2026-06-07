@@ -21,13 +21,8 @@ import { initScribbleMode }     from './scribble.js';
 import { initNavigation }       from './navigation.js';
 import { initCardInteractions } from './cards.js';
 import { initGestures }         from './gestures.js';
-import { loadStylesheet }       from './styles.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ── Stylesheet Integration ────────────────────────────────
-    // Manage loading style.css from JS for controlled cache-busting.
-    // Called first to prevent FOUC.
-    loadStylesheet();
 
     // ── Watermark Console ─────────────────────────────────────
     console.log(
