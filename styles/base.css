@@ -33,6 +33,15 @@ html.dark-mode.style-glassmorph {
     --math-bg: rgba(0, 24, 69, 0.4); /* Deep Navy Glass */
     --header-bg: linear-gradient(135deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95), rgba(0, 40, 85, 0.95)); /* Deep Classic Navy Glass */
     --tab-text: rgba(98, 182, 203, 0.5);
+    --tab-color-hover: rgba(202, 233, 255, 0.9);
+    --tab-bg-hover: rgba(202, 233, 255, 0.12);
+    --tab-color-active: #ffffff;
+    --tab-bg-active: rgba(4, 102, 200, 0.4);
+    --tab-border-active: 1px solid rgba(202, 233, 255, 0.3);
+    --tab-line-active: var(--accent-orange);
+    --tab-color-completed: var(--text-primary);
+    --tab-bg-completed: rgba(202, 233, 255, 0.12);
+    --tab-line-completed: rgba(255, 255, 255, 0.3);
     --footer-text: #62b6cb;
     --grid-opacity: 0.60;
     --table-bg: linear-gradient(135deg, rgba(4, 102, 200, 0.05), rgba(0, 24, 69, 0.3));
@@ -62,6 +71,15 @@ html.dark-mode.style-formal {
     --math-bg: #001233; /* Solid dark blue */
     --header-bg: var(--teal-dark); /* Solid Dark Teal */
     --tab-text: rgba(202, 233, 255, 0.85);
+    --tab-color-hover: rgba(202, 233, 255, 1.0);
+    --tab-bg-hover: rgba(202, 233, 255, 0.15);
+    --tab-color-active: #ffffff;
+    --tab-bg-active: var(--primary-academic);
+    --tab-border-active: 1px solid var(--border-subtle);
+    --tab-line-active: var(--accent-orange);
+    --tab-color-completed: var(--text-primary);
+    --tab-bg-completed: rgba(202, 233, 255, 0.15);
+    --tab-line-completed: rgba(255, 255, 255, 0.4);
     --footer-text: #62b6cb;
     --grid-opacity: 0.0;
     --table-bg: var(--bg-card);
@@ -94,6 +112,15 @@ html.dark-mode.style-retro-academic {
     --math-bg: #231f1e;
     --header-bg: #2b2624;
     --tab-text: rgba(234, 230, 223, 0.6);
+    --tab-color-hover: #eae6df;
+    --tab-bg-hover: rgba(234, 230, 223, 0.1);
+    --tab-color-active: #2b2624;
+    --tab-bg-active: #eae6df;
+    --tab-border-active: 2px solid #111111;
+    --tab-line-active: var(--accent-orange);
+    --tab-color-completed: #eae6df;
+    --tab-bg-completed: rgba(234, 230, 223, 0.1);
+    --tab-line-completed: rgba(234, 230, 223, 0.3);
     --footer-text: #eae6df; /* Warm paper white */
     --grid-opacity: 0.0;
     --table-bg: var(--bg-card);
@@ -131,7 +158,16 @@ html.dark-mode.style-cyber-terminal {
     --backdrop-blur: none;
     --math-bg: #073642;
     --header-bg: #073642;
-    --tab-text: rgba(147, 161, 161, 0.7);
+    --tab-text: rgba(147, 161, 161, 0.6);
+    --tab-color-hover: #93a1a1;
+    --tab-bg-hover: rgba(147, 161, 161, 0.15);
+    --tab-color-active: #2aa198;
+    --tab-bg-active: #002b36;
+    --tab-border-active: 2px solid #2aa198;
+    --tab-line-active: #cb4b16;
+    --tab-color-completed: #93a1a1;
+    --tab-bg-completed: rgba(147, 161, 161, 0.15);
+    --tab-line-completed: rgba(147, 161, 161, 0.3);
     --footer-text: #93a1a1; /* Solarized Base1 */
     --grid-opacity: 0.0;
     --table-bg: #073642;

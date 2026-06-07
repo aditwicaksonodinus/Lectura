@@ -52,6 +52,15 @@ html.style-glassmorph {
     --math-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.10));
     --header-bg: linear-gradient(135deg, rgba(3, 4, 94, 0.98), rgba(2, 62, 138, 0.95)); /* Navy to Royal Blue Glass */
     --tab-text: rgba(255, 255, 255, 0.65);
+    --tab-color-hover: rgba(255, 255, 255, 0.9);
+    --tab-bg-hover: rgba(255, 255, 255, 0.1);
+    --tab-color-active: #ffffff;
+    --tab-bg-active: rgba(255, 255, 255, 0.22);
+    --tab-border-active: none;
+    --tab-line-active: var(--accent-orange);
+    --tab-color-completed: rgba(255, 255, 255, 0.9);
+    --tab-bg-completed: rgba(255, 255, 255, 0.1);
+    --tab-line-completed: rgba(255, 255, 255, 0.3);
     --footer-text: white;
     --grid-opacity: 0.60;
     --table-bg: var(--math-bg);
@@ -85,6 +94,15 @@ html.style-formal {
     --math-bg: #ffffff;
     --header-bg: var(--primary-academic);
     --tab-text: rgba(255, 255, 255, 0.85);
+    --tab-color-hover: rgba(255, 255, 255, 1.0);
+    --tab-bg-hover: rgba(255, 255, 255, 0.15);
+    --tab-color-active: #ffffff;
+    --tab-bg-active: rgba(255, 255, 255, 0.25);
+    --tab-border-active: none;
+    --tab-line-active: var(--accent-orange);
+    --tab-color-completed: #ffffff;
+    --tab-bg-completed: rgba(255, 255, 255, 0.15);
+    --tab-line-completed: rgba(255, 255, 255, 0.4);
     --footer-text: white; /* Navy text on navy footer would be invisible, sync with white */
     --grid-opacity: 0.0;
     --table-bg: #ffffff;
@@ -119,6 +137,15 @@ html.style-retro-academic {
     --math-bg: #fefcf0;
     --header-bg: #111111;
     --tab-text: rgba(255, 255, 255, 0.7);
+    --tab-color-hover: #ffffff;
+    --tab-bg-hover: rgba(255, 255, 255, 0.15);
+    --tab-color-active: #111111;
+    --tab-bg-active: #faf6e8;
+    --tab-border-active: 2px solid #111111;
+    --tab-line-active: var(--accent-orange);
+    --tab-color-completed: #ffffff;
+    --tab-bg-completed: rgba(255, 255, 255, 0.15);
+    --tab-line-completed: rgba(255, 255, 255, 0.4);
     --footer-text: #ffffff;
     --grid-opacity: 0.0;
     --table-bg: #fefcf0;
@@ -158,7 +185,16 @@ html.style-cyber-terminal {
     --backdrop-blur: none;
     --math-bg: #eee8d5;
     --header-bg: #586e75;
-    --tab-text: #fdf6e3;
+    --tab-text: rgba(253, 246, 227, 0.6);
+    --tab-color-hover: #fdf6e3;
+    --tab-bg-hover: rgba(253, 246, 227, 0.15);
+    --tab-color-active: #586e75;
+    --tab-bg-active: #fdf6e3;
+    --tab-border-active: 2px solid #586e75;
+    --tab-line-active: #cb4b16;
+    --tab-color-completed: #fdf6e3;
+    --tab-bg-completed: rgba(253, 246, 227, 0.15);
+    --tab-line-completed: rgba(253, 246, 227, 0.4);
     --footer-text: #fdf6e3;
     --grid-opacity: 0.0;
     --table-bg: #eee8d5;

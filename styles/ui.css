@@ -166,7 +166,7 @@ html.dark-mode .theme-icon::before {
 
 .tab-item {
     background: transparent;
-    color: rgba(255, 255, 255, 0.45); /* Muted for future tabs in Light Mode */
+    color: var(--tab-text);
     border: none;
     padding: 0 10px;
     border-radius: 12px; /* Matched with timer button rounded style */
@@ -179,10 +179,6 @@ html.dark-mode .theme-icon::before {
     align-items: center;
     position: relative;
     text-transform: uppercase;
-}
-
-html.dark-mode .tab-item {
-    color: rgba(202, 233, 255, 0.7); /* Significantly increased opacity from 0.45 for readability */
 }
 
 .tab-item::after {
@@ -199,49 +195,33 @@ html.dark-mode .tab-item {
 
 /* Completed Tabs Style */
 .tab-item.completed {
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-html.dark-mode .tab-item.completed {
-    color: var(--text-primary); /* Full brightness for completed tabs in dark mode */
-    background: rgba(202, 233, 255, 0.12);
+    color: var(--tab-color-completed);
+    background: var(--tab-bg-completed);
 }
 
 .tab-item.completed::after {
     width: 100%;
     height: 2px;
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--tab-line-completed);
 }
 
 .tab-item:hover {
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-html.dark-mode .tab-item:hover {
-    color: rgba(202, 233, 255, 0.9);
-    background: rgba(202, 233, 255, 0.12);
+    color: var(--tab-color-hover);
+    background: var(--tab-bg-hover);
 }
 
 /* Active Tab Style */
 .tab-item.active {
-    background: rgba(255, 255, 255, 0.22);
-    color: white;
+    background: var(--tab-bg-active);
+    color: var(--tab-color-active) !important;
     box-shadow: var(--shadow-tab-active);
+    border: var(--tab-border-active);
     font-weight: 800;
-}
-
-html.dark-mode .tab-item.active {
-    color: #ffffff !important; /* Absolute white for max contrast */
-    background: rgba(4, 102, 200, 0.4); /* Stronger blue background */
-    box-shadow: var(--shadow-tab-active);
-    border: 1px solid rgba(202, 233, 255, 0.3);
 }
 
 .tab-item.active::after {
     width: 85%;
-    background: var(--accent-orange); /* Progress indicator */
+    background: var(--tab-line-active); /* Progress indicator */
 }
 
 /* ════════════════════════════════════════════════════
