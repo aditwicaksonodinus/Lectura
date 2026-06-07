@@ -30,17 +30,70 @@
     --title-border-color: rgba(245, 158, 11, 0.1);
     --closing-border-color: rgba(245, 158, 11, 0.1);
     
+    --presentation-width: 1600px; /* Default for 16:9 */
+}
+
+/* ════════════════════════════════════════════════════
+   STYLE PRESET 1 — GLASSMORPH (Default Fallback)
+   ════════════════════════════════════════════════════ */
+html,
+html.style-glassmorph {
     --bg-card: linear-gradient(135deg, rgba(255, 255, 255, 0.70), rgba(255, 255, 255, 0.50));
     --bg-header-card: var(--bg-card);
     --bg-dot: rgba(27, 54, 93, 0.25);
+    --border-card: 1px solid var(--border-subtle);
+    --accent-left: 4px solid var(--accent-orange); /* Signature Orange Line */
+    --accent-left-navy: 4px solid var(--primary-academic); /* Secondary Navy Line */
     --shadow-card: 0 8px 32px 0 rgba(27, 54, 93, 0.08); /* Sophisticated subtle shadow */
     --shadow-active: 0 8px 32px 0 rgba(27, 54, 93, 0.15); /* Pronounced active shadow */
+    --card-radius: 15px;
+    --backdrop-blur: blur(5px);
     --math-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.10));
     --header-bg: linear-gradient(135deg, rgba(3, 4, 94, 0.98), rgba(2, 62, 138, 0.95)); /* Navy to Royal Blue Glass */
     --tab-text: rgba(255, 255, 255, 0.65);
     --footer-text: white;
+    --grid-opacity: 0.60;
 
-    --presentation-width: 1600px; /* Default for 16:9 */
+    /* UI Specific Glassy Styles */
+    --shadow-ui: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 5px 25px rgba(0, 0, 0, 0.2);
+    --shadow-tab-active: 0 0 15px rgba(255, 255, 255, 0.15);
+    --bg-timer: rgba(255, 255, 255, 0.15);
+    --border-timer: 1px solid rgba(255, 255, 255, 0.3);
+    --color-timer: #ffffff;
+    --bg-timer-btn: rgba(255, 255, 255, 0.22);
+    --border-timer-btn: 1px solid rgba(255, 255, 255, 0.35);
+    --color-timer-btn: #ffffff;
+}
+
+/* ════════════════════════════════════════════════════
+   STYLE PRESET 2 — FORMAL (Traditional Academic Flat)
+   ════════════════════════════════════════════════════ */
+html.style-formal {
+    --bg-card: #ffffff;
+    --bg-header-card: var(--bg-card);
+    --bg-dot: transparent;
+    --border-card: 1px solid var(--border-subtle);
+    --accent-left: 4px solid var(--accent-orange); /* Unify with signature line shape */
+    --accent-left-navy: 4px solid var(--primary-academic); /* Unify with signature line shape */
+    --shadow-card: none;
+    --shadow-active: none;
+    --card-radius: 15px;
+    --backdrop-blur: none;
+    --math-bg: #ffffff;
+    --header-bg: var(--primary-academic);
+    --tab-text: rgba(255, 255, 255, 0.85);
+    --footer-text: white; /* Navy text on navy footer would be invisible, sync with white */
+    --grid-opacity: 0.0;
+
+    /* UI Specific Flat Styles */
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+    --bg-timer: #ffffff;
+    --border-timer: 1px solid var(--primary-academic);
+    --color-timer: var(--primary-academic);
+    --bg-timer-btn: var(--primary-academic);
+    --border-timer-btn: 1px solid var(--primary-academic);
+    --color-timer-btn: #ffffff;
 }
 
 /* Aspect Ratio Adjustments */

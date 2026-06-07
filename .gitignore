@@ -26,5 +26,8 @@ assets/adversarial_inactive_reward/
 content-id.md
 
 # Agent internal folders
-.agents/
 .antigravitycli/
+
+# Local development overrides
+*.local
+local/

@@ -34,7 +34,7 @@ export function updateActiveTab() {
 
     tabsCache.forEach(tab => {
         const tabSection = tab.getAttribute('data-section-name');
-
+        
         if (tabSection === currentSection) {
             tab.classList.add('active');
             tab.classList.remove('completed');

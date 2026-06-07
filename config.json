@@ -12,5 +12,6 @@
   "timerResetText": "RESET",
   "themeToggleTitle": "Toggle Dark/Light Mode",
   "aspectRatio": "16:9",
+  "stylePreset": "formal",
   "contentFile": "content-id.md"
 }

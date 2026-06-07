@@ -11,17 +11,19 @@
    ════════════════════════════════════════════════════ */
 .academic-box {
     background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-left: 4px solid var(--primary-academic);
+    border: var(--border-card);
+    border-left: var(--accent-left);
     padding: 30px 40px;
     margin-bottom: 20px;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-card), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
     width: 100%;
     max-width: var(--presentation-width);
     box-sizing: border-box;
-    border-radius: 15px;
+    border-radius: var(--card-radius);
     text-align: left;
     position: relative;
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
     /* Separate cubic-bezier transitions specifically for interactive scale feedback and shadow scaling.
        These are distinct from the general theme color transitions defined in the global transit rules. */
     transition: 
@@ -31,9 +33,7 @@
     will-change: transform;
 }
 
-html.dark-mode .academic-box {
-    background: linear-gradient(135deg, rgba(4, 102, 200, 0.1), rgba(0, 24, 69, 0.3));
-}
+/* Academic boxes are unified via CSS variables and follow the same layout */
 
 .academic-box::before {
     content: '';
@@ -45,14 +45,22 @@ html.dark-mode .academic-box {
     background: var(--border-subtle);
 }
 
+/* Variants with colored borders — Using tokens to ensure style consistency */
+.academic-box.red-top,
+.academic-box.blue-top {
+    border-left: var(--accent-left);
+}
+
 .academic-box.red-top {
-    border-color: rgba(27, 54, 93, 0.06);
-    border-left: 4px solid var(--primary-academic);
+    border-top-color: rgba(27, 54, 93, 0.06);
+    border-right-color: rgba(27, 54, 93, 0.06);
+    border-bottom-color: rgba(27, 54, 93, 0.06);
 }
 
 .academic-box.blue-top {
-    border-color: rgba(0, 98, 155, 0.06);
-    border-left: 4px solid var(--primary-academic);
+    border-top-color: rgba(0, 98, 155, 0.06);
+    border-right-color: rgba(0, 98, 155, 0.06);
+    border-bottom-color: rgba(0, 98, 155, 0.06);
 }
 
 /* Touch Feedback & Hover */
@@ -91,9 +99,9 @@ html.dark-mode .academic-box {
     max-width: 100%;
     max-height: 700px;
     object-fit: contain;
-    border-radius: 15px;
-    border: 1px solid var(--border-light);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: var(--card-radius);
+    border: var(--border-card);
+    box-shadow: var(--shadow-card);
 }
 
 .full-width-image-container {
@@ -107,9 +115,9 @@ html.dark-mode .academic-box {
     max-width: 100%;
     max-height: 450px;
     object-fit: contain;
-    border-radius: 15px;
-    border: 1px solid var(--border-light);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: var(--card-radius);
+    border: var(--border-card);
+    box-shadow: var(--shadow-card);
 }
 
 .two-image-row {
@@ -118,8 +126,8 @@ html.dark-mode .academic-box {
 
 .two-image-row .flex-item img {
     max-height: 350px;
-    border-radius: 15px;
-    border: 1px solid var(--border-light);
+    border-radius: var(--card-radius);
+    border: var(--border-card);
 }
 
 /* Dark Mode — White background for transparent PNGs */
@@ -197,6 +205,7 @@ tbody tr:last-child td {
     border-bottom: 3px solid var(--primary-academic);
     background: var(--math-bg); /* Use themed bg */
 }
+/* Tables are unified using variables */
 
 html.dark-mode .academic-table-wrapper table {
     background: linear-gradient(135deg, rgba(4, 102, 200, 0.05), rgba(0, 24, 69, 0.3));
@@ -240,6 +249,7 @@ html.dark-mode .academic-table-wrapper table {
     border-radius: 8px;
     box-sizing: border-box;
 }
+/* Equations are unified using variables */
 
 .ieee-equation-content {
     flex-grow: 1;
@@ -283,6 +293,7 @@ mjx-container:not([display="true"]) {
     justify-content: center;
     overflow: visible !important; /* allow diagrams to extend beyond container if needed */
 }
+/* Mermaid containers are unified using variables */
 
 /* Ensure all text and HTML labels inside mermaid container have a stable dark color */
 .mermaid,

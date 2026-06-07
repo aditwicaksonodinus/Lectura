@@ -22,6 +22,7 @@ export let TIMER_RESET_TEXT     = 'RESET';
 export let THEME_TOGGLE_TITLE   = 'Toggle Dark/Light Mode';
 export let ASPECT_RATIO         = '16:9';
 export let CONTENT_FILE         = 'content-id.md';
+export let STYLE_PRESET         = 'glassmorph';
 
 /**
  * Loads configuration from config.json and updates the variables above.
@@ -49,6 +50,7 @@ export async function loadConfig() {
         THEME_TOGGLE_TITLE   = config.themeToggleTitle    || THEME_TOGGLE_TITLE;
         ASPECT_RATIO         = config.aspectRatio         || ASPECT_RATIO;
         CONTENT_FILE         = config.contentFile || (LANG === 'en' ? 'content-en.md' : 'content-id.md');
+        STYLE_PRESET         = config.stylePreset || STYLE_PRESET;
     } catch (configErr) {
         console.warn('Error loading config.json, using default values:', configErr);
     }

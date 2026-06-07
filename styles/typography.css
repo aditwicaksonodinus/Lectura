@@ -22,7 +22,6 @@
 
 .reveal h1, .reveal h2, .reveal h3 {
     font-family: "Noto Serif", serif;
-    color: var(--primary-academic);
     text-transform: none;
     font-weight: 700;
     line-height: 1.2;
@@ -30,20 +29,42 @@
     letter-spacing: 0.02em;
 }
 
+/* Glassmorph Style H2 */
+html, html.style-glassmorph {
+    --h2-color: var(--accent-orange);
+}
+
+/* Formal Style H2 */
+html.style-formal {
+    --h2-color: var(--accent-orange);
+}
+
+.reveal h2 {
+    color: var(--h2-color);
+}
+
+/* Base Heading Color Defaults */
+.reveal h1, .reveal h3 {
+    color: var(--primary-academic);
+}
+
 /* Card styling for H3 (Note: Redefined as a container card component; affects ### markdown headers) */
 .reveal .slides section h3 {
     color: var(--primary-academic);
     background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-left: 4px solid var(--primary-academic);
-    padding: 15px 30px;
-    box-shadow: none;
-    border-radius: 12px;
+    border: var(--border-card);
+    border-left: var(--accent-left);
+    padding: 30px 40px;
+    box-shadow: var(--shadow-card), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    border-radius: var(--card-radius);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
     width: 100%;
     max-width: var(--presentation-width);
     margin: 0 auto 20px auto;
     text-align: left;
     box-sizing: border-box;
+    position: relative;
 }
 
 /* Dark Mode — Heading Color Overrides */
@@ -59,7 +80,7 @@ html.dark-mode .reveal .slides section:not(.layout-title):not(.layout-closing) h
 html.dark-mode .reveal .slides section h3,
 html.dark-mode .academic-box h4,
 html.dark-mode .reveal h5 {
-    color: #FF9B05;
+    color: var(--accent-orange);
 }
 
 /* SPECIAL Title Slide: Clear White (Force high specificity) */
@@ -85,19 +106,21 @@ li {
 
 /* Blockquotes — IEEE Formal Style */
 blockquote {
-    border-left: 4px solid var(--ieee-blue) !important;
-    background: var(--bg-gray) !important;
-    padding: 15px 30px !important;
+    border-left: var(--accent-left) !important;
+    background: var(--bg-card) !important;
+    padding: 20px 30px !important;
     margin: 25px 0 !important;
     font-size: 0.85em !important;
-    color: var(--text-secondary) !important;
+    color: var(--text-primary) !important;
     font-style: normal !important;
     text-align: left !important;
     line-height: 1.25 !important;
-    box-shadow: none !important;
+    box-shadow: var(--shadow-card) !important;
     width: auto !important;
     align-self: stretch !important;
-    border-radius: 0 !important;
+    border-radius: var(--card-radius) !important;
+    backdrop-filter: var(--backdrop-blur) !important;
+    -webkit-backdrop-filter: var(--backdrop-blur) !important;
 }
 
 blockquote p {
@@ -110,3 +133,5 @@ blockquote p {
 blockquote::before {
     display: none !important;
 }
+
+/* Blockquotes & H3 styles unified above using CSS Variables */

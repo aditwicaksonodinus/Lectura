@@ -22,6 +22,7 @@ import {
     THEME_TOGGLE_TITLE,
     ASPECT_RATIO,
     CONTENT_FILE,
+    STYLE_PRESET,
 } from './config.js';
 
 import { initMermaid }          from './mermaid.js';
@@ -123,6 +124,11 @@ export async function initPresentation() {
         document.documentElement.classList.remove('ratio-16-9', 'ratio-4-3');
         const ratioClass = `ratio-${ASPECT_RATIO.replace(':', '-')}`;
         document.documentElement.classList.add(ratioClass);
+
+        // Apply Style Preset class
+        document.documentElement.classList.remove('style-glassmorph', 'style-formal');
+        const stylePresetClass = `style-${STYLE_PRESET}`;
+        document.documentElement.classList.add(stylePresetClass);
 
         // Reveal theme
         const themeLink = document.getElementById('theme');

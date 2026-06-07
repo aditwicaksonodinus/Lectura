@@ -6,7 +6,7 @@
   ========================================================================
 */
 
-/* Dark Mode — CSS Variable Overrides */
+/* Dark Mode — Base Variables (Shared / Theme Parity) */
 html.dark-mode {
     --bg-gray: #001845; /* Oxford Blue Background */
     --text-primary: #cae9ff; /* Light Cyan-White */
@@ -14,18 +14,65 @@ html.dark-mode {
     --text-muted: #62b6cb; /* Muted Cyan */
     --primary-academic: #0466c8; /* Honolulu Blue */
     --secondary-academic: #33415c; /* Slate Blue */
+    --teal-dark: #0b3c43; /* Dark Teal */
+    --border-subtle: rgba(4, 102, 200, 0.35); /* Slightly stronger border for glass */
+    --row-alt: rgba(4, 102, 200, 0.08); /* Subtle gradient for tables */
+    --footnote-color: var(--text-muted); /* Sync with footer color */
+}
+
+/* Preset 1: Dark Mode Glassmorphism Overrides */
+html.dark-mode,
+html.dark-mode.style-glassmorph {
     --bg-card: linear-gradient(145deg, rgba(5, 10, 20, 0.75), rgba(0, 0, 5, 0.55)); /* Very Dark/Black Glass */
     --bg-header-card: linear-gradient(135deg, rgba(4, 102, 200, 0.1), rgba(0, 24, 69, 0.3));
     --bg-dot: rgba(4, 102, 200, 0.15); 
+    --border-card: 1px solid var(--border-subtle);
     --shadow-card: 0 0 25px rgba(0, 0, 0, 0.5); /* Centered and reduced spread */
     --shadow-active: 0 0 50px rgba(4, 102, 200, 0.2); /* Centered and reduced spread */
-    --border-subtle: rgba(4, 102, 200, 0.35); /* Slightly stronger border for glass */
+    --card-radius: 15px;
+    --backdrop-blur: blur(5px);
     --math-bg: rgba(0, 24, 69, 0.4); /* Deep Navy Glass */
     --header-bg: linear-gradient(135deg, rgba(0, 18, 51, 0.95), rgba(0, 24, 69, 0.95), rgba(0, 40, 85, 0.95)); /* Deep Classic Navy Glass */
-    --tab-text: rgba(98, 182, 203, 0.5); /* Match footer text color (--text-muted) muted */
+    --tab-text: rgba(98, 182, 203, 0.5);
     --footer-text: #62b6cb;
-    --row-alt: rgba(4, 102, 200, 0.08); /* Subtle gradient for tables */
-    --footnote-color: var(--footer-text); /* Sync with footer color */
+    --grid-opacity: 0.60;
+
+    /* UI Dark Glassy Styles */
+    --shadow-ui: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 5px 25px rgba(0, 0, 0, 0.4);
+    --shadow-tab-active: 0 0 20px rgba(202, 233, 255, 0.2);
+    --bg-timer: rgba(4, 102, 200, 0.2);
+    --border-timer: 1px solid rgba(202, 233, 255, 0.4);
+    --color-timer: #ffffff;
+    --bg-timer-btn: rgba(255, 255, 255, 0.22);
+    --border-timer-btn: 1px solid rgba(202, 233, 255, 0.4);
+    --color-timer-btn: #ffffff;
+}
+
+/* Preset 2: Dark Mode Formal Overrides */
+html.dark-mode.style-formal {
+    --bg-card: #001233; /* Dark solid card background */
+    --bg-header-card: var(--bg-card); /* Solid header */
+    --bg-dot: transparent;
+    --border-card: 1px solid var(--border-subtle); /* Unify border structure */
+    --shadow-card: none;
+    --shadow-active: none;
+    --card-radius: 15px;
+    --backdrop-blur: none;
+    --math-bg: #001233; /* Solid dark blue */
+    --header-bg: var(--teal-dark); /* Solid Dark Teal */
+    --tab-text: rgba(202, 233, 255, 0.85);
+    --footer-text: #62b6cb;
+    --grid-opacity: 0.0;
+
+    /* UI Dark Flat Styles */
+    --shadow-ui: none;
+    --shadow-tab-active: none;
+    --bg-timer: #001233;
+    --border-timer: 1px solid var(--text-primary);
+    --color-timer: var(--text-primary);
+    --bg-timer-btn: var(--primary-academic);
+    --border-timer-btn: 1px solid var(--primary-academic);
+    --color-timer-btn: #ffffff;
 }
 
 /* Global Stacking Context */
@@ -46,7 +93,7 @@ html::before {
     background-image: url('../assets/background.png');
     background-size: cover;
     background-position: center;
-    opacity: 0.60; /* 40% Transparency (Opacity 60%) */
+    opacity: var(--grid-opacity);
     z-index: 1; /* Render in front of html canvas background */
     pointer-events: none; /* Let clicks pass through to presentation */
     transition: opacity 0.4s ease, filter 0.4s ease;

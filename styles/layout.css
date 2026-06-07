@@ -13,33 +13,37 @@
     justify-content: flex-start; /* Align content to top */
     align-items: center;
     height: 100%;
-    padding: 190px 60px 80px 60px; /* Adjusted to prevent title overlap */
+    padding: 80px 60px 80px 60px; /* Reduced top padding now that header flows naturally */
     box-sizing: border-box;
     text-align: left;
     overflow: visible !important; /* Allow card zoom/shadow to spill out */
 }
 
-/* Floating Slide Title (H2) */
+/* Floating Slide Title (H2) — Now follows academic-box style rules */
 .reveal .slides section:not(.layout-title):not(.layout-closing) h2 {
-    position: absolute;
-    top: 90px; /* Adjusted from 125px to match slimmer header (15+40=55 + 35 gap) */
-    left: 50%;
-    transform: translateX(-50%);
-    width: var(--presentation-width); /* Fixed width to match academic-box max-width */
-    background: var(--bg-header-card);
-    border: 1px solid var(--border-subtle);
-    border-left: 4px solid var(--primary-academic); /* Unified 10px left border */
+    position: relative; /* Changed from absolute to flow naturally */
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: var(--presentation-width);
+    background: var(--bg-card);
+    border: var(--border-card);
+    border-left: var(--accent-left);
     padding: 20px 40px;
     box-shadow: var(--shadow-card);
-    margin: 0;
+    margin: 0 auto 25px auto; /* Centered with bottom margin to separate from content */
     font-size: 1.4em;
     line-height: 1.2;
-    text-align: left; /* Align text to match content cards */
+    text-align: left;
     z-index: 5;
     box-sizing: border-box;
-    border-radius: 15px;
+    border-radius: var(--card-radius);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
     color: var(--primary-academic);
 }
+
 
 /* ── Scrollable Content Wrapper ── */
 .content-wrapper {
@@ -114,6 +118,11 @@
     box-shadow: none !important;
 }
 
+/* Formal Exception: Keep the global accent even in plain UI */
+html.style-formal .plain-ui {
+    border-left: var(--accent-left) !important;
+}
+
 /* ── Layout: Title & Closing Section Resets ── */
 .reveal .slides section.layout-title,
 .reveal .slides section.layout-closing {
@@ -135,13 +144,15 @@
     box-sizing: border-box;
     text-align: center !important;
     background: var(--bg-card) !important; /* Themed background */
-    border: 1px solid var(--border-subtle);
-    border-left: 4px solid var(--primary-academic); /* Navy Blue Accent */
+    border: var(--border-card);
+    border-left: var(--accent-left-navy); 
     box-shadow: var(--shadow-active);
     margin: 0 auto !important;
     position: relative;
     z-index: 10;
-    border-radius: 15px;
+    border-radius: var(--card-radius);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
 }
 
 .layout-title-slide > * {
@@ -211,13 +222,15 @@
     box-sizing: border-box;
     text-align: center !important;
     background: var(--bg-card) !important; /* Themed background */
-    border: 1px solid var(--border-subtle);
-    border-left: 4px solid var(--primary-academic); /* Navy Blue Accent */
+    border: var(--border-card);
+    border-left: var(--accent-left-navy); 
     box-shadow: var(--shadow-active);
     margin: 0 auto !important;
     position: relative;
     z-index: 10;
-    border-radius: 15px;
+    border-radius: var(--card-radius);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
 }
 
 .layout-closing-slide h1 {
@@ -268,3 +281,5 @@
 .layout-1-column-stacked .academic-box h4 {
     margin-bottom: 10px !important;
 }
+
+/* Slide layouts unified using variables */

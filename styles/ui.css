@@ -18,9 +18,11 @@
     width: var(--presentation-width);
     height: 46px; /* Slightly taller for better alignment with footer style */
     background: var(--header-bg); /* Themed header bg */
-    border: 1px solid var(--border-subtle);
-    border-radius: 15px; /* Matched with footer */
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 5px 25px rgba(0, 0, 0, 0.2);
+    border: var(--border-card);
+    border-radius: var(--card-radius); /* Matched with footer */
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    box-shadow: var(--shadow-ui);
     box-sizing: border-box;
     z-index: 100; /* High priority */
     display: flex;
@@ -48,11 +50,11 @@
 
 #accessibility-toggle,
 .accessibility-menu button {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
+    background: var(--bg-timer-btn);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border: var(--border-timer-btn);
+    color: var(--color-timer-btn);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -82,10 +84,10 @@
     left: 50%;
     right: auto;
     background: var(--header-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--border-subtle);
-    border-radius: 15px; /* Matched with header/footer */
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border: var(--border-card);
+    border-radius: var(--card-radius); /* Matched with header/footer */
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.3);
     padding: 8px;
     display: flex;
@@ -226,14 +228,14 @@ html.dark-mode .tab-item:hover {
 .tab-item.active {
     background: rgba(255, 255, 255, 0.22);
     color: white;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-tab-active);
     font-weight: 800;
 }
 
 html.dark-mode .tab-item.active {
     color: #ffffff !important; /* Absolute white for max contrast */
     background: rgba(4, 102, 200, 0.4); /* Stronger blue background */
-    box-shadow: 0 0 20px rgba(202, 233, 255, 0.2);
+    box-shadow: var(--shadow-tab-active);
     border: 1px solid rgba(202, 233, 255, 0.3);
 }
 
@@ -246,35 +248,28 @@ html.dark-mode .tab-item.active {
    TIMER
    ════════════════════════════════════════════════════ */
 .timer-container {
-    background: rgba(255, 255, 255, 0.15); /* Slightly clearer glassy background */
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: var(--bg-timer);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
     padding: 0 20px;
     height: 36px;
-    border-radius: 15px; /* Rounded consistent with dashboard style */
+    border-radius: var(--card-radius); /* Rounded consistent with dashboard style */
     display: flex;
     align-items: center;
     gap: 12px;
     font-family: inherit;
     font-weight: 700;
     font-size: 0.75em;
-    color: #ffffff;
-    box-shadow: none;
+    color: var(--color-timer);
+    box-shadow: var(--shadow-ui-container);
     margin-bottom: 0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-html.dark-mode .timer-container {
-    background: rgba(4, 102, 200, 0.2);
-    color: #ffffff;
-    border-color: rgba(202, 233, 255, 0.4);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border: var(--border-timer);
 }
 
 .timer-container button {
-    background: rgba(255, 255, 255, 0.22);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: var(--bg-timer-btn);
+    color: var(--color-timer-btn);
+    border: var(--border-timer-btn);
     padding: 4px 12px;
     border-radius: 12px; /* Rounded consistent with timer container */
     cursor: pointer;
@@ -283,27 +278,17 @@ html.dark-mode .timer-container {
     transition: background 0.2s ease, transform 0.1s ease;
 }
 
-html.dark-mode .timer-container button {
-    border-color: rgba(202, 233, 255, 0.4);
-}
-
 /* Distinct button variants */
 .timer-container button#start-timer {
     background: var(--primary-academic);
     border-color: var(--primary-academic);
-}
-
-html.dark-mode .timer-container button#start-timer {
-    background: #0466c8; /* Brighter blue for dark mode */
+    color: white;
 }
 
 .timer-container button#reset-timer {
     background: var(--secondary-academic);
     border-color: var(--secondary-academic);
-}
-
-html.dark-mode .timer-container button#reset-timer {
-    background: #5c677d; /* Lighter slate blue for dark mode */
+    color: white;
 }
 
 .timer-container button:hover {
@@ -360,9 +345,11 @@ html.dark-mode .timer-container button#reset-timer {
     width: var(--presentation-width);
     height: 50px;
     background: var(--header-bg); /* Themed header bg */
-    border: 1px solid var(--border-subtle);
-    border-radius: 15px;
-    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.2);
+    border: var(--border-card);
+    border-radius: var(--card-radius);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    box-shadow: var(--shadow-ui);
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr; /* Center info given more space */
     align-items: center;
@@ -410,7 +397,7 @@ html.dark-mode .timer-container button#reset-timer {
     justify-content: flex-end;
     align-items: center;
     gap: 15px;
-    color: white;
+    color: inherit;
     height: 100%;
 }
 
@@ -434,7 +421,7 @@ html.dark-mode .timer-container button#reset-timer {
     font-size: 1em !important;
     letter-spacing: normal !important;
     line-height: 1 !important;
-    color: white !important;
+    color: inherit !important;
     background: transparent !important; /* Remove the black box */
     padding: 0 !important; /* Remove default padding */
     margin: 0 !important;
@@ -629,3 +616,5 @@ html.dark-mode .navigation-controls button {
     cursor: cell; /* Pencil-like cursor */
     touch-action: none;
 }
+
+/* Formal Specific Slide Number & Footer Text Visibility Fixes unified using variables */
