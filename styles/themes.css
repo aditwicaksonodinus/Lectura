@@ -152,28 +152,29 @@ html.dark-mode.style-formal {
    ───────────────────────────────────────────────────────────── */
 html.style-retro {
     /* Layout & Backgrounds */
-    --bg-main: #faf6a8;
-    --bg-card: #fefcf1;
-    --bg-secondary: #fefcf0;
+    --bg-main: #ffffff;
+    --bg-card: #ffffff;
+    --bg-secondary: #fafafa;
     --border-primary: 3px solid #111111;
     --border-accent-primary: 3px solid #f59e0b;
     --border-accent-secondary: 3px solid #111111;
-    --shadow-card: 5px 5px 0px #111111;
-    --shadow-card-active: 8px 8px 0px #111111;
+    --shadow-card: 2px 2px 0px #e11d48, 4px 4px 0px #f59e0b, 6px 6px 0px #2d3fe7;
+    --shadow-card-active: 3px 3px 0px #e11d48, 6px 6px 0px #f59e0b, 9px 9px 0px #2d3fe7;
+    --shadow-card-inset: none;
     --radius-card: 4px;
     --blur-backdrop: none;
-    --bg-header: #111111;
-    --text-footer: #ffffff;
+    --bg-header: #ffffff;
+    --text-footer: #111111;
     --opacity-grid: 0.0;
     --shadow-ui: 4px 4px 0px #111111;
     --shadow-tab-active: none;
 
     /* Interactive Elements (Tabs & Buttons) */
-    --text-tab: #ffffffb2;
-    --text-tab-active: #111111;
-    --bg-tab-active: #faf6e8;
-    --bg-tab-highlight: #ffffff26;
-    --text-tab-highlight: #ffffff;
+    --text-tab: #111111b2;
+    --text-tab-active: #ffffff;
+    --bg-tab-active: #111111;
+    --bg-tab-highlight: #1111111a;
+    --text-tab-highlight: #111111;
     --border-tab-line-active: #f59e0b;
 
     /* Typography & Branding */
@@ -186,25 +187,26 @@ html.style-retro {
 
 html.dark-mode.style-retro {
     /* Layout & Backgrounds */
-    --bg-main: #291507;
-    --bg-card: #3d1f0b;
-    --bg-secondary: #3d1f0b;
-    --border-primary: 3px solid #111111;
+    --bg-main: #121212;
+    --bg-card: #1e1e1e;
+    --bg-secondary: #1e1e1e;
+    --border-primary: 3px solid #000000;
     --border-accent-primary: 3px solid #f59e0b;
-    --border-accent-secondary: 3px solid #111111;
-    --shadow-card: 5px 5px 0px #111111;
-    --shadow-card-active: 8px 8px 0px #111111;
+    --border-accent-secondary: 3px solid #000000;
+    --shadow-card: 2px 2px 0px #f43f5e, 4px 4px 0px #f59e0b, 6px 6px 0px #facc15;
+    --shadow-card-active: 3px 3px 0px #f43f5e, 6px 6px 0px #f59e0b, 9px 9px 0px #facc15;
+    --shadow-card-inset: none;
     --radius-card: 4px;
     --blur-backdrop: none;
-    --bg-header: #3d1f0b;
+    --bg-header: #1e1e1e;
     --text-footer: #eae6df;
     --opacity-grid: 0.0;
-    --shadow-ui: 4px 4px 0px #111111;
+    --shadow-ui: 4px 4px 0px #000000;
     --shadow-tab-active: none;
 
     /* Interactive Elements (Tabs & Buttons) */
     --text-tab: #eae6df99;
-    --text-tab-active: #3d1f0b;
+    --text-tab-active: #1e1e1e;
     --bg-tab-active: #eae6df;
     --bg-tab-highlight: #eae6df1a;
     --text-tab-highlight: #eae6df;
@@ -233,18 +235,18 @@ html.style-cyber {
     --shadow-card-active: 6px 6px 0px #dcdfe6;
     --radius-card: 0px;
     --blur-backdrop: none;
-    --bg-header: #121422;
-    --text-footer: #ffffff;
+    --bg-header: #ffffff;
+    --text-footer: #121422;
     --opacity-grid: 0.0;
     --shadow-ui: 4px 4px 0px #dcdfe6;
     --shadow-tab-active: none;
 
     /* Interactive Elements (Tabs & Buttons) */
-    --text-tab: #ffffffb2;
-    --text-tab-active: #00c8ff;
-    --bg-tab-active: #121422;
-    --bg-tab-highlight: #ffffff26;
-    --text-tab-highlight: #ffffff;
+    --text-tab: #121422b2;
+    --text-tab-active: #ffffff;
+    --bg-tab-active: #e6006f;
+    --bg-tab-highlight: #e6006f1a;
+    --text-tab-highlight: #e6006f;
     --border-tab-line-active: #e6006f;
 
     /* Typography & Branding */
@@ -275,10 +277,10 @@ html.dark-mode.style-cyber {
 
     /* Interactive Elements (Tabs & Buttons) */
     --text-tab: #ffffff99;
-    --text-tab-active: #00f0ff;
-    --bg-tab-active: #07080f;
-    --bg-tab-highlight: #ffffff26;
-    --text-tab-highlight: #ffffff;
+    --text-tab-active: #ffffff;
+    --bg-tab-active: #ff007f;
+    --bg-tab-highlight: #ff007f1a;
+    --text-tab-highlight: #ff007f;
     --border-tab-line-active: #ff007f;
 
     /* Typography & Branding */
@@ -295,67 +297,71 @@ html.dark-mode.style-cyber {
 html.style-minimal {
     /* Layout & Backgrounds */
     --bg-main: #ffffff;
-    --bg-card: #fafafa;
+    --bg-card: #ffffff;
     --bg-secondary: #fafafa;
-    --border-primary: 1px solid #e5e5e5;
-    --border-accent-primary: 1px solid #111111;
-    --border-accent-secondary: 1px solid #e5e5e5;
-    --shadow-card: none;
-    --shadow-card-active: none;
-    --radius-card: 4px;
+    --border-primary: none;
+    --border-card: none;
+    --border-accent-primary: 2px solid #0066cc;
+    --border-accent-secondary: none;
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-card-active: 0 12px 30px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.03);
+    --shadow-card-inset: none;
+    --radius-card: 12px;
     --blur-backdrop: none;
     --bg-header: #ffffff;
-    --text-footer: #888888;
+    --text-footer: #86868b;
     --opacity-grid: 0.0;
     --shadow-ui: none;
     --shadow-tab-active: none;
 
     /* Interactive Elements (Tabs & Buttons) */
-    --text-tab: #11111166;
-    --text-tab-active: #111111;
-    --bg-tab-active: #ffffff;
-    --bg-tab-highlight: #0000000a;
-    --text-tab-highlight: #111111;
-    --border-tab-line-active: #111111;
+    --text-tab: #86868b;
+    --text-tab-active: #1d1d1f;
+    --bg-tab-active: #fafafa;
+    --bg-tab-highlight: #00000005;
+    --text-tab-highlight: #1d1d1f;
+    --border-tab-line-active: transparent;
 
     /* Typography & Branding */
-    --text-primary: #111111;
-    --text-secondary: #444444;
-    --color-academic-primary: #111111;
-    --color-academic-secondary: #666666;
-    --color-timer-reset: #ef4444;
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --color-academic-primary: #1d1d1f;
+    --color-academic-secondary: #0066cc;
+    --color-timer-reset: #ff3b30;
 }
 
 html.dark-mode.style-minimal {
     /* Layout & Backgrounds */
-    --bg-main: #0a0a0a;
-    --bg-card: #121212;
-    --bg-secondary: #121212;
-    --border-primary: 1px solid #262626;
-    --border-accent-primary: 1px solid #e5e5e5;
-    --border-accent-secondary: 1px solid #262626;
-    --shadow-card: none;
-    --shadow-card-active: none;
-    --radius-card: 4px;
+    --bg-main: #0a0a0c;
+    --bg-card: #161618;
+    --bg-secondary: #161618;
+    --border-primary: none;
+    --border-card: none;
+    --border-accent-primary: 2px solid #2997ff;
+    --border-accent-secondary: none;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.45);
+    --shadow-card-active: 0 12px 36px rgba(0, 0, 0, 0.65);
+    --shadow-card-inset: none;
+    --radius-card: 12px;
     --blur-backdrop: none;
-    --bg-header: #0a0a0a;
-    --text-footer: #777777;
+    --bg-header: #0a0a0c;
+    --text-footer: #86868b;
     --opacity-grid: 0.0;
     --shadow-ui: none;
     --shadow-tab-active: none;
 
     /* Interactive Elements (Tabs & Buttons) */
-    --text-tab: #e5e5e566;
-    --text-tab-active: #e5e5e5;
-    --bg-tab-active: #121212;
-    --bg-tab-highlight: #ffffff0a;
-    --text-tab-highlight: #e5e5e5;
-    --border-tab-line-active: #e5e5e5;
+    --text-tab: #86868b;
+    --text-tab-active: #f5f5f7;
+    --bg-tab-active: #161618;
+    --bg-tab-highlight: #ffffff05;
+    --text-tab-highlight: #f5f5f7;
+    --border-tab-line-active: transparent;
 
     /* Typography & Branding */
-    --text-primary: #e5e5e5;
-    --text-secondary: #a3a3a3;
-    --color-academic-primary: #e5e5e5;
-    --color-academic-secondary: #737373;
-    --color-timer-reset: #f43f5e;
+    --text-primary: #f5f5f7;
+    --text-secondary: #86868b;
+    --color-academic-primary: #f5f5f7;
+    --color-academic-secondary: #2997ff;
+    --color-timer-reset: #ff453a;
 }

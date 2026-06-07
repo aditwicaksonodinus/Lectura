@@ -44,7 +44,7 @@
     border: var(--border-card);
     border-left: var(--border-accent-primary);
     padding: 30px 40px;
-    box-shadow: var(--shadow-card), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    box-shadow: var(--shadow-card), var(--shadow-card-inset, inset 0 1px 0 0 rgba(255, 255, 255, 0.15));
     border-radius: var(--radius-card);
     backdrop-filter: var(--blur-backdrop);
     -webkit-backdrop-filter: var(--blur-backdrop);

@@ -30,6 +30,7 @@
     --title-border-color: rgba(245, 158, 11, 0.1);
     --closing-border-color: rgba(245, 158, 11, 0.1);
     --h2-color: var(--accent-orange);
+    --border-card: var(--border-primary);
     
     --presentation-width: 1600px; /* Default for 16:9 */
 }
