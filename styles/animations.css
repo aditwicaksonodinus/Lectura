@@ -11,6 +11,11 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Preparatory state for staggered elements to avoid premature fade-in */
+.staggered-prepare {
+    opacity: 0;
+}
+
 .staggered {
     opacity: 0;
     animation: fadeUpStagger 0.5s ease forwards;

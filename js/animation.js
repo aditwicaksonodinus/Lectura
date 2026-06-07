@@ -4,15 +4,27 @@
 let _prevStaggered = [];
 
 /**
- * Applies staggered animation to elements in the active slide.
- * Cleans up animations from the previous slide first.
+ * Prepares elements in the incoming slide by hiding them to avoid overlap during transition.
+ * @param {HTMLElement|null} slide - The incoming slide section element
+ */
+export function prepareStaggeredAnimation(slide) {
+    if (!slide) return;
+
+    const elements = slide.querySelectorAll('.academic-box > *');
+    elements.forEach((el, i) => {
+        el.style.setProperty('--stagger-index', i);
+        el.classList.add('staggered-prepare');
+    });
+}
+
+/**
+ * Cleans up previous slide animations and triggers the staggered animation for current slide.
  * @param {HTMLElement|null} slide - The current slide section element
  */
-export function applyStaggeredAnimation(slide) {
-    // Clear stagger state from the previous slide via tracked refs
-    // (more efficient than a global querySelectorAll('.staggered') scan)
+export function playStaggeredAnimation(slide) {
+    // Clean up elements from previous slide (now fully hidden)
     for (const el of _prevStaggered) {
-        el.classList.remove('staggered');
+        el.classList.remove('staggered', 'staggered-prepare');
         el.style.removeProperty('--stagger-index');
     }
     _prevStaggered = [];
@@ -22,6 +34,7 @@ export function applyStaggeredAnimation(slide) {
     const elements = slide.querySelectorAll('.academic-box > *');
     elements.forEach((el, i) => {
         el.style.setProperty('--stagger-index', i);
+        el.classList.remove('staggered-prepare');
         el.classList.add('staggered');
     });
     _prevStaggered = Array.from(elements);

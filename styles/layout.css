@@ -8,7 +8,7 @@
 
 /* ── Main Slide Section ── */
 .reveal .slides section {
-    display: flex !important;
+    display: none;
     flex-direction: column;
     justify-content: flex-start; /* Align content to top */
     align-items: center;
@@ -17,6 +17,11 @@
     box-sizing: border-box;
     text-align: left;
     overflow: visible !important; /* Allow card zoom/shadow to spill out */
+}
+
+.reveal .slides section.present,
+.reveal .slides section.visible {
+    display: flex !important;
 }
 
 /* Floating Slide Title (H2) — Now follows academic-box style rules */

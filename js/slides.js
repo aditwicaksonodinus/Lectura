@@ -28,7 +28,7 @@ import {
 import { initMermaid }          from './mermaid.js';
 import { LayoutTemplates }      from './layouts.js';
 import { updateUI }             from './ui.js';
-import { applyStaggeredAnimation } from './animation.js';
+import { prepareStaggeredAnimation, playStaggeredAnimation } from './animation.js';
 import { startTimer, resetTimer, setTimerDuration } from './timer.js';
 import { resetTabsCache }       from './tabs.js';
 import { applyCSSConfig }       from './styles.js';
@@ -275,12 +275,21 @@ export async function initPresentation() {
         // 9. Register Reveal event listeners
         Reveal.on('slidechanged', event => {
             updateUI(event.currentSlide);
-            applyStaggeredAnimation(event.currentSlide);
+            prepareStaggeredAnimation(event.currentSlide);
         });
-        Reveal.on('ready', () => updateUI(Reveal.getCurrentSlide()));
 
-        // 10. Update UI for initial slide
+        Reveal.on('slidetransitionend', event => {
+            playStaggeredAnimation(event.currentSlide);
+        });
+
+        Reveal.on('ready', () => {
+            updateUI(Reveal.getCurrentSlide());
+            playStaggeredAnimation(Reveal.getCurrentSlide());
+        });
+
+        // 10. Update UI and play initial animation
         updateUI(Reveal.getCurrentSlide());
+        playStaggeredAnimation(Reveal.getCurrentSlide());
 
     } catch (error) {
         console.error('Presentation Load Error:', error);
