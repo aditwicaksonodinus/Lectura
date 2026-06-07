@@ -48,12 +48,12 @@
                 xhr.send(null);
                 if (xhr.status === 200) {
                     var config = JSON.parse(xhr.responseText);
-                    var preset = config.stylePreset || 'glassmorph';
+                    var preset = config.stylePreset || 'glass';
                     html.classList.add('style-' + preset);
                 }
             } catch (e) {
                 console.warn('Failed to load config synchronously:', e);
-                html.classList.add('style-glassmorph');
+                html.classList.add('style-glass');
             }
         })();
     </script>

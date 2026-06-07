@@ -126,8 +126,8 @@ python3 -m http.server 8000
 - Dark mode overrides in `styles/base.css`.
 
 **4. Changing the style preset**
-- Edit `stylePreset` in `config.json` (supported values: `"glassmorph"` or `"formal"`).
-- Customize preset rules under `styles/base.css` (`Preset 1: Dark Mode Glassmorphism Overrides` and `Preset 2: Dark Mode Formal Overrides`).
+- Edit `stylePreset` in `config.json` (supported values: `"glass"`, `"formal"`, `"retro"`, or `"cyber"`).
+- Customize preset rules under `styles/base.css` (`Preset 1: Dark Mode Glass Overrides` and `Preset 2: Dark Mode Formal Overrides`).
 
 **5. Adding card interactions**
 - Edit the `.academic-box` CSS selector in `styles/components.css`.

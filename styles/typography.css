@@ -126,26 +126,26 @@ blockquote::before {
 /* Blockquotes & H3 styles unified above using CSS Variables */
 
 /* ════════════════════════════════════════════════════
-   CYBER-TERMINAL MONOSPACE OVERRIDES
+   CYBER MONOSPACE OVERRIDES
    ════════════════════════════════════════════════════ */
-html.style-cyber-terminal .reveal,
-html.style-cyber-terminal .reveal p,
-html.style-cyber-terminal .reveal span,
-html.style-cyber-terminal .reveal li,
-html.style-cyber-terminal .reveal td,
-html.style-cyber-terminal .reveal th,
-html.style-cyber-terminal .reveal h1,
-html.style-cyber-terminal .reveal h2,
-html.style-cyber-terminal .reveal h3,
-html.style-cyber-terminal .reveal h4,
-html.style-cyber-terminal .reveal h5,
-html.style-cyber-terminal .reveal h6,
-html.style-cyber-terminal .reveal blockquote,
-html.style-cyber-terminal .reveal .slide-number,
-html.style-cyber-terminal .reveal .footer,
-html.style-cyber-terminal .reveal .header,
-html.style-cyber-terminal .loading-logo-text,
-html.style-cyber-terminal .loading-logo-sub,
-html.style-cyber-terminal .loading-status {
+html.style-cyber .reveal,
+html.style-cyber .reveal p,
+html.style-cyber .reveal span,
+html.style-cyber .reveal li,
+html.style-cyber .reveal td,
+html.style-cyber .reveal th,
+html.style-cyber .reveal h1,
+html.style-cyber .reveal h2,
+html.style-cyber .reveal h3,
+html.style-cyber .reveal h4,
+html.style-cyber .reveal h5,
+html.style-cyber .reveal h6,
+html.style-cyber .reveal blockquote,
+html.style-cyber .reveal .slide-number,
+html.style-cyber .reveal .footer,
+html.style-cyber .reveal .header,
+html.style-cyber .loading-logo-text,
+html.style-cyber .loading-logo-sub,
+html.style-cyber .loading-status {
     font-family: "Courier New", Courier, monospace !important;
 }

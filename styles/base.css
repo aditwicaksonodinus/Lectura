@@ -20,8 +20,8 @@ html.dark-mode {
     --footnote-color: var(--text-muted); /* Sync with footer color */
 }
 
-/* Preset 1: Dark Mode Glassmorphism Overrides */
-html.dark-mode.style-glassmorph {
+/* Preset 1: Dark Mode Glass Overrides */
+html.dark-mode.style-glass {
     --bg-card: linear-gradient(145deg, rgba(5, 10, 20, 0.75), rgba(0, 0, 5, 0.55)); /* Very Dark/Black Glass */
     --bg-header-card: linear-gradient(135deg, rgba(4, 102, 200, 0.1), rgba(0, 24, 69, 0.3));
     --bg-dot: rgba(4, 102, 200, 0.15); 
@@ -96,8 +96,8 @@ html.dark-mode.style-formal {
     --color-timer-btn: #ffffff;
 }
 
-/* Preset 3: Dark Mode Retro-Academic Overrides */
-html.dark-mode.style-retro-academic {
+/* Preset 3: Dark Mode Retro Overrides */
+html.dark-mode.style-retro {
     --bg-gray: #1c1917; /* Warm Stone-900 background */
     --bg-card: #2b2624; /* Stone-800 warm paper card */
     --bg-header-card: #2b2624;
@@ -143,8 +143,8 @@ html.dark-mode.style-retro-academic {
     --secondary-academic: #f43f5e; /* Retro rose */
 }
 
-/* Preset 4: Dark Mode Cyber-Terminal Overrides */
-html.dark-mode.style-cyber-terminal {
+/* Preset 4: Dark Mode Cyber Overrides */
+html.dark-mode.style-cyber {
     --bg-gray: #002b36; /* Solarized Dark Background: Base03 */
     --bg-card: #073642; /* Solarized Dark Card: Base02 */
     --bg-header-card: #073642;

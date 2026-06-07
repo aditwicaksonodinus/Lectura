@@ -35,10 +35,10 @@
 }
 
 /* ════════════════════════════════════════════════════
-   STYLE PRESET 1 — GLASSMORPH (Default Fallback)
+   STYLE PRESET 1 — GLASS (Default Fallback)
    ════════════════════════════════════════════════════ */
 html,
-html.style-glassmorph {
+html.style-glass {
     --bg-card: linear-gradient(135deg, rgba(255, 255, 255, 0.70), rgba(255, 255, 255, 0.50));
     --bg-header-card: var(--bg-card);
     --bg-dot: rgba(27, 54, 93, 0.25);
@@ -120,9 +120,9 @@ html.style-formal {
 }
 
 /* ════════════════════════════════════════════════════
-   STYLE PRESET 3 — RETRO-ACADEMIC (Neobrutalist)
+   STYLE PRESET 3 — RETRO (Neobrutalist)
    ════════════════════════════════════════════════════ */
-html.style-retro-academic {
+html.style-retro {
     --bg-gray: #faf6e8;
     --bg-card: #fefcf0;
     --bg-header-card: #fefcf0;
@@ -169,9 +169,9 @@ html.style-retro-academic {
 }
 
 /* ════════════════════════════════════════════════════
-   STYLE PRESET 4 — CYBER-TERMINAL (Solarized Terminal)
+   STYLE PRESET 4 — CYBER (Solarized Terminal)
    ════════════════════════════════════════════════════ */
-html.style-cyber-terminal {
+html.style-cyber {
     --bg-gray: #fdf6e3; /* Solarized Light Background: Base3 */
     --bg-card: #eee8d5; /* Solarized Light Card: Base2 */
     --bg-header-card: #eee8d5;

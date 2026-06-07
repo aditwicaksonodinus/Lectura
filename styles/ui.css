@@ -685,46 +685,46 @@ html.dark-mode .navigation-controls button {
 }
 
 /* Retro-Academic Specific Neobrutalist Loader */
-html.style-retro-academic .loading-spinner-bar {
+html.style-retro .loading-spinner-bar {
     border: 2px solid #111111;
     height: 10px;
     background-color: #ffffff;
     border-radius: 0px;
 }
 
-html.style-retro-academic .loading-progress {
+html.style-retro .loading-progress {
     background-color: #111111;
     border-radius: 0px;
 }
 
-html.dark-mode.style-retro-academic .loading-spinner-bar {
+html.dark-mode.style-retro .loading-spinner-bar {
     border: 2px solid #fafafa;
     background-color: #18181b;
 }
 
-html.dark-mode.style-retro-academic .loading-progress {
+html.dark-mode.style-retro .loading-progress {
     background-color: #fafafa;
 }
 
 /* Cyber-Terminal Specific Console Loader */
-html.style-cyber-terminal .loading-spinner-bar {
+html.style-cyber .loading-spinner-bar {
     border: 1px solid #586e75;
     background-color: #eee8d5;
     border-radius: 0px;
     height: 12px;
 }
 
-html.style-cyber-terminal .loading-progress {
+html.style-cyber .loading-progress {
     background-color: #cb4b16; /* Solarized Orange progress */
     border-radius: 0px;
 }
 
-html.dark-mode.style-cyber-terminal .loading-spinner-bar {
+html.dark-mode.style-cyber .loading-spinner-bar {
     border: 1px solid #2aa198; /* Solarized Cyan border */
     background-color: #073642; /* Solarized Base02 */
 }
 
-html.dark-mode.style-cyber-terminal .loading-progress {
+html.dark-mode.style-cyber .loading-progress {
     background-color: #2aa198; /* Solarized Cyan progress */
 }
 
