@@ -142,43 +142,43 @@ html.style-retro-academic {
 }
 
 /* ════════════════════════════════════════════════════
-   STYLE PRESET 4 — CYBER-TERMINAL (Hacker Console)
+   STYLE PRESET 4 — CYBER-TERMINAL (Solarized Terminal)
    ════════════════════════════════════════════════════ */
 html.style-cyber-terminal {
-    --bg-gray: #f0fbf0;
-    --bg-card: #e8f7e8;
-    --bg-header-card: #e8f7e8;
+    --bg-gray: #fdf6e3; /* Solarized Light Background: Base3 */
+    --bg-card: #eee8d5; /* Solarized Light Card: Base2 */
+    --bg-header-card: #eee8d5;
     --bg-dot: transparent;
-    --border-card: 2px solid #00aa00;
-    --accent-left: 2px solid var(--accent-orange);
-    --accent-left-navy: 2px solid #00aa00;
+    --border-card: 2px solid #586e75; /* Solarized Base01 */
+    --accent-left: 2px solid #cb4b16; /* Solarized Orange */
+    --accent-left-navy: 2px solid #586e75;
     --shadow-card: none;
     --shadow-active: none;
     --card-radius: 0px;
     --backdrop-blur: none;
-    --math-bg: #e8f7e8;
-    --header-bg: #00aa00;
-    --tab-text: white;
-    --footer-text: white;
-    --grid-opacity: 0.1;
-    --table-bg: #e8f7e8;
-    --equation-border: 2px solid #00aa00;
+    --math-bg: #eee8d5;
+    --header-bg: #586e75;
+    --tab-text: #fdf6e3;
+    --footer-text: #fdf6e3;
+    --grid-opacity: 0.0;
+    --table-bg: #eee8d5;
+    --equation-border: 2px solid #586e75;
 
     /* UI Specific Terminal Styles */
     --shadow-ui: none;
     --shadow-tab-active: none;
-    --bg-timer: #e8f7e8;
-    --border-timer: 2px solid #00aa00;
-    --color-timer: #00aa00;
-    --bg-timer-btn: #00aa00;
-    --border-timer-btn: 2px solid #00aa00;
-    --color-timer-btn: #ffffff;
+    --bg-timer: #eee8d5;
+    --border-timer: 2px solid #586e75;
+    --color-timer: #586e75;
+    --bg-timer-btn: #586e75;
+    --border-timer-btn: 2px solid #586e75;
+    --color-timer-btn: #fdf6e3;
 
     /* Typography / Colors Overrides */
-    --text-primary: #005500;
-    --text-secondary: #00aa00;
-    --primary-academic: #008800;
-    --secondary-academic: #aa0000;
+    --text-primary: #657b83; /* Solarized Base00 */
+    --text-secondary: #268bd2; /* Solarized Blue */
+    --primary-academic: #cb4b16; /* Solarized Orange */
+    --secondary-academic: #d33682; /* Solarized Magenta */
 }
 
 /* Aspect Ratio Adjustments */

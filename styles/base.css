@@ -118,40 +118,40 @@ html.dark-mode.style-retro-academic {
 
 /* Preset 4: Dark Mode Cyber-Terminal Overrides */
 html.dark-mode.style-cyber-terminal {
-    --bg-gray: #050705; /* Pitch black terminal background */
-    --bg-card: #0a0f0a; /* Dark terminal box */
-    --bg-header-card: #0a0f0a;
+    --bg-gray: #002b36; /* Solarized Dark Background: Base03 */
+    --bg-card: #073642; /* Solarized Dark Card: Base02 */
+    --bg-header-card: #073642;
     --bg-dot: transparent;
-    --border-card: 2px solid #39ff14; /* CRT neon green */
-    --accent-left: 2px solid var(--accent-orange);
-    --accent-left-navy: 2px solid #39ff14;
-    --shadow-card: 0 0 10px rgba(57, 255, 20, 0.3); /* Phosphor glow */
-    --shadow-active: 0 0 20px rgba(57, 255, 20, 0.6);
+    --border-card: 2px solid #2aa198; /* Solarized Cyan */
+    --accent-left: 2px solid #cb4b16; /* Solarized Orange */
+    --accent-left-navy: 2px solid #2aa198;
+    --shadow-card: 4px 4px 0px #001f27; /* Solid dark offset shadow */
+    --shadow-active: 6px 6px 0px #001f27;
     --card-radius: 0px;
     --backdrop-blur: none;
-    --math-bg: #0d140d;
-    --header-bg: #0a0f0a;
-    --tab-text: rgba(57, 255, 20, 0.7);
-    --footer-text: #39ff14;
-    --grid-opacity: 0.3;
-    --table-bg: #0a0f0a;
-    --equation-border: 2px solid #39ff14;
+    --math-bg: #073642;
+    --header-bg: #073642;
+    --tab-text: rgba(147, 161, 161, 0.7);
+    --footer-text: #93a1a1; /* Solarized Base1 */
+    --grid-opacity: 0.0;
+    --table-bg: #073642;
+    --equation-border: 2px solid #2aa198;
 
     /* UI Dark Terminal Styles */
-    --shadow-ui: 0 0 10px rgba(57, 255, 20, 0.3);
-    --shadow-tab-active: 0 0 8px rgba(57, 255, 20, 0.8);
-    --bg-timer: #0a0f0a;
-    --border-timer: 2px solid #39ff14;
-    --color-timer: #39ff14;
-    --bg-timer-btn: #39ff14;
-    --border-timer-btn: 2px solid #39ff14;
-    --color-timer-btn: #050705;
+    --shadow-ui: 4px 4px 0px #001f27;
+    --shadow-tab-active: none;
+    --bg-timer: #073642;
+    --border-timer: 2px solid #2aa198;
+    --color-timer: #93a1a1;
+    --bg-timer-btn: #2aa198;
+    --border-timer-btn: 2px solid #2aa198;
+    --color-timer-btn: #002b36;
 
     /* Typography / Colors Overrides */
-    --text-primary: #39ff14; /* CRT green text */
-    --text-secondary: #00f0ff; /* Cyber cyan text */
-    --primary-academic: #39ff14;
-    --secondary-academic: #ff007f; /* Cyber hot pink */
+    --text-primary: #93a1a1; /* Solarized Base1 */
+    --text-secondary: #268bd2; /* Solarized Blue */
+    --primary-academic: #2aa198; /* Solarized Cyan */
+    --secondary-academic: #b58900; /* Solarized Yellow */
 }
 
 /* Global Stacking Context */

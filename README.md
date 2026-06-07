@@ -51,7 +51,7 @@ Lectura provides 4 custom styling presets selectable via [config.json](config.js
 *   **Glassmorphism (`glassmorph`)**: Modern, fluid design with semi-transparent elements, backdrop blurs, and soft shadows.
 *   **Formal (`formal`)**: Traditional academic style (IEEE paper-like) with solid backgrounds, sharp edges, high contrast, and clean layout structures.
 *   **Retro-Academic (`retro-academic`)**: Bold neobrutalist style with thick dark borders, flat solid offset shadows, and warm paper backdrops (cream in light mode, warm stone-slate in dark mode).
-*   **Cyber-Terminal (`cyber-terminal`)**: Retro-futuristic hacker console / CRT screen style with sharp corners (radius 0px), monospace typography, glowing phosphor green borders/shadows, and cyber cyan highlights.
+*   **Cyber-Terminal (`cyber-terminal`)**: Retro-futuristic hacker console styled with Ethan Schoonover's **Solarized** color scheme. Sharp corners (radius 0px), monospace typography, base teal backgrounds, cyan/orange accents, and low-contrast high-readability text.
 
 ---
 
