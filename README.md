@@ -11,8 +11,12 @@
 **Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with 5 distinct aesthetic presets (*Glass*, *Formal*, *Retro*, *Cyber*, or *Minimal*) and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
 
 <p align="center">
-  <img src="assets/dark-mode.png" alt="High-Contrast Dark Mode" width="49%">
-  <img src="assets/light-mode.png" alt="Light Mode" width="49%">
+  <img src="assets/style-glass.png" alt="Glass Style" width="32%">
+  <img src="assets/style-formal.png" alt="Formal Style" width="32%">
+  <img src="assets/style-retro.png" alt="Retro Style" width="32%">
+  <br>
+  <img src="assets/style-solarized.png" alt="Cyber Style" width="32%">
+  <img src="assets/style-simple.png" alt="Minimal Style" width="32%">
 </p>
 
 </div>
