@@ -10,25 +10,55 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+let initialized = false;
+
 /**
  * Initializes the laser pointer.
  * Exposes window.setLaserEnabled for cross-module coordination.
  */
 export function initLaserPointer() {
+    if (initialized) return;
+    initialized = true;
+
     const toggleBtn = document.getElementById('laser-toggle');
     const cursor    = document.getElementById('laser-cursor');
     let enabled     = false;
+
+    // Move laser cursor (Mouse & Touch)
+    const handlePointer = (e) => {
+        let x = e.clientX;
+        let y = e.clientY;
+
+        // Touch offset: shift 50px up to avoid being covered by the finger
+        if (e.pointerType === 'touch') {
+            y -= 50;
+        }
+
+        cursor.style.left = `${x}px`;
+        cursor.style.top  = `${y}px`;
+    };
+
+    // Prevent scroll while laser is active and touching the screen
+    const handleTouchMove = (e) => {
+        if (e.cancelable) e.preventDefault();
+    };
 
     /**
      * Enables or disables the laser pointer.
      * @param {boolean} state
      */
     const setEnabled = (state) => {
+        if (enabled === state) return;
         enabled = state;
 
         if (enabled) {
             cursor.style.display = 'block';
-            toggleBtn.setAttribute('aria-pressed', 'true');
+            if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'true');
+
+            // Attach listeners dynamically only when active
+            document.addEventListener('pointermove',  handlePointer);
+            document.addEventListener('pointerdown', handlePointer);
+            document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
             // If laser is active, disable scribble
             if (window.setScribbleEnabled) window.setScribbleEnabled(false);
@@ -37,7 +67,12 @@ export function initLaserPointer() {
             if (typeof Reveal !== 'undefined') Reveal.configure({ touch: false });
         } else {
             cursor.style.display = 'none';
-            toggleBtn.setAttribute('aria-pressed', 'false');
+            if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'false');
+
+            // Detach listeners immediately when inactive
+            document.removeEventListener('pointermove',  handlePointer);
+            document.removeEventListener('pointerdown', handlePointer);
+            document.removeEventListener('touchmove', handleTouchMove);
 
             // Re-enable Reveal touch if scribble is also inactive
             if (!window.scribbleEnabled && typeof Reveal !== 'undefined') {
@@ -58,30 +93,6 @@ export function initLaserPointer() {
             setEnabled(!enabled);
         }
     });
-
-    // Move laser cursor (Mouse & Touch)
-    const handlePointer = (e) => {
-        if (!enabled) return;
-
-        let x = e.clientX;
-        let y = e.clientY;
-
-        // Touch offset: shift 50px up to avoid being covered by the finger
-        if (e.pointerType === 'touch') {
-            y -= 50;
-        }
-
-        cursor.style.left = `${x}px`;
-        cursor.style.top  = `${y}px`;
-    };
-
-    document.addEventListener('pointermove',  handlePointer);
-    document.addEventListener('pointerdown', handlePointer);
-
-    // Prevent scroll while laser is active and touching the screen
-    document.addEventListener('touchmove', (e) => {
-        if (enabled && e.cancelable) e.preventDefault();
-    }, { passive: false });
 
     // Expose for cross-module coordination (scribble.js)
     window.setLaserEnabled = setEnabled;

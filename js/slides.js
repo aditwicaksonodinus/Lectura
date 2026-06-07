@@ -32,6 +32,9 @@ import { startTimer, resetTimer, setTimerDuration } from './timer.js';
 import { resetTabsCache }       from './tabs.js';
 import { applyCSSConfig }       from './styles.js';
 
+// Module-level initialization state
+let _listenersAttached = false;
+
 // ─────────────────────────────────────────────────────────────
 // extractMetadata
 // ─────────────────────────────────────────────────────────────
@@ -229,83 +232,97 @@ export async function initPresentation() {
             timerDisplay.textContent = `${PRESENTATION_MINUTES.toString().padStart(2, '0')}:00`;
         }
 
-        // 7. Initialize Reveal.js
-        const revealWidth = ASPECT_RATIO === '4:3' ? 1440 : 1920;
+        // 7. Setup timer buttons & event listeners (only once)
+        if (!_listenersAttached) {
+            const startBtn = document.getElementById('start-timer');
+            if (startBtn) {
+                startBtn.addEventListener('click', startTimer);
+            }
+            const resetBtn = document.getElementById('reset-timer');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', resetTimer);
+            }
 
-        await Reveal.initialize({
-            width:          revealWidth,
-            height:         1080,
-            margin:         0,
-            minScale:       0.1,
-            maxScale:       2.0,
-            hash:           true,
-            slideNumber:    false,
-            transition:     'fade',
-            transitionSpeed: 'slow',
-            center:         true,
-            touch:          true,
-            controls:       false,
-            overview:       false,
-            mathjax3: {
-                mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
-                tex: {
-                    inlineMath: [['$', '$'], ['\\(', '\\)']]
-                },
-                options: {
-                    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                }
-            },
-            plugins: [ RevealMath.MathJax3 ]
-        });
+            // Register Reveal event listeners before calling initialize
+            if (typeof Reveal !== 'undefined') {
+                Reveal.on('slidechanged', event => {
+                    updateUI(event.currentSlide);
+                    prepareStaggeredAnimation(event.currentSlide);
 
-        // 8. Setup timer buttons after Reveal is ready
-        const startBtn = document.getElementById('start-timer');
-        if (startBtn) {
-            startBtn.textContent = TIMER_START_TEXT;
-            startBtn.addEventListener('click', startTimer);
-        }
-        const resetBtn = document.getElementById('reset-timer');
-        if (resetBtn) {
-            resetBtn.textContent = TIMER_RESET_TEXT;
-            resetBtn.addEventListener('click', resetTimer);
-        }
+                    // Safety fallback: play animation after 900ms in case slidetransitionend doesn't fire
+                    // Must exceed the CSS transition duration (0.8s default, 1.2s slow) to avoid
+                    // triggering stagger mid-transition.
+                    if (event.currentSlide) {
+                        if (event.currentSlide._staggerTimeout) {
+                            clearTimeout(event.currentSlide._staggerTimeout);
+                        }
+                        event.currentSlide._staggerTimeout = setTimeout(() => {
+                            playStaggeredAnimation(event.currentSlide);
+                        }, 900);
+                    }
+                });
 
-        // 9. Register Reveal event listeners
-        Reveal.on('slidechanged', event => {
-            updateUI(event.currentSlide);
-            prepareStaggeredAnimation(event.currentSlide);
-
-            // Safety fallback: play animation after 900ms in case slidetransitionend doesn't fire
-            // Must exceed the CSS transition duration (0.8s default, 1.2s slow) to avoid
-            // triggering stagger mid-transition.
-            if (event.currentSlide) {
-                if (event.currentSlide._staggerTimeout) {
-                    clearTimeout(event.currentSlide._staggerTimeout);
-                }
-                event.currentSlide._staggerTimeout = setTimeout(() => {
+                Reveal.on('slidetransitionend', event => {
+                    if (event.currentSlide && event.currentSlide._staggerTimeout) {
+                        clearTimeout(event.currentSlide._staggerTimeout);
+                        event.currentSlide._staggerTimeout = null;
+                    }
                     playStaggeredAnimation(event.currentSlide);
-                }, 900);
+                });
+
+                Reveal.on('ready', () => {
+                    updateUI(Reveal.getCurrentSlide());
+                    playStaggeredAnimation(Reveal.getCurrentSlide());
+                });
             }
-        });
+        }
 
-        Reveal.on('slidetransitionend', event => {
-            if (event.currentSlide && event.currentSlide._staggerTimeout) {
-                clearTimeout(event.currentSlide._staggerTimeout);
-                event.currentSlide._staggerTimeout = null;
+        // Timer buttons text updates (always sync with current config on init)
+        const startBtn = document.getElementById('start-timer');
+        if (startBtn) startBtn.textContent = TIMER_START_TEXT;
+        const resetBtn = document.getElementById('reset-timer');
+        if (resetBtn) resetBtn.textContent = TIMER_RESET_TEXT;
+
+        // 8. Initialize Reveal.js (only once)
+        if (!_listenersAttached) {
+            const revealWidth = ASPECT_RATIO === '4:3' ? 1440 : 1920;
+
+            await Reveal.initialize({
+                width:          revealWidth,
+                height:         1080,
+                margin:         0,
+                minScale:       0.1,
+                maxScale:       2.0,
+                hash:           true,
+                slideNumber:    false,
+                transition:     'fade',
+                transitionSpeed: 'slow',
+                center:         true,
+                touch:          true,
+                controls:       false,
+                overview:       false,
+                mathjax3: {
+                    mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+                    tex: {
+                        inlineMath: [['$', '$'], ['\\(', '\\)']]
+                    },
+                    options: {
+                        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                    }
+                },
+                plugins: [ RevealMath.MathJax3 ]
+            });
+            _listenersAttached = true;
+        } else {
+            // Re-sync and update if presentation is re-loaded
+            if (typeof Reveal !== 'undefined') {
+                Reveal.sync();
+                updateUI(Reveal.getCurrentSlide());
+                playStaggeredAnimation(Reveal.getCurrentSlide());
             }
-            playStaggeredAnimation(event.currentSlide);
-        });
+        }
 
-        Reveal.on('ready', () => {
-            updateUI(Reveal.getCurrentSlide());
-            playStaggeredAnimation(Reveal.getCurrentSlide());
-        });
-
-        // 10. Update UI and play initial animation
-        updateUI(Reveal.getCurrentSlide());
-        playStaggeredAnimation(Reveal.getCurrentSlide());
-
-        // 11. Fade out premium loading overlay after a brief delay for assets to cache
+        // 9. Fade out premium loading overlay after a brief delay for assets to cache
         setTimeout(() => {
             const loader = document.getElementById('loading-overlay');
             if (loader) {

@@ -9,10 +9,15 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+let initialized = false;
+
 /**
  * Initializes the image preview overlay.
  */
 export function initImagePreview() {
+    if (initialized) return;
+    initialized = true;
+
     const overlay   = document.getElementById('image-preview');
     const previewImg = document.getElementById('image-preview-img');
     const closeBtn  = document.getElementById('image-preview-close');

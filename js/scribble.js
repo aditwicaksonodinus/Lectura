@@ -12,11 +12,16 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+let initialized = false;
+
 /**
  * Initializes scribble mode.
  * Exposes window.setScribbleEnabled and window.clearAllScribbles.
  */
 export function initScribbleMode() {
+    if (initialized) return;
+    initialized = true;
+
     const canvas    = document.getElementById('scribble-canvas');
     const toggleBtn = document.getElementById('scribble-toggle');
     const clearBtn  = document.getElementById('scribble-clear');

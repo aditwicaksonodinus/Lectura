@@ -7,10 +7,14 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+let initialized = false;
+
 /**
  * Attaches event listeners for card interactions.
  */
 export function initCardInteractions() {
+    if (initialized) return;
+    initialized = true;
 
     const handleInteractionStart = (e) => {
         const box = e.target.closest('.academic-box');
@@ -25,15 +29,16 @@ export function initCardInteractions() {
         box.classList.add('is-interacting');
     };
 
-    // Support Touch and Mouse for activation
-    document.addEventListener('touchstart', handleInteractionStart, { passive: true });
-    document.addEventListener('mousedown',  handleInteractionStart);
+    // Support Touch and Mouse for activation via unified pointer events
+    document.addEventListener('pointerdown', handleInteractionStart);
 
     // Clear highlight on slide change
-    Reveal.on('slidechanged', () => {
-        const activeBox = document.querySelector('.academic-box.is-interacting');
-        if (activeBox) {
-            activeBox.classList.remove('is-interacting');
-        }
-    });
+    if (typeof Reveal !== 'undefined') {
+        Reveal.on('slidechanged', () => {
+            const activeBox = document.querySelector('.academic-box.is-interacting');
+            if (activeBox) {
+                activeBox.classList.remove('is-interacting');
+            }
+        });
+    }
 }

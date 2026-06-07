@@ -152,7 +152,7 @@ Nilai kontinu $z_t$ dipetakan ke dalam **4 level ZPD (ZPD-0 hingga ZPD-3)** untu
 [^2)] 3.15 Teknik Analisis Data
 
 ---slide-break---
-<!-- layout: 2-content-center-mermaid -->
+<!-- layout: 1-content-center-mermaid -->
 <!-- title: Metodologi: Alur Kerja Arsitektur MAESTRO -->
 <!-- section: Metodologi -->
 
@@ -259,7 +259,7 @@ sequenceDiagram
 <!-- split -->
 
 <div class="Bukti-implementasi" style="display: flex; gap: 15px; justify-content: center; align-items: center;">
-  <img src="./qr-code.jpg" width="15%">
+  <img src="./assets/qr-code.jpg" width="15%">
   <img src="../assets/Maestro-visual-phone.png" width="45%">
 </div>
 

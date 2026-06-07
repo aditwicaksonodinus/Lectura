@@ -15,11 +15,15 @@ import { isRunning } from './timer.js';
 let touchStartPosX = 0;
 let touchStartPosY = 0;
 
+let initialized = false;
+
 /**
  * Attaches all gesture prevention event listeners.
  * Called once from main.js on window.onload.
  */
 export function initGestures() {
+    if (initialized) return;
+    initialized = true;
 
     // Confirmation before closing tab (only when timer is running)
     window.addEventListener('beforeunload', (e) => {

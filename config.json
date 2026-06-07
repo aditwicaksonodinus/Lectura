@@ -11,7 +11,7 @@
   "timerStartText": "START",
   "timerResetText": "RESET",
   "themeToggleTitle": "Toggle Dark/Light Mode",
-  "aspectRatio": "16:9",
+  "aspectRatio": "43",
   "stylePreset": "ieee",
   "contentFile": "content-id.md"
 }

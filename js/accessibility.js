@@ -7,10 +7,15 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+let initialized = false;
+
 /**
  * Initializes the accessibility menu and all its event listeners.
  */
 export function initAccessibilityMenu() {
+    if (initialized) return;
+    initialized = true;
+
     const container = document.querySelector('.accessibility-container');
     const toggleBtn = document.getElementById('accessibility-toggle');
     const menu      = document.getElementById('accessibility-menu');

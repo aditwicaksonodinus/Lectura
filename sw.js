@@ -49,6 +49,7 @@ const PRECACHE_ASSETS = [
     './js/vendor/marked.min.js',
     './js/vendor/reveal.min.js',
     './js/vendor/math.min.js',
+    './js/vendor/mermaid.min.js',
     './fonts/NotoSerif-Variable.ttf',
     './fonts/Inter-Regular.ttf',
     './fonts/Inter-Bold.ttf',
@@ -97,6 +98,29 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     // Only intercept GET requests
     if (event.request.method !== 'GET') return;
+
+    const url = new URL(event.request.url);
+
+    // 1. Google Fonts CDN (fonts.googleapis.com / fonts.gstatic.com) -> Cache-First
+    if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
+        event.respondWith(
+            caches.match(event.request).then((cachedResponse) => {
+                if (cachedResponse) {
+                    return cachedResponse;
+                }
+                return fetch(event.request).then((networkResponse) => {
+                    if (networkResponse.status === 200) {
+                        const responseToCache = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return networkResponse;
+                });
+            })
+        );
+        return;
+    }
 
     // 2. Local Assets (Network-First, fallback to Cache)
     event.respondWith(
