@@ -8,7 +8,7 @@
 [![GitHub License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)]()
 
-**Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with 3 distinct aesthetic presets (modern *Glassmorphism*, traditional *Formal*, or bold *Retro-Academic*) and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
+**Lectura** is a web-based academic slide platform that combines **Markdown** simplicity with 4 distinct aesthetic presets (modern *Glassmorphism*, traditional *Formal*, bold *Retro-Academic*, or retro *Cyber-Terminal*) and *High-Contrast Dark Mode*, all powered by **Reveal.js**.
 
 <p align="center">
   <img src="assets/dark-mode.png" alt="High-Contrast Dark Mode" width="49%">
@@ -39,7 +39,7 @@
 | Area | Highlights |
 |------|------------|
 | **Content** | Markdown-based ✅ LaTeX Math (MathJax 3) ✅ Mermaid Diagrams ✅ |
-| **UI/UX** | Glassmorphism / Formal / Retro-Academic preset 🌓 Dark/Light Mode 🚀 Loading Overlay 🔖 Chapter Tabs ⏱️ Timer 📐 16:9 & 4:3 Ratios |
+| **UI/UX** | Glassmorphism / Formal / Retro-Academic / Cyber-Terminal preset 🌓 Dark/Light Mode 🚀 Loading Overlay 🔖 Chapter Tabs ⏱️ Timer 📐 16:9 & 4:3 Ratios |
 | **Layouts** | 9 slide layouts 🖼️ Image Lightbox 🎴 Booktabs Tables |
 | **Control** | Server-side parsed 🛡️ Navigation Protection 🚀 Enhanced Navigation |
 
@@ -47,10 +47,11 @@
 
 ## 🎨 Style Presets
 
-Lectura provides 3 custom styling presets selectable via [config.json](config.json):
+Lectura provides 4 custom styling presets selectable via [config.json](config.json):
 *   **Glassmorphism (`glassmorph`)**: Modern, fluid design with semi-transparent elements, backdrop blurs, and soft shadows.
 *   **Formal (`formal`)**: Traditional academic style (IEEE paper-like) with solid backgrounds, sharp edges, high contrast, and clean layout structures.
 *   **Retro-Academic (`retro-academic`)**: Bold neobrutalist style with thick dark borders, flat solid offset shadows, and warm paper backdrops (cream in light mode, warm stone-slate in dark mode).
+*   **Cyber-Terminal (`cyber-terminal`)**: Retro-futuristic hacker console / CRT screen style with sharp corners (radius 0px), monospace typography, glowing phosphor green borders/shadows, and cyber cyan highlights.
 
 ---
 

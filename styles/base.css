@@ -116,6 +116,44 @@ html.dark-mode.style-retro-academic {
     --secondary-academic: #f43f5e; /* Retro rose */
 }
 
+/* Preset 4: Dark Mode Cyber-Terminal Overrides */
+html.dark-mode.style-cyber-terminal {
+    --bg-gray: #050705; /* Pitch black terminal background */
+    --bg-card: #0a0f0a; /* Dark terminal box */
+    --bg-header-card: #0a0f0a;
+    --bg-dot: transparent;
+    --border-card: 2px solid #39ff14; /* CRT neon green */
+    --accent-left: 2px solid var(--accent-orange);
+    --accent-left-navy: 2px solid #39ff14;
+    --shadow-card: 0 0 10px rgba(57, 255, 20, 0.3); /* Phosphor glow */
+    --shadow-active: 0 0 20px rgba(57, 255, 20, 0.6);
+    --card-radius: 0px;
+    --backdrop-blur: none;
+    --math-bg: #0d140d;
+    --header-bg: #0a0f0a;
+    --tab-text: rgba(57, 255, 20, 0.7);
+    --footer-text: #39ff14;
+    --grid-opacity: 0.3;
+    --table-bg: #0a0f0a;
+    --equation-border: 2px solid #39ff14;
+
+    /* UI Dark Terminal Styles */
+    --shadow-ui: 0 0 10px rgba(57, 255, 20, 0.3);
+    --shadow-tab-active: 0 0 8px rgba(57, 255, 20, 0.8);
+    --bg-timer: #0a0f0a;
+    --border-timer: 2px solid #39ff14;
+    --color-timer: #39ff14;
+    --bg-timer-btn: #39ff14;
+    --border-timer-btn: 2px solid #39ff14;
+    --color-timer-btn: #050705;
+
+    /* Typography / Colors Overrides */
+    --text-primary: #39ff14; /* CRT green text */
+    --text-secondary: #00f0ff; /* Cyber cyan text */
+    --primary-academic: #39ff14;
+    --secondary-academic: #ff007f; /* Cyber hot pink */
+}
+
 /* Global Stacking Context */
 html {
     transition: background-color 0.4s ease;

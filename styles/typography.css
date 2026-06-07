@@ -124,3 +124,28 @@ blockquote::before {
 }
 
 /* Blockquotes & H3 styles unified above using CSS Variables */
+
+/* ════════════════════════════════════════════════════
+   CYBER-TERMINAL MONOSPACE OVERRIDES
+   ════════════════════════════════════════════════════ */
+html.style-cyber-terminal .reveal,
+html.style-cyber-terminal .reveal p,
+html.style-cyber-terminal .reveal span,
+html.style-cyber-terminal .reveal li,
+html.style-cyber-terminal .reveal td,
+html.style-cyber-terminal .reveal th,
+html.style-cyber-terminal .reveal h1,
+html.style-cyber-terminal .reveal h2,
+html.style-cyber-terminal .reveal h3,
+html.style-cyber-terminal .reveal h4,
+html.style-cyber-terminal .reveal h5,
+html.style-cyber-terminal .reveal h6,
+html.style-cyber-terminal .reveal blockquote,
+html.style-cyber-terminal .reveal .slide-number,
+html.style-cyber-terminal .reveal .footer,
+html.style-cyber-terminal .reveal .header,
+html.style-cyber-terminal .loading-logo-text,
+html.style-cyber-terminal .loading-logo-sub,
+html.style-cyber-terminal .loading-status {
+    font-family: "Courier New", Courier, monospace !important;
+}
