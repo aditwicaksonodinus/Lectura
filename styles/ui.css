@@ -267,8 +267,8 @@ html.dark-mode .theme-icon::before {
 }
 
 .timer-container button#reset-timer {
-    background: var(--color-academic-secondary);
-    border-color: var(--color-academic-secondary);
+    background: var(--color-timer-reset);
+    border-color: var(--color-timer-reset);
     color: var(--bg-main);
 }
 

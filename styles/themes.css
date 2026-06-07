@@ -39,11 +39,12 @@ html.style-glass {
     --text-secondary: #1e3a8a;
     --color-academic-primary: #1b365d;
     --color-academic-secondary: #8b0000;
+    --color-timer-reset: #dc2626;
 }
 
 html.dark-mode.style-glass {
     /* Layout & Backgrounds */
-    --bg-main: #001845;
+    --bg-main: #022566;
     --bg-card: linear-gradient(145deg, #050a14bf, #0000058c);
     --bg-secondary: linear-gradient(135deg, #0466c80d, #0018454c);
     --border-primary: 1px solid #0466c859;
@@ -72,6 +73,7 @@ html.dark-mode.style-glass {
     --text-secondary: #98c1d9;
     --color-academic-primary: #0466c8;
     --color-academic-secondary: #33415c;
+    --color-timer-reset: #ef4444;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -108,6 +110,7 @@ html.style-formal {
     --text-secondary: #1e3a8a;
     --color-academic-primary: #1b365d;
     --color-academic-secondary: #8b0000;
+    --color-timer-reset: #b91c1c;
 }
 
 html.dark-mode.style-formal {
@@ -141,6 +144,7 @@ html.dark-mode.style-formal {
     --text-secondary: #98c1d9;
     --color-academic-primary: #0466c8;
     --color-academic-secondary: #33415c;
+    --color-timer-reset: #ef4444;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -177,6 +181,7 @@ html.style-retro {
     --text-secondary: #2d3fe7;
     --color-academic-primary: #111111;
     --color-academic-secondary: #e11d48;
+    --color-timer-reset: #e11d48;
 }
 
 html.dark-mode.style-retro {
@@ -210,6 +215,7 @@ html.dark-mode.style-retro {
     --text-secondary: #f59e0b;
     --color-academic-primary: #facc15;
     --color-academic-secondary: #f43f5e;
+    --color-timer-reset: #f43f5e;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -246,6 +252,7 @@ html.style-cyber {
     --text-secondary: #e6006f;
     --color-academic-primary: #00c8ff;
     --color-academic-secondary: #ffb800;
+    --color-timer-reset: #ff0055;
 }
 
 html.dark-mode.style-cyber {
@@ -279,6 +286,7 @@ html.dark-mode.style-cyber {
     --text-secondary: #ff007f;
     --color-academic-primary: #00f0ff;
     --color-academic-secondary: #ffb800;
+    --color-timer-reset: #ff0055;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -315,6 +323,7 @@ html.style-minimal {
     --text-secondary: #444444;
     --color-academic-primary: #111111;
     --color-academic-secondary: #666666;
+    --color-timer-reset: #ef4444;
 }
 
 html.dark-mode.style-minimal {
@@ -348,4 +357,5 @@ html.dark-mode.style-minimal {
     --text-secondary: #a3a3a3;
     --color-academic-primary: #e5e5e5;
     --color-academic-secondary: #737373;
+    --color-timer-reset: #f43f5e;
 }
