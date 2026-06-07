@@ -11,6 +11,11 @@ assets/*
 !assets/Maestro-log.png
 !assets/Maestro-visual-phone.png
 !assets/qr-code.jpg
+!assets/style-formal.png
+!assets/style-glass.png
+!assets/style-retro.png
+!assets/style-solarized.png
+!assets/style-simple.png
 
 # Still ignore research data/graphs if they are too heavy or sensitive
 # (Uncomment the ones you want to keep if needed)
