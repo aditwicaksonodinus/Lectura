@@ -209,6 +209,8 @@ html.style-cyber {
     --bg-timer-btn: #586e75;
     --border-timer-btn: 2px solid #586e75;
     --color-timer-btn: #fdf6e3;
+    --timer-alert-bg: #dc322f; /* Solarized Red */
+    --timer-alert-color: #fdf6e3; /* Solarized Base3 */
 
     /* Typography / Colors Overrides */
     --text-primary: #657b83; /* Solarized Base00 */
@@ -258,6 +260,8 @@ html.style-minimal {
     --bg-timer-btn: #111111;
     --border-timer-btn: 1px solid #111111;
     --color-timer-btn: #ffffff;
+    --timer-alert-bg: #e11d48;
+    --timer-alert-color: #ffffff;
 
     /* Typography / Colors Overrides */
     --text-primary: #111111; /* Monochromatic rich black */

@@ -169,7 +169,7 @@ html.dark-mode .theme-icon::before {
     color: var(--tab-text);
     border: none;
     padding: 0 10px;
-    border-radius: 12px; /* Matched with timer button rounded style */
+    border-radius: var(--card-radius); /* Matched with active style preset card-radius */
     cursor: pointer;
     font-size: 0.6em;
     font-weight: 700;
@@ -251,7 +251,7 @@ html.dark-mode .theme-icon::before {
     color: var(--color-timer-btn);
     border: var(--border-timer-btn);
     padding: 4px 12px;
-    border-radius: 12px; /* Rounded consistent with timer container */
+    border-radius: var(--card-radius); /* Rounded consistent with style preset */
     cursor: pointer;
     font-size: 0.7em;
     font-weight: 600;
@@ -262,26 +262,18 @@ html.dark-mode .theme-icon::before {
 .timer-container button#start-timer {
     background: var(--primary-academic);
     border-color: var(--primary-academic);
-    color: white;
+    color: var(--color-timer-btn);
 }
 
 .timer-container button#reset-timer {
     background: var(--secondary-academic);
     border-color: var(--secondary-academic);
-    color: white;
+    color: var(--color-timer-btn);
 }
 
 .timer-container button:hover {
-    background: rgba(255, 255, 255, 0.35);
+    opacity: 0.85;
     transform: translateY(-1px);
-    opacity: 1;
-}
-
-.timer-container button#start-timer:hover {
-    background: #164a7c; /* darker primary */
-}
-.timer-container button#reset-timer:hover {
-    background: #5c1e1e; /* darker secondary */
 }
 
 .timer-container .timer-display {
@@ -294,9 +286,9 @@ html.dark-mode .theme-icon::before {
 }
 
 .timer-container.alert-mode, html.dark-mode .timer-container.alert-mode {
-    background: #ff3b30 !important; /* Crimson Red Warning */
-    border-color: #ff3b30 !important;
-    color: white !important;
+    background: var(--timer-alert-bg, #ff3b30) !important;
+    border-color: var(--timer-alert-bg, #ff3b30) !important;
+    color: var(--timer-alert-color, #ffffff) !important;
     transition: all 0.3s ease;
     animation: pulse-alert 1.5s infinite alternate;
 }

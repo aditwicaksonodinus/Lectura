@@ -182,6 +182,8 @@ html.dark-mode.style-cyber {
     --bg-timer-btn: #2aa198;
     --border-timer-btn: 2px solid #2aa198;
     --color-timer-btn: #002b36;
+    --timer-alert-bg: #dc322f; /* Solarized Red */
+    --timer-alert-color: #002b36; /* Solarized Base03 */
 
     /* Typography / Colors Overrides */
     --text-primary: #93a1a1; /* Solarized Base1 */
@@ -229,6 +231,8 @@ html.dark-mode.style-minimal {
     --bg-timer-btn: #e5e5e5;
     --border-timer-btn: 1px solid #e5e5e5;
     --color-timer-btn: #0a0a0a;
+    --timer-alert-bg: #f43f5e;
+    --timer-alert-color: #0a0a0a;
 
     /* Typography / Colors Overrides */
     --text-primary: #e5e5e5; /* Off-white for readability */
